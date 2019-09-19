@@ -67,9 +67,6 @@ One common type of mistake is mis-generalizing in Step 3. When we detect such a 
 Another common type of mistake is that there are cases we did not consider in designing our algorithm.
 
 
-<h2>Examples</h2>
-
-
 
 <h1>Week 2: Reading Code</h1>
 

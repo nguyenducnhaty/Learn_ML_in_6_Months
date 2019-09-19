@@ -7,8 +7,6 @@
 <h3>Motivations for linear algebra</h3>
 
 
-
-
 <h2>Vectors</h2>
 
 <h3>Operations with vectors</h3>
@@ -18,7 +16,24 @@
 <h1>Week 2: Vectors are objects that move around space</h1>
 
 
+<h2>Finding the size of a vector, its angle, and projection</h2>
 
+<h3>Modulus & inner product</h3>
+
+<h3>Cosine & dot product</h3>
+
+<h3>Projection</h3>
+
+
+<h2>Changing the reference frame</h2>
+
+<h3>Changing basis</h3>
+
+<h3>Basis, vector space, and linear independence</h3>
+
+<img src="../1. Linear Algebra/images/basis.png">
+
+<h3>Applications of changing basis</h3>
 
 
 

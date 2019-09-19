@@ -2,6 +2,8 @@
 
 - Einstein Chatbot that is trained on his theories or personal life and answer questions about famous Physicists.
 
+- Anomaly detection for planets or stars.
+
 
 
 

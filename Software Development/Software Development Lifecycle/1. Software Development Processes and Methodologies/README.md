@@ -66,6 +66,107 @@ The WRSPM model is a reference model for how we understand problems in the real 
 
 <h2>Architecture</h2>
 
+<h3>Software Architecture: Definition</h3>
+
+There's a lot of parallels between software architecture and what most people think of architecture when it comes to building buildings. Architects, no matter which field it is, are that interface between the customer, what they want, and a contractor or the implementer, the person building the thing.
+
+And it's always too across all architecture that bad architectural design can't be rescued by good construction. A bad design can't be fixed when you're building that design, it's unbelievably rare. And there's also parallels in how architects actually work. There are specialist types of projects that require certain architect expertise. If you can imagine it's very different building skyscrapers than it is to build, say, a dam. Or a nuclear reactor or anything else that might need to be architected in a specific way. So, there are specialist types of projects within each field of architect. And in all those fields, schools of thought and styles of architecture have already emerged and continue to emerge as we work through the life cycle of all architectural projects.
+
+Below is three separate definitions, two of them from very popular, well-respected architecture text books that are used in the field. And as well as one from one of the premier international computing bodies, IEEE.
+
+<img src="../1. Software Development Processes and Methodologies/images/software_architecture.png">
+
+In software architecture what we really care about is partitioning large systems into smaller ones. And these smaller systems still individually and independently have business value. And that they can, supposedly, if they're linked properly, be integrated with one another and other existing systems very easily. Now there's a number of reasons why this partitioning is a key component. One of the things that we talk about in terms of software architecture is a decision, for example, buy versus build. You need to decide whether or not the overall project you're going to build should be built by an internal team or you should go out and find an existing product, piece of software off of the Internet, off the shelf. And merely customize it to your specific needs.
+
+Software architectures are about a lot of different things, okay? A big part of it is funding. One of the reasons why we decompose systems into these components that are independent is so that we can talk about parallelization.
+
+<h3>Software Architecture: Models</h3>
+
+So there's a variety of models that have become essentially go-to best practice models for a number of different common problems. So these models are effectively best practiced solutions for commonly occurring problems at the enterprise level, for example:
+
+- __Pipe and Filter__: This pattern can be used to structure systems which produce and process a stream of data. Each processing step is enclosed within a filter component. Data to be processed is passed through pipes. These pipes can be used for buffering or for synchronization purposes.
+
+    Usage:
+    - Compilers. The consecutive filters perform lexical analysis, parsing, semantic analysis, and code generation.
+    - Workflows in bioinformatics.
+
+<img src="../1. Software Development Processes and Methodologies/images/pipers_and_filter.png">
+
+- __Blackboard__: This pattern is useful for problems for which no deterministic solution strategies are known. The blackboard pattern consists of 3 main components.
+
+    - _blackboard_ — a structured global memory containing objects from the solution space
+    - _knowledge source_ — specialized modules with their own representation
+    - _control component_ — selects, configures and executes modules.
+
+    All the components have access to the blackboard. Components may produce new data objects that are added to the blackboard. Components look for particular kinds of data on the blackboard, and may find these by pattern matching with the existing knowledge source.
+
+    Usage:
+    - Speech recognition.
+    - Vehicle identification and tracking.
+    - Protein structure identification.
+    - Sonar signals interpretation.
+
+<img src="../1. Software Development Processes and Methodologies/images/blackboard.png">
+
+
+- __Layered__ : This pattern can be used to structure programs that can be decomposed into groups of subtasks, each of which is at a particular level of abstraction. Each layer provides services to the next higher layer.
+
+    The most commonly found 4 layers of a general information system are as follows.
+    - _Presentation layer_ (also known as UI layer)
+    - _Application layer_ (also known as service layer)
+    - _Business logic layer_ (also known as domain layer)
+    - _Data access layer_ (also known as persistence layer)
+
+    Usage:
+    - General desktop applications.
+    - E commerce web applications.
+
+<img src="../1. Software Development Processes and Methodologies/images/layer.png">
+
+- __Client Server__: This pattern consists of two parties; a server and multiple clients. The server component will provide services to multiple client components. Clients request services from the server and the server provides relevant services to those clients. Furthermore, the server continues to listen to client requests.
+
+    Usage:
+    - Online applications such as email, document sharing and banking.
+
+<img src="../1. Software Development Processes and Methodologies/images/client_server.png">
+
+- __Event Based__: This pattern primarily deals with events and has 4 major components; _event source_, _event listener_, _channel_ and _event bus_. Sources publish messages to particular channels on an event bus. Listeners subscribe to particular channels. Listeners are notified of messages that are published to a channel to which they have subscribed before.
+
+    Usage:
+    - Android development
+    - Notification services
+
+<img width="60%" src="../1. Software Development Processes and Methodologies/images/event_based.png">
+
+Below is a summary of the model advantages and disadvantages.
+
+<img src="../1. Software Development Processes and Methodologies/images/model_summary.png">
+
+<h3>Software Architecture: Process</h3>
+
+There's three major concerns when we start talking about design process.
+
+1. __System Structuring__: refers to how the system is decomposed into these several principal subsystems and communications between those subsystems are then identified. We're keying in particularly on things like the interfaces. As soon as we start to decompose or separate elements or components, large scale subsystems of our overall system, we have to start worrying about how they're going to continue to communicate now that we've separated them. This is particularly important when you're going to then parallelize the development work once you split them out giving one component to one development team, another component to another development team and yet more to further development teams. Having that interface as an agreed-upon contract is a very key component to making sure that it all works once it comes back together and the system structuring is part of that.
+
+2. __Control Modeling__:  is how architectures create a model of the control relationships between the different parts of the system that's established. This is particularly true when we have these separate components dealing with the flow of control, not just the interfaces but the flow of control in communicating with each other, but how the software will work once it's running.
+
+3. __Modular decomposition__: is how we identify those subsystem partitions. We are particularly looking at things like simplicity. We're looking for things like maintainability, reliability, security, all those kinds of quality attributes but also, we're worried about things like resource management, who needs to go where and what teams are best suited to handle what kind of responsibilities.
+
+So, when we talk about _subsystem_ versus _modules_, it's important here to note the distinction. Subsystems are still an independent system which could hold business value. It's not our full product but it's still some part of that product that, by itself, has business value and it can run completely independently, or, at the very least, can be developed entirely independently. That's really what we're looking for when it comes to a subsystem and that's the primary goal for architecture. That's versus modules. Module design's what we consider software design. That's a individual component of a subsystem which can't function as a standalone system or a standalone piece of the overall product. It doesn't, by itself, have business value. You have to gather and integrate multiple modules to make up a subsystem.
+
+Another thing we care about at the architectural level is software quality attributes.
+- Performance
+- Reliability
+- Testability
+- Security
+- Usability
+
+Each of these tends to be something that's associated with architecture. It doesn't mean that it can't be associated with other stages in the process like requirements, design, or even implementation but it's something that we particularly focus on at the architectural stage.
+
+Software architecture process concerns itself primarily with those three things.
+- Estimation; estimating the work and total, deciding how much it's going to take, how long it's going to take, who's going to do it.
+- Focusing on quality; how do we ensure things like reliability and performance especially at this architectural level since those are primarily hardware and developer-focused concerns.
+- And then partitioning; actually dividing the work into subsystems or modules that can then be passed off on to the design stage because then, design stage goes into the actual building of the individual modules.
 
 
 
