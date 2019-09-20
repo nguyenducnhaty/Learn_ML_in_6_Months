@@ -1,6 +1,7 @@
 <h1>Study Plan</h1>
 
 Phase 1:
+
 1. IBM Data Science Professional Certificate
 2. Introduction to Programming in C Specialization
 3. Mathematics for Machine Learning Specialization
@@ -11,6 +12,7 @@ Phase 1:
 
 
 Phase 2:
+
 8. Advanced Data Science with IBM Specialization
 9. C++ For C Programmers
 10. Accelerated Computer Science Fundamentals Specialization

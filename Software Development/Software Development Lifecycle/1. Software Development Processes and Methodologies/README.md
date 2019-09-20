@@ -170,8 +170,144 @@ Software architecture process concerns itself primarily with those three things.
 
 
 
-<h1>Week 2: Software Development Processes : Part 2</h1>
+<h1>Week 2: Software Development Processes: Part 2</h1>
 
+
+
+<h2>Design</h2>
+
+<h3>Software Design: Introduction</h3>
+
+In the V-model of software development, design comes into the process at the fourth stage, after architecture and before implementation. It sits between the enterprise level decisions in the subsystem designing and the development effort.
+
+<img src="../1. Software Development Processes and Methodologies/images/v_model.png">
+
+I want to know here that this is not the only way to represent this. In fact, you are going to see architecture and design phases shown here bunched together in various places. The combined stage could be called architectural design or it could even just be called architecture or design alone even though it contains both sets of tasks. We split them so that we can be more specific and provide insight into each of the responsibilities separately.
+
+So, what is software design? Software design is what we call the deliverable, design, the noun, and what we call the process to make that design. Design, the verb, is the creative process of transforming the problem into a solution. In our case, transforming a requirement specification into a detailed description of the software that's code-ready. The noun then is the documented description of that solution and the constraints and explanations used to arrive at it. We develop the software design.
+
+We'll cover architecture separately but as a brief overview, architecture is primarily focused on overarching, cross-cutting concerns for our system especially in the context of the entire enterprise. Large scale decisions like, should we build or buy the software from another company? How is security going to be handled, by the server or by the application? Lots of enterprise and management focused decisions go into this two like apportioning resources and personnel, deciding if the current staff and hardware can handle the project itself, and what is it going to cost to get us there. Securing the internal funding for such endeavors is often looked at as an architectural concern.
+
+<img src="../1. Software Development Processes and Methodologies/images/stages_of_design.png">
+
+The first thing we do is get a good problem understanding when it comes to design. Most of this should come from your requirements and specification documents. If you are unlucky enough not to have these or maybe at least not have them as written documents, it becomes even more important that you get a full grasp of the problem domain before starting to develop your own design solution.
+
+Do not be tunnel-visioned into any large-scale solution as always the only way to go about solving the problem. There is almost always another way to reach the same singular goal, so consider multiple alternatives before deciding definitively which one to pursue. When we say solution abstractions, we essentially mean any documentation of the solution that is not technological. Mostly, that means anything that's not code or hardware. Graphical including mock-ups or wireframes, formal descriptions including unified modeling language or UML diagrams like class diagrams and sequence diagrams, and other descriptive notations should be used to capture your description of the solution that you intend to build or have built for you. What you are going to do is repeat for all abstractions, subsystem components etc. under the entire design and until the entire design is expressed in primitive terms. Now, primitive terms is a bit subjective. What I want you to imagine is this, keep abstracting and designing until you are convinced that you can hand this design off to a developer team that you do not know and you are confident they will come back with a solution that's right. And you do all this without being technology-specific. You let the developers, those coding in C Sharp or Java or Python decide what kind of collection to use at the code level. Let them decide exactly how to sort. Those things are very language-specific and should be left to the developers. Those decisions do not need to be made at the design level. You should still be focused on what makes the overall solution work correctly, leaving all the language-specific optimization to the developer team. They follow your design. They work out the optimizations at the language level.
+
+<img src="../1. Software Development Processes and Methodologies/images/stages_of_design_formal.png">
+
+In architecture and design, we follow these six stages. The first three are architectural. The last three, design. After we decide on a system architecture, separate behavior responsibility into components, and determine how those components will interact through their interfaces, we set out to design the individual components. Each component is designed in isolation, the benefit of encapsulation and reliance on those interfaces we design. Once each component is fully designed in isolation, any data structures which are inherently complex, important, or shared between the classes, or even shared between components, are then designed for efficiency. The same goes for algorithms. When the algorithm is particularly complex, novel, or important to the successful fulfillment of the components' required behavior, you might see software designers rather, than the developers, writing pseudo code to ensure that the algorithm is properly built.
+
+Software design takes abstract requirements and then you build the detail and until you are satisfied that you can hand it off and it will be developed properly. So, you are going to decide things like classes, methods, data types, that kind of thing but not the individual language-specific optimizations that will go into the eventual code. So, you are going to provide detail, which is implementation-ready but it does not include implementation detail.
+
+Software design is all about designing a solution, creating the deliverables and documentation necessary to allow the developing team to build something that meets the needs of the user or the client. The best people to do that is the designing team. This is a crucial step that moves from our natural language understanding to code-ready solutions.
+
+<h3>Software Design: Modularity</h3>
+
+When we talk about modularity, we're primarily talking about these four things:
+
+1. __Coupling__: is the degree of interdependence between software modules; a measure of how closely connected two routines or modules are; the strength of the relationships between modules.
+
+2. __Cohesion__: refers to the degree to which the elements inside a module belong together. In one sense, it is a measure of the strength of relationship between the methods and data of a class and some unifying purpose or concept served by that class. In another sense, it is a measure of the strength of relationship between the class's methods and data themselves. Coupling, cohesion are measures of how well modules work together and how well each individual module meets a certain single well-defined task and they tend to go together.
+
+3. __Information Hiding__: describes our ability to abstract away information and knowledge in a way that allows us to complete complex work in parallel without having to know all the implementation details concerning how the task will be completed eventually.
+
+4. __Data Encapsulation__: refers to the idea that we can contain constructs and concepts within a module, allowing us to much more easily understand and manipulate the concept when we're looking at it in relative isolation.
+
+Software development is complex, attempting to hold the entire concept of a large scale program in your mind all at once is a fool's errand. We have no choice but to break the problem down into smaller parts. Which we might then be able to comprehend. To do that properly, we're going to focus on three concepts or aspects of modularity:
+
+1. _Decomposability_: Essentially it's the ancient possibly Roman concept of divide and conquer. When the problem is too large and complex to get a proper handle on it, breaking it down into smaller parts until you can solve the smaller part is the way to go. Then you just solve all the smaller parts.
+
+2. _Composability_: But then we have to put all those smaller parts back together and that's where composability comes into play. This is often not as simple as one would like.
+
+3. _Ease of Understanding_: So we try to focus on ease of understanding by breaking down the components we hope to provide an ease of understanding, which will then hopefully lead to an ease of communication.
+
+When it comes to _information hiding_, all we want is the ability to use something by understanding what it does but not necessarily how. This tends to work well until the understanding of what it does is strained. Take Rand. What does the function rand do? You might answer that it provides you with a random number but that's not quite right. For most purposes, it generates a random enough value for most uses, but in reality, rand is a pseudo random number generator. It's based off of a seeded value and isn't exactly random. So when you need true randomness, it doesn't quite fit the bill but it does work in many typical situations where true randomness isn't quite necessary.
+
+Because of _data encapsulation_, protecting the data from unauthorized access and maintaining integrity is a key point. The developer of a module has the best idea of how and when the attributes should be modified, and then we try to allow them to maintain as much control as is possible. Nobody else is allowed to mess with that data. If it gets corrupted, it must have been done by the module, that's the intent. And data encapsulation makes designs more robust, by robust here, I mean that chances are that new additions aren't going to break the current design.
+
+So when we talk about modularity, we're really talking about breaking down and reassembling all these components. So when it comes to _coupling, cohesion, information hiding,_ and _data encapsulation_, they are just qualities, different perspectives on what modularity really means.
+
+<h3>Software Design: Coupling</h3>
+
+__Measuring the strength of connection between sub system components:__
+
+One of the key ideas of modularity is 'decomposability', separating complexity. One way we can control the change on a design is to enforce the separation. When the requirements are changed, may be half way through our process, we don't want that change to have massive impact across entirety of our system.
+
+__Loose coupling allow for changes to be unlikely to propagate across components:__
+
+By enforcing low coupling, what we're hoping to accomplish is that changes don't cross the boundaries of our modules. Ideally, when a requirement changes, and it will, the changes in our code should be contained within a single module, the module tasked with completing that function that's changed. When you produce effective low coupling, changes in one module shouldn't affect the other modules, or should do so as minimally as possible. That's our goal. We accomplish that goal by being attentive to the kinds of coupling we are using between our modules.
+
+__Shared variables and control information lead to tight coupling:__
+
+Even though the mantra is low coupling, high cohesion, we talk about the levels of coupling in terms of loose and tight coupling. Those terms make more sense in isolation. The worst, strongest, highest, forms of coupling are listed below.
+
+Tight Coupling:
+
+- _Content coupling_: happens when module _a_ directly relies on the local data members of module _b_, rather than relying on some access or a method.
+
+- _Common coupling_: happens when module _a_ and module _b_ both rely on some global data, or global variable.
+
+- _External coupling_: is a reliance on an externally imposed format, protocol, or interface. In some cases, this can't be avoided. But it does represent tight coupling, which means that changes here could affect a large number of modules, which is probably not ideal.
+
+Medium Coupling:
+
+- _Control coupling_: happens when a module can control the logical flow of another by passing in information on what to do or the order in which to do it, a what to do flag. Changing the process may then necessitate changes to any module which control that part of the process. That's not necessarily good.
+
+- _Data structure_ coupling: occurs when two modules rely on the same composite data structure, especially if the parts the modules rely on are distinct. Changing the data structure could adversely affect the other module even when the parts of the data structure that were changed aren't necessarily those that were relied on by that other module.
+
+__Loose coupling achieved by state decentralization and message passing:__
+
+Loose Coupling:
+
+- _Data couplings_:  is when only parameters are shared. These includes elementary pieces of data like when you pass an integer to a function to compute the square root.
+
+- _Message coupling_: is then the loosest type of coupling. It's primarily achieved through state decentralization and component communications, only accomplished either through parameters or message passing.
+
+- _No coupling_: this is usually the trivial case and isn't really of that much interest to us.
+
+<h3>Software Design: Cohesion</h3>
+
+__Measures how well a module's components fit together:__
+
+__Implements a single logical entity or function:__
+
+__Represents a desirable design attribute:__
+
+__Divides into various levels of strength:__
+
+Cohesion is really how well everything within a module fits together, how it works towards a singular purpose. Now this is pretty subjective, in that the context in which you consider the singular purpose makes a big difference. For example, imagine you're building a game as a mobile application. Technically, everything you do is cohesive to the idea that you are building a game. Every line of code works towards that singular goal, from advertising to user accounts to micro-transactions to the game and the graphics themselves. But that's a very high level categorization. That's why we typically refer to cohesion using various levels of cohesion to better define what we mean when we say cohesion. So let's start with the weakest forms of cohesion.
+
+Weakest Cohesion:
+
+- _Coincidental cohesion_: is effectively the idea that parts of the module are together just because they are, they are in the same file. If you just throw all the code into one file, technically it's cohesive in that it resides in the exact same file location. It's in the same class, for example, in object-oriented programming. But this is ultimately very, very weak cohesion. Its proximity to other code is the only relationship between it and the other. That's not good.
+
+- _Temporal cohesion_: means that the code is activated at the same time, but that's it. That's really the only connection. Being in a module because you're both called at the start isn't a very OO way of looking at the solution.
+
+- _Procedural cohesion_: is similarly time based and not very strong cohesion. Just because one comes after the other doesn't really tie them together, not necessarily. What if the process flow changes? Again, that's not good. They don't necessarily need to be cohesive in that way.
+
+- _Logical association_: is the idea that components which perform similar functions are grouped. We're getting less weak, but it's still not good enough. The idea here is that at some level the components do similar, but separate or parallel things. That's not a good reason to combine them in a module. They are considered separate, though similar, for a reason. And so we should separate them.
+
+Medium Cohesion:
+
+- _Communicational cohesion_: means that all elements of the component operate on the same input or produce the same output. This is more than just doing a similar function. It's producing identical types of output or working from a singular input.
+
+- _Sequential cohesion_: is the stronger form of procedural cohesion. Instead of merely following the other in time, sequential cohesion is achieved when one part of the component is the input to another part of the component. It's a direct handoff and a cohesive identity.
+
+Strong Cohesion:
+
+- _Object cohesion_: In object cohesion, we see that each operation in a module is provided to allow the object attributes to be modified or inspected. Every single operation in the module. Each part is specifically designed for purpose within the object itself, that's that object cohesion.
+
+- _Functional cohesion_: goes above and beyond sequential cohesion to assure that every part of the component is necessary for a well-defined function or behavior. So it's not just input to output, it's everything together is functionally cohesive.
+
+I also want to make this note. Technically speaking, inheritance weakens cohesion. The idea is being able to have the full understanding of a concept in a single module. When you inherit, you by design don't have all the concepts in a single module when you're viewing the code base. You have to go look at the super class files as well. That does make it harder to find detail and goes against the principle of high cohesion. However, that is usually a very easy tradeoff, given the benefits available to us using inheritance.
+
+
+<h2>Implementation</h2>
+
+
+
+<h2>Testing and Verification</h2>
 
 
 

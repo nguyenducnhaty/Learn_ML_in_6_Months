@@ -41,7 +41,17 @@
 
 
 
+<h2>Introduction to matrices</h2>
 
+
+
+<h2>Matrices in linear algebra: operating on vectors</h2>
+
+
+<h2>Matrix Inverses</h2>
+
+
+<h2>Special matrices and Coding up some matrix operations</h2>
 
 
 
