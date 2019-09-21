@@ -201,19 +201,113 @@ If all of that seems complicated, you will be comforted by the fact that thinkin
 
 <h2>Printing</h2>
 
+Our example programs so far have computed results, but had no way to communicate them to the user. Such programs would be useless in practice. Real programs have means to communicate with their user, both to read input and to provide output. Many programs that you are accustomed to have Graphical User Interfaces (GUIs), however, we will work primarily with programs that use a command line interface. Writing GUIs is a more complex task, and requires a variety of additional concepts.
 
+Command line programs provide output to their user by printing it out on the terminal. In C, printing output is accomplished by calling the __printf__ function, which takes a string specifying what to print. We will learn more about strings later, as they require knowledge of pointers to understand. For now, you can think of them as being text—words, or sentences. In much the same way that we can write down numerical literals (such as 3, or -42), we can write down string literals by placing the string we want inside of quotation marks, e.g., "This is a string". If we wanted to print out the string, “Hello World”, we would type __printf("Hello World");__.
 
+The f in __printf__ stands for “formatted,” meaning that __printf__ does not just print literal strings, but can take multiple arguments (of various types), format the output as a string, and print the result. To format output in this way, the string argument of printf (which is called the “format string”) includes special _format specifiers_, which start with a percent sign (%). For now, we will only concern ourselves with %d which specifies that an integer should be formatted as a decimal (base 10) number. For example, if we wrote the following code fragment:
+
+```c
+int x = 3;
+int y = 4;
+printf("x + y = %d", x + y);
+```
+
+it would print x + y = 7, because it would evaluate the expression x + y to get 3 + 4 which is 7, and format the number 7 as a decimal number in place of the %d specifier. The rest of the string is printed literally.
+
+Another type of special information we can include in the string is _escape sequences_. Escape sequences are two (or more) characters, the first of which is a backslash (\), which gives the remaining characters special meaning. The most common escape sequence you will encounter is \n, which means “newline”. If you want your print statement to print a newline character (which makes the next output begin at the start of the next line), then you do so with \n. If you want a literal backslash (that is, you actually want to print a backslash), \\ is the escape sequence for that purpose. We will note that you generally will want to print a newline in your output, not only so that it looks nice, but also because printf does not actually print the output to the screen until it encounters a newline character, or is otherwise forced to do so.
 
 
 <h2>Conditional Statements</h2>
 
+In addition to computing arithmetic combinations of their variables, programs often make decisions based on the values of their variables—executing different statements based on the value of expressions. In C, an if/else statement specifies that one block of code should be executed if a condition is true, and another block should be executed if that condition is false.
 
+To write meaningful if/else statements, we need to introduce operators which allow us to compare two expressions and produce a Boolean outcome. In C, however, there are no distinct values for true or false, instead, false is 0, and anything which is non-zero is true. We will refer to true and false because they make more sense conceptually; the distinction should not make a practical difference in most cases.
 
+<img src="../1. Programming Fundamentals/images/conditionals.png">
+
+The table above shows the C operators for conditional expressions. The first six (==, !=, <, <=, >, and >=) are relational operators—they compare two expressions for equality or inequality. For any of these operators, both operands (the expressions on the left and right) are evaluated to a value, then compared appropriately. The operator then produces a true or false value.
+
+The last three operators in the table (!, &&, and ||) are boolean operators—they operate on true/false values. The first of these, ! performs the boolean NOT operation. It is a unary operator—meaning that is has one operand—which evaluates to true if its operand is false, and evaluates to false if its operand is true.
+
+The && and || operators perform the logical AND and logical OR operations respectively. The logical AND of two values is true if and only if both values are true, otherwise it is false. The logical OR of two values is true if and only if either of the values are true, otherwise it is false.
+
+Unlike previous operators that we have seen, && and || may know their answer from only one argument. In the case of &&, if either operand is false, then the result is false, regardless of the other value. Similarly for ||, if either operand is true, then the result is true regardless of the other value. C exploits this fact in the way that it evaluates && and || by making them short circuit—they may only evaluate one operand. Specifically, the first operand is always evaluated to a value; however, if the value of that operand determines the result of the entire && or ||—false for && or true for ||—then the second operand is not evaluated at all.
+
+<h3>if/else</h3>
+
+Now that we understand comparison operators, and can compare expressions, we can discuss the evaluation of if/else statements. The syntax for an if/else statement is shown in figure below.
+
+<img src="../1. Programming Fundamentals/images/if_else.png">
+
+The keyword if is followed by an expression in parenthesis. This expression is evaluated to a value, to determine whether the “then” block or the “else” block is executed. The “then” block of code comes immediately after the expression. C does not have a then keyword (although some languages do), however, this block of code serves the same purpose regardless of the syntactic particulars of the language—it is executed if the conditional expression evaluates to true. After the “then” block, we have the keyword else, followed by the “else” block. This block of code is executed if the conditional expression evaluates to false.
+
+C permits if with no else, which is equivalent to an empty “else” block (as if the programmer had written else {}). If you execute an if with no else, then simply imagine the empty “else” block. If the conditional expression evaluates to true, you should execute the “then” block as previously described, however, there is no “else” block to skip. Instead, continue executing statements immediately after the end of the “then” block (skipping over the non-existent “else” block). If the conditional expression evaluates to false, then skip the “then” block, and execute whatever statements follow it (doing nothing for the “else” block).
+
+if/else statements may be nested—one (or more) may occur in the “then” or “else” block of another if/else statement. When you encounter nested statements, the same rules apply. The inner statement is just one of the (possibly) many statements in the block, and is executed according to its rules—the condition is evaluated, whichever of the “then” or “else” blocks is appropriate is executed, and then execution continues after the end of the “else” block. When the execution arrow reaches the end of the outer “then” or “else” block, it behaves no differently than if there were no inner if statement.
+
+<h3>switch/case</h3>
+
+Another way that programs can make decisions is to use switch/case. The syntax of switch/case is shown in the figure below. Here, when the execution arrow reaches the switch statement, the selection expression—in parenthesis after the keyword switch—is evaluated to a value. This value is then used to determine which case to enter. The execution arrow then jumps to the corresponding case—the one whose label (the constant immediately after the keyword case) matches the selection expression’s value. If no label matches, then the execution arrow jumps to the default case if there is one, and to the closing curly brace of the switch if not.
+
+<img src="../1. Programming Fundamentals/images/switch_case.png">
+
+Once the execution arrow has jumped into a particular case, execution continues as normal until it encounters the keyword break. When the execution arrow reaches the break keyword, it jumps to the close curly brace which ends the switch statement. Note that reaching another case label does not end the current case. Unless the execution arrow encounters break, execution continues from one statement to the next. When the execution arrow passes from one case into the next like this, it is called “falling through” into the next case.
+
+For example, if we were executing the code in the figure above, and reached the switch statement with x having a value of 17 and y having a value of 16, then we would first evaluate the selection expression (x - y), and get a value of 1. The execution arrow would then jump to case 1: and begin executing statements after it. We would execute y = 9;. Then we would fall through the next case label—our execution arrow would move past it into the next case (the label itself has no effect). Then we would execute z = 42;. Next, we would execute the break; statement, causing our execution arrow to jump to the close curly brace of the switch, after which we would continue executing whatever other statements are there.
+
+<h3>Shorthand</h3>
+
+C (and many other programming languages) has shorthand—also called _syntactic sugar_—for a variety of common operations. These shorthands do not introduce any new behaviors. Instead, they just provide a shorter way to write common patterns of existing things we have seen. This table shows the most common shorthand notations in C:
+
+<img src="../1. Programming Fundamentals/images/syntactic_sugar.png">
 
 
 <h2>Loops</h2>
 
+<h3>While Loops</h3>
 
+There are three kinds of loops in C. The first of these is the __while__ loop. The syntax for a while loop is shown in this figure:
+
+<img src="../1. Programming Fundamentals/images/while_loop.png">
+
+The keyword __while__ is followed by an expression in parenthesis. Much like an if statement, this expression is evaluated to determine whether or not to enter the block of code immediately following it, which is known as the _body_ of the loop. If the conditional expression evaluates to true, the execution arrow moves inside the body of the loop and its statements are executed normally. The while loop differs from the if statement in what happens when the execution arrow reaches the closing curly brace. In the case of a while loop, it jumps up to the top of the loop, immediately before the while keyword. The conditional expression is then re-evaluated, and if it is still true, execution re-enters the loop body. If the conditional expression evaluates to false, then the execution arrow skips to immediately after the closing curly brace of the loop body, and proceeds from there.
+
+<h3>do/while Loops</h3>
+
+Another type of loop in C is the do-while loop. Unlike a while loop, which checks its conditional expression at the top of the loop, the do-while loop checks its conditional expression at the bottom of the loop—after it has executed the body. While this distinction may seem contrived—either way the condition is checked between iterations—it is important at the start of the loop. A while loop may execute its body zero times, skipping the entire loop, if the condition is false initially. By contrast, a do-while loop is guaranteed to execute its body at least once because it executes the loop body before ever checking the condition.
+
+<img src="../1. Programming Fundamentals/images/do_while_loops.png">
+
+The figure above shows the syntax of a do-while loop. The keyword do is followed by the loop body. After the loop body, the keyword while is followed by the conditional expression and a semicolon.
+
+Execution of a do-while loop proceeds by first entering the loop body and executing all of the statements contained in it. When the execution arrow reaches the while at the end of the loop body, its conditional expression is evaluated. If the expression evaluates to true, then the execution arrow jumps back to the start of the loop body. If the expression evaluates to false, then it moves past the end of the loop and execution continues with the next statement after the loop.
+
+<h3>For Loops</h3>
+
+The third type of loop in C is a for loop. The for loop is syntactic sugar—it does not introduce any new behavior, but instead provides a more convenient syntax for a common programming idiom. In the case of for loops, the common idiom is counting from one number to another. The following figure shows the syntax of a for loop, and how it is de-sugared into a while loop—that is, how we could write the for loop in terms of the already familiar while loop. Knowing how the for loop de-sugars to a while loop tells us how to execute it. We can imagine the equivalent while loop, and follow the execution rules we have already learned for it.
+
+<img src="../1. Programming Fundamentals/images/for_loop.png">
+
+The for keyword is followed by three pieces, separated by semicolons, inside of parenthesis. The first of these is the “initialization statement”. It happens once before the first time the loop’s condition is checked. In the de-sugaring, this statement appears right before the while loop. The second piece is not a statement (even though it is followed by a semicolon), but rather the conditional expression for the loop. In the de-sugaring, this expression is the conditional expression of the while loop. The third statement is the “increment statement”. In the de-sugaring, it appears immediately before the close curly brace of the loop body. After all of these is the loop body, which (except for the addition of the “increment statement” at the end) is the loop body of the while loop in the de-sugared version.
+
+If you examine the figure carefully, you will notice that there is a set of curly braces around the entire piece of while-based code. These curly braces are there for a subtle, but important reason. The scope of any variables declared in the “initialization statement” of the for loop have a scope which is limited to the for loop. Recall that a variable typically has a scope which is limited to the curly braces which enclose its declaration. For a variable declared in the start of the for loop, the scope appears to be an exception to this rule, however, it is not if we think of it in terms of the de-sugaring shown above with the curly braces surrounding the declaration.
+
+__Nesting__
+
+Just as if/else statements may be nested, loops may also be nested. Similarly, loops follow exactly the same rules no matter how they are nested. In fact, if/else statements and loops may be nested within each other in any combinations. The rules are always the same regardless of any combinations or depths of nesting.
+
+<h3>Break and Continue</h3>
+
+Sometimes a programmer wants to leave the loop body early, rather than finishing all of the statements in side of it. There are two possible behaviors that a programmer might want when leaving the loop body early.
+
+__Break:__
+
+One behavior would be to exit the loop completely, making the execution arrow jump to immediately after the close curly brace which ends the loop (the same place that it goes when the loop’s condition evaluates to false). This behavior is obtained by using the break; statement—which we have already seen in the context of switch/case. Whenever the execution arrow encounters a break statement, it executes the statement by jumping out of the innermost enclosing loop (whether it is a while, do-while, or for loop), or switch statement. If the break statement is inside multiple of these which are nested together (e.g. a loop inside a case of a switch statement), then it exits only the most immediately enclosing one. If a break statement occurs and is not inside one of these loops or a switch statement, it is an error in the program.
+
+__Continue:__
+
+The other possible behavior that the programmer might want to have is for the execution arrow to jump back to the top of the loop. This behavior is accomplished with the continue; statement. Executing the continue statement jumps to the top of the innermost enclosing loop (if it is not in a loop, it is an error). In the case of a for loop, the “increment statement” in the for loop is executed immediately before the jump. This fact complicates the de-sugaring of a for loop into a while loop slightly relative to the explanation given above. If the for loop contains any continue statements, then the “increment statement” is written not only before the close curly brace of the loop, but also before any continue statements.
 
 
 
