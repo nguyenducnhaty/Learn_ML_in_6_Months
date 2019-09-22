@@ -46,17 +46,27 @@
 
 <h2>Matrices in linear algebra: operating on vectors</h2>
 
+<h3>How matrices transform space</h3>
+
+<h3>Types of matrix transformation</h3>
+
+<h3>Composition or combination of matrix transformations</h3>
+
 
 <h2>Matrix Inverses</h2>
+
+<h3>Gaussian elimination</h3>
+
+<h3>Going from Gaussian elimination to finding the inverse matrix</h3>
 
 
 <h2>Special matrices and Coding up some matrix operations</h2>
 
+<h3>Determinants and Inverses</h3>
+
 
 
 <h1>Week 4: Matrices make linear mappings</h1>
-
-
 
 
 

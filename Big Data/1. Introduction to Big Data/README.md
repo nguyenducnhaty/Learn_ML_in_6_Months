@@ -118,6 +118,96 @@ Additionally, by bringing the data together, and providing programmable access t
 
 
 
+<h2>Characteristics of Big Data</h2>
+
+By now you have seen that big data is a blanket term that is used to refer to any collection of data so large and complex that it exceeds the processing capability of conventional data management systems and techniques. The applications of big data are endless. Every part of business and society are changing in front our eyes due to that fact that we now have so much more data and the ability for analyzing.
+
+But how can we characterize big data? Big data is commonly characterized using a number of V's. The first three are _volume, velocity_, and _variety_.
+- __Volume__: refers to the vast amounts of data that is generated every second, mInutes, hour, and day in our digitized world.
+- __Variety__: refers to the ever increasing different forms that data can come in such as text, images, voice, and geospatial data.
+- __Velocity__: refers to the speed at which data is being generated and the pace at which data moves from one point to the next.
+
+Volume, variety, and velocity are the three main dimensions that characterize big data. And describe its challenges.
+
+We have huge amounts of data in different formats, and varying quality which must be processed quickly. More Vs have been introduced to the big data community as we discover new challenges and ways to define big data. _Veracity_ and _valence_ are two of these additional V's.
+- __Veracity__: refers to the biases, noise, and abnormality in data. Or, better yet, It refers to the often unmeasurable uncertainties and truthfulness and trustworthiness of data.
+- __Valence__: refers to the connectedness of big data in the form of graphs, just like atoms.
+
+<img src="../1. Introduction to Big Data/images/chars_of_big_data.png">
+
+Moreover, we must be sure to never forget our sixth V, _Value_. How do big data benefit you and your organization? Without a clear strategy and an objective with the value they are getting from big data. It is easy to imagine that organizations will be sidetracked by all these challenges of big data, and not be able to turn them into opportunities.
+
+<h3>Characteristics of Big Data - Volume</h3>
+
+Volume is the big data dimension that relates to the sheer size of big data. This volume can come from large datasets being shared or many small data pieces and events being collected over time.
+
+There are a number of challenges related to the massive volumes of big data. The most obvious one is of course storage. As the size of the data increases so does the amount of storage space required to store that data efficiently. However, we also need to be able to retrieve that large amount of data fast enough, and move it to processing units in a timely fashion to get results when we need them. This brings additional challenges such as networking, bandwidth, cost of storing data. In-house versus cloud storage and things like that.
+
+Additional challenges arise during processing of such large data. Most existing analytical methods won't scale to such sums of data in terms of memory, processing, or IO needs. This means their performance will drop. You might be able to get good performance for data from hundreds of customers. But how about scaling your solution to 1,000 or 10,000 customers? As the volume increases performance and cost start becoming a challenge.
+
+As a summary the challenges with working with volumes of big data include cost, scalability, and performance related to their storage, access, and processing.
+
+<h3>Characteristics of Big Data - Variety</h3>
+
+Now we'll talk about a form of scalability called variety. In this case, scale does not refer to the largeness of data. It refers to increased diversity.
+
+When we, as data scientists, think of data variety, we think of the additional complexity that results from more kinds of data that we need to store, process, and combine. Now, many years ago when we said data management, we always thought of data as tables. These tables could be in spreadsheets or databases or just files, but somehow they will be modeled and manipulated as rows and columns of of tables. Now, tables are still really important and dominant, however today a much wider variety of data are collected, stored, and analyzed to solve real world problems. Image data, text data, network data, geographic maps, computer generated simulations are only a few of the types of data we encounter everyday.
+
+The heterogeneity of data can be characterized along several dimensions. We mention four such axes here:
+
+1. __Structural variety__: refers to the difference in the representation of the data. For example, an EKG signal is very different from a newspaper article. A satellite image of wildfires from NASA is very different from tweets sent out by people who are seeing the fire spread.
+2. __Media variety__: refers to the medium in which the data gets delivered. The audio of a speech versus the transcript of the speech may represent the same information in two different media. Data objects like news video may have multiple media. An image sequence, an audio, and closed captioned text, all time synchronized to each other.
+3. __Semantic variety__: is best described two examples. We often use different units for quantities we measure. Sometimes we also use qualitative versus quantitative measures. For example, age can be a number or we represent it by terms like infant, juvenile, or adult. Another kind of semantic variety comes from different assumptions of conditions on the data. For example, if we conduct two income surveys on two different groups of people, we may not be able to compare or combine them without knowing more about the populations themselves.
+4. __Availability variety__: The variation and availability takes many forms. For one, data can be available real time, like sensor data, or it can be stored, like patient records. Similarly data can be accessible continuously, for example from a traffic cam. Versus intermittently, for example, only when the satellite is over the region of interest. This makes a difference between what operations one can do with data, especially if the volume of the data is large.
+
+<h3>Characteristics of Big Data - Velocity</h3>
+
+Velocity refers to the increasing speed at which big data is created and the increasing speed at which the data needs to be stored and analyzed. Processing of data in real-time to match its production rate as it gets generated is a particular goal of big data analytics. For example, this type of capability allows for personalization of advertisement on the web pages you visit based on your recent search, viewing, and purchase history.
+
+Being able to catch up with the velocity of big data and analyzing it as it gets generated can even impact the quality of human life. Sensors and smart devices monitoring the human body can detect abnormalities in real time and trigger immediate action, potentially saving lives. This type of processing is what we call _real time processing_. Real-time processing is quite different from its remote relative, batch processing.
+
+Batch processing was the norm until a couple of years ago. Large amounts of data would be fed into large machines and processed for days at a time. While this type of processing is still very common today, decisions based on information that is even few days old can be catastrophic to some businesses.
+
+For this reason it's important to match the speed of processing with the speed of information generation, and get real time decision making power. In addition, today's sensor-powered socioeconomic climate requires faster decisions. Hence, we can not wait for all the data to be first produced, then fed into a machine.
+
+The need for real time data-driven actions within a business case is what in the end dictates the velocity of analytics over big data. Sometimes precision of a minute is needed. Sometimes half a day. When the timeliness of processed information plays no role in decision making, the speed at which data is generated becomes irrelevant. In other words, you can wait for as long as it takes to process data. Days, months, weeks. And once processing is over, you will look at the results and probably share them with someone.
+
+<h3>Characteristics of Big Data - Veracity</h3>
+
+Veracity of Big Data refers to the quality of the data. It sometimes gets referred to as validity or volatility referring to the lifetime of the data. Veracity is very important for making big data operational. Because big data can be noisy and uncertain. It can be full of biases, abnormalities and it can be imprecise. Data is of no value if it's not accurate, the results of big data analysis are only as good as the data being analyzed. So we can say although big data provides many opportunities to make data enabled decisions, the evidence provided by data is only valuable if the data is of a satisfactory quality.
+
+There are many different ways to define data quality. In the context of big data, quality can be defined as a function of a couple of different variables. Accuracy of the data, the trustworthiness or reliability of the data source. And how the data was generated are all important factors that affect the quality of data. Additionally how meaningful the data is with respect to the program that analyzes it, is an important factor, and makes context a part of the quality.
+
+Uncertainty of the data increases as we go from enterprise data to sensor data. This is as we would expect it to be. Traditional enterprise data in warehouses have standardized quality solutions like master processes for extract, transform and load of the data which we referred to as before as ETL. As enterprises started incorporating less structured and unstructured people and machine data into their big data solutions, the data become messier and more uncertain. There are many reasons for this.
+
+First, unstructured data on the internet is imprecise and uncertain. In addition, high velocity big data leaves very little or no time for ETL, and in turn hindering the quality assurance processes of the data. This brings up the need for being able to identify where exactly the big data they used comes from. What transformation did big data go through up until the moment it was used for a estimate? This is what we refer to as data providence.
+
+<h3>Characteristics of Big Data - Valence</h3>
+
+Simply put Valence refers to Connectedness. The more connected data is, the higher it's valences. The term valence comes from chemistry. In chemistry, we talk about core electrons and valence electrons of an atom. Valence electrons are in the outer most shell, have the highest energy level and are responsible for bonding with other atoms. That higher valence results in greater boding, that is greater connectedness. This idea is carried over into our definition of the term valence in the context of big data.
+
+Data items are often directly connected to one another. A city is connected to the country it belongs to. Two Facebook users are connected because they are friends. An employee is connected to his work place. Data could also be indirectly connected. Two scientists are connected, because they are both physicists. For a data collection valence measures the ratio of actually connected data items to the possible number of connections that could occur within the collection.
+
+The most important aspect of valence is that the data connectivity increases over time. A high valence data set is denser. This makes many regular, analytic critiques very inefficient. More complex analytical methods must be adopted to account for the increasing density.
+
+More interesting challenges arise due to the dynamic behavior of the data. Now there is a need to model and predict how valence of a connected data set may change with time and volume. The dynamic behavior also leads to the problem of event detection, such as bursts in the local cohesion in parts of the data. And emergent behavior in the whole data set, such as increased polarization in a community.
+
+<h3>The Sixth V: Value</h3>
+
+So far we have described the five ways which are considered to be dimensions of big data. Each way presented a challenging dimension of big data namely, size, complexity, speed, quality, and connectedness.
+
+However, at the heart of the big data challenge is turning all of the other dimensions into truly useful business value. The idea behind processing all this big data in the first place is to bring value to the problem at hand.
+
+
+<h2>Getting Value out of Big Data</h2>
+
+
+
+<h2>The Process of Data Analysis</h2>
+
+
+
+
 
 
 

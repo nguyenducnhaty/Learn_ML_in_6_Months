@@ -6,6 +6,10 @@
 
 - Complete control system for your home, electricity through regular means and green energy from solar and wind and you use this data to predict usage and then build an optimum system that regulates your bills, should be able to add new devices to the system and the model should be able to accommodate. It will be like a phone app where the usage and all other details are shown along with how much you are saving. Can be like the 1st step in a connected home which will monitor your usage and makes suggestions or switches things off. I could try to build a model home to demo.
 
+- Home security
+
+- Surveillance, I am thinking if you need to find a car that you saw, you still have to manually look for it, so what if we could just manually input some text description of what we saw and the AI finds the frame for it. This is a neat application. It could be as simple as breaking the description into individual words and break the video into individual frames and then run an object detection algorithm, see what it captures and find the frames that matches most with the predicted labels and the description.
+
 
 
 
