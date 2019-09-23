@@ -60,6 +60,7 @@
 <h3>Going from Gaussian elimination to finding the inverse matrix</h3>
 
 
+
 <h2>Special matrices and Coding up some matrix operations</h2>
 
 <h3>Determinants and Inverses</h3>

@@ -201,13 +201,139 @@ However, at the heart of the big data challenge is turning all of the other dime
 
 <h2>Getting Value out of Big Data</h2>
 
+We have all heard data science turned data into insights or even actions. But what does that really mean? Data science can be thought of as a basis for empirical research where data is used to induce information for observations. These observations are mainly data, in our case, big data, related to a business or scientific case.
+
+Insight is a term we use to refer to the data products of data science. It is extracted from a diverse amount of data through a combination of exploratory data analysis and modeling. The questions are sometimes more specific, and sometimes it requires looking at the data and patterns in it to come up with the specific question.
+
+Another important point to recognize is that data science is not static. It is not one time analysis. It involves a process where models generated to lead to insights are constantly improved through further empirical evidence, or simply, data.
+
+<h3>Building a Big Data Strategy</h3>
+
+A big data strategy starts with __Business objectives__. Notice that I didn't say it starts with collecting data because in this activity we are really trying to identify what data is useful and why by focusing on what data to collect. Every organization or team is unique. Different projects have different objectives. Hence, it's important to first define what your team's goals are.
+
+Once you define these objectives, or more generally speaking, questions to turn big data into advantage for your business, you can look at what you have and analyze the gaps and actions to get there. It is important to focus on both short term and long term objectives in this activity. These objectives should also be linked to big data analytics with business objectives. To make the best use of big data, each company needs to evaluate how data science or big data analytics would add value to their business objectives.
+
+Once you have established that analytics can help your business, you need to create a culture to embrace it. The first and foremost ingredient for a successful data science program is __organizational buy-in__. A big data strategy must have commitment and sponsorship from the company's leadership. Goals for using big data analytics should be developed with all stakeholders and clearly communicated to everyone in the organization. So that its value is understood and appreciated by all.
+
+The next step is to build your __data science team__. A diverse team with data scientists, information technologists, application developers, and business owners is necessary to be effective. As well as the mentality that everyone works together as partners with common goals. No one is a customer or service provider of another. Rather, everyone works together and delivers as a team.
+
+Since big data is a team game, and multi-disciplinary, a big part of a big data strategy is __constant training__ of team members on new big data tools and analytics. As well as business practices and objectives. This becomes even more critical if your business depends on deep expertise on one or more subject areas with subject matter experts working on problems, utilizing big data.
+
+Since data is key to any big data initiative, it is essential that data across the organization is __easily accessed and integrated__. Data silos as you know, are like a death knell on effective analytics. So barriers to data access must be removed. Opening up the silos must be encouraged and supported from the organization's leaders in order to promote a data sharing mindset for the company.
+
+Another aspect of defining your big data strategy is defining the __policies__ around big data. Although it has an amazing amount of potential for your business, using big data should also raise some concerns in long term planning for data. Although this is a very complex issue, here are some questions you should think of addressing around policy. What are the privacy concerns? Who should have access to, or control data? What is the lifetime of data, which is sometimes defined as volatility, anatomy of big data? How does data get curated and cleaned up? What ensures data quality in the long term? How do different parts of your organization communicate or interoperate using this data? Are there any legal and regulatory standards in place?
+
+Cultivating an __analytics driven culture__ is crucial to the success of a big data strategy. The mindset that you want to establish is that analytics is an integral part of doing business, not a separate afterthought. Analytics activities must be tied to your business objectives, and you must be willing to use analytics in driving business decisions. Analytics and business together bring about exciting opportunities and growth to your big data strategy.
+
+<h3>How does big data science happen?: Five Components of Data Science</h3>
+
+Data Science is about extracting knowledge from data. We define 5 P's that take significant part in the data science activities.
+
+- __Purpose:__ The purpose refers to the challenge or set of challenges defined by your big data strategy. The purpose can be related to a scientific analysis with a hypothesis or a business metric that needs to be analyzed based often on Big Data.
+
+- __People:__ The data scientists are often seen as people who possess skills on a variety of topics including: science or business domain knowledge; analysis using statistics, machine learning and mathematical knowledge; data management, programming and computing. In practice, this is generally a group of researchers comprised of people with complementary skills.
+
+- __Process:__ Since there is a predefined team with a purpose, a great place for this team to start with is a process they could iterate on. We can simply say, People with Purpose will define a Process to collaborate and communicate around! The process of data science includes techniques for statistics, machine learning, programming, computing and data management. A process is conceptual in the beginning and defines the course set of steps and how everyone can contribute to it. Note that similar reusable processes can be applicable to many applications with different purposes when employed within different workflows. Data science workflows combine such steps in executable graphs. We believe that process-oriented thinking is a transformative way of conducting data science to connect people and techniques to applications. Execution of such a data science process requires access to many datasets, Big and small, bringing new opportunities and challenges to Data Science. There are many Data Science steps or tasks, such as Data Collection, Data Cleaning, Data Processing/Analysis, Result Visualization, resulting in a Data Science Workflow. Data Science Processes may need user interaction and other manual operations, or be fully automated.Challenges for the data science process include 1) how to easily integrate all needed tasks to build such a process; 2) how to find the best computing resources and efficiently schedule process executions to the resources based on process definition, parameter settings, and user preferences.
+
+- __Platforms:__ Based on the needs of an application-driven purpose and the amount of data and computing required to perform this application, different computing and data platforms can be used as a part of the data science process. This scalability should be made part of any data science solution architecture.
+
+- __Programmability:__ Capturing a scalable data science process requires aid from programming languages, e.g., Python, and patterns, e.g., MapReduce. Tools that provide access to such programming techniques are key to making the data science process programmable on a variety of platforms.
+
+To summarize, data science can be defined as a craft of using the five pieces identified above. Having a process between the more business driven P’s people and purpose and the more technical driven P’s platforms and programmability leads to a streamlined approach that starts and ends with a defined business value, team accountability and collaboration in mind.
+
+<h3>Asking the Right Questions</h3>
+
+The first step in any process is to define what it is you are trying to tackle. What is the problem that needs to be addressed, or the opportunity that needs to be ascertained.
+
+Without this, you won't have a clear goal in mind, or know when you've solved your problem. An example question is, how can sales figures and call center logs be combined to evaluate a new product, or in a manufacturing process, how can data from multiple sensors in an instrument be used to detect instrument failure? How can we understand our customers and market better to achieve effective target marketing? Next you need to assess the situation with respect to the problem or the opportunity you have defined. This is a step where you need to exercise caution analyzing risks, costs, benefits, contingencies, regulations, resources and requirements of the situation. What are the requirements of the problem? What are the assumptions and constraints? What resources are available? This is in terms of both personnel and capital, such as computer systems, instruments etc. What are the main costs associated with this project? What are the potential benefits? What risks are there in pursuing the project? What are the contingencies to potential risks, and so on? Answers to these questions will help you get a better overview of the situation. And better understanding of what the project involves.
+
+Then you need to define your goals and objectives, based on the answers to these questions. Defining success criteria is also very important. What do you hope to achieve by the end of this project? Having clear goals and and success criteria will help you to assess the project throughout its life cycle. Once you know the problem you want to address and understand the constraints and goals, then you can formulate the plan to come up with the answer, that is the solution to your business problem.
 
 
 <h2>The Process of Data Analysis</h2>
 
+<h3>Steps in the Data Science Process</h3>
 
+We have already seen a simple linear form of data science process, including five distinct activities that depend on each other. Let's summarize each activity further before we go into the details of each.
+- __Acquire__ includes anything that makes us retrieve data including; finding, accessing, acquiring, and moving data. It includes identification of and authenticated access to all related data. And transportation of data from sources to distributed files systems. It includes way to subset and match the data to regions or times of interest. As we sometimes refer to it as geo-spacial query.
 
+- The next activity is __Prepare__ data, we divide the pre-data activity. Into two steps based on the nature of the activity. Namely, explore data and pre-process data. The first step in data preparation involves literally looking at the data to understand its nature, what it means, its quality and format. It often takes a preliminary analysis of data, or samples of data, to understand it. This is why this step is called explore. Once we know more about the data through exploratory analysis, the next step is pre-processing of data for analysis. Pre-processing includes cleaning data, sub-setting or filtering data, creating data, which programs can read and understand, such as modeling raw data into a more defined data model, or packaging it using a specific data format. If there are multiple data sets involved, this step also includes integration of multiple data sources, or streams.
 
+- The prepared data then would be passed onto the __Analysis__ step, which involves selection of analytical techniques to use, building a model of the data, and analyzing results. This step can take a couple of iterations on its own or might require data scientists to go back to steps one and two to get more data or package data in a different way.
+
+- Step four for communicating results includes evaluation of analytical results. Presenting them in a visual way, creating __Reports__ that include an assessment of results with respect to success criteria. Activities in this step can often be referred to with terms like interpret, summarize, visualize, or post process.
+
+- The last step brings us back to the very first reason we do data science, the purpose. Reporting insights from analysis and determining actions from insights based on the purpose you initially defined is what we refer to as the __Act__ step.
+
+<h3>Step 1: Acquiring Data</h3>
+
+A lot of data exists in conventional relational databases, like structure big data from organizations. The tool of choice to access data from databases is structured query language or SQL, which is supported by all relational databases management systems. Additionally, most data base systems come with a graphical application environment that allows you to query and explore the data sets in the database.
+
+An increasingly popular way to get data is from websites. Web pages are written using a set of standards approved by a world wide web consortium or shortly, W3C. This includes a variety of formats and services. One common format is the Extensible Markup Language, or XML, which uses markup symbols or tabs to describe the contents on a webpage. Many websites also host web services which produce program access to their data.
+
+There are several types of web services. The most popular is REST because it's so easy to use. REST stand for Representational State Transfer. And it is an approach to implementing web services with performance, scalability and maintainability in mind.
+
+Web socket services are also becoming more popular since they allow real time modifications from web sites. NoSQL storage systems are increasingly used to manage a variety of data types in big data. These data stores are databases that do not represent data in a table format with columns and rows as with conventional relational databases. Examples of these data stores include Cassandra, MongoDB and HBASE.
+
+NoSQL data stores provide APIs to allow users to access data. These APIs can be used directly or in an application that needs to access the data. Additionally, most NoSQL systems provide data access via a web service interface, such a REST.
+
+<h3>Step 2-A: Exploring Data</h3>
+
+The first step after getting your data is to explore it. Exploring data is a part of the two-step data preparation process. You want to do some _preliminary investigation_ in order to gain a better understanding of the specific characteristics of your data. In this step, you'll be looking for things like correlations, general trends, and outliers. Without this step, you will not be able to use the data effectively. Correlation graphs can be used to explore the dependencies between different variables in the data. Graphing the general trends of variables will show you if there is a consistent direction in which the values of these variables are moving towards, like sales prices going up or down.
+
+In statistics, an outlier is a data point that's distant from other data points. Plotting outliers will help you double check for errors in the data due to measurements. In some cases, outliers that are not errors might make you find a rare event. Additionally, summary statistics provide numerical values to describe your data. Summary statistics are quantities that capture various characteristics of a set of values with a single number or a small set of numbers. Some basic summary statistics that you should compute for your data set are mean, median, range, and standard deviation. Mean and median are measures of the location of a set of values. Mode is the value that occurs most frequently in your data set. And range and standard deviation are measures of spread in your data. Looking at these measures will give you an idea of the nature of your data. They can tell you if there's something wrong with your data.
+
+Visualization techniques also provide a quick and effective, and overall a very useful way to look at data in this preliminary analysis step. A heat map, can quickly give you the idea of where the hotspots are. Many other different types of graphs can be used. Histograms show that the distribution of the data and can show skewness or unusual dispersion. Boxplots are another type of plot for showing data distribution. Line graphs are useful for seeing how values in your data change over time. Spikes in the data are also easy to spot. Scatter plots can show you correlation between two variables. Overall, there are many types of graph to visualize data. They are very useful in helping you understand the data you have.
+
+<h3>Step 2-B: Pre-Processing Data</h3>
+
+The raw data that you get directly from your sources are never in the format that you need to perform analysis on. There are two main goals in the data pre-processing step. The first is to clean the data to address data quality issues, and the second is to transform the raw data to make it suitable for analysis.
+
+A very important part of data preparation is to address quality of issues in your data. Real-world data is messy. There are many examples of quality issues with data from real applications including inconsistent data, missing data, invalid data and outliers.
+
+Since we get the data downstream we usually have little control over how the data is collected. Preventing data quality problems as the data is being collected is not often an option. So we have the data that we get and we have to address quality issues by detecting and correcting them.
+
+Here are some approaches we can take to address this quality issues. We can remove data records with missing values. We can merge duplicate records. This will require a way to determine how to resolve conflicting values. Perhaps it makes sense to retain the newer value whenever there's a conflict. For invalid values, the best estimate for a reasonable value can be used as a replacement. Outliers can also be removed if they are not important to the task.
+
+In order to address data quality issues effectively, knowledge about the application, such as how the data was collected, the user population, and the intended uses of the application is important. This domain knowledge is essential to making informed decisions on how to handle incomplete or incorrect data.
+
+The second part of preparing data is to manipulate the clean data into the format needed for analysis. The step is known by many names. Data manipulation, data preprocessing, data wrangling, and even data munging, some operations for this type of operation I mean data munging, wrangling, preprocessing, include, scaling, transformation, feature selection, dimensionality reduction, and data manipulation.
+
+Scaling involves changing the range of values to be between a specified range. Such as from zero to one. This is done to avoid having certain features that large values from dominating the results.
+
+Various transformations can be performed on the data to reduce noise and variability. One such transformation is aggregation. Aggregate data generally results in data with less variability, which may help with your analysis.
+
+Other filtering techniques can also be used to remove variability in the data. Of course, this comes at the cost of less detailed data. So these factors must be weighed for the specific application.
+
+Future selection can involve removing redundant or irrelevant features, combining features, and creating new features. During the exploring data step, you might have discovered that two features are correlated. In that case one of these features can be removed without negatively affecting the analysis results. Removing redundant or irrelevant features will make the subsequent analysis much simpler.
+
+There are also algorithms to automatically determine the most relevant features, based on various mathematical properties. Dimensionality reduction is useful when the data set has a large number of dimensions. It involves finding a smaller subset of dimensions that captures most of the variation in the data. This reduces the dimensions of the data while eliminating irrelevant features and makes analysis simpler. A technique commonly used for dimensional reduction is called principle component analysis or PCA.
+
+<h3>Step 3: Analyzing Data</h3>
+
+Data analysis involves building a model from your data, which is called input data. The input data is used by the analysis technique to build a model. What your model generates is the output data. There are different types of problems, and so there are different types of analysis techniques.
+
+The main categories of analysis techniques are classification, regression, clustering, association analysis, and graph analysis. In classification, the goal is to predict the category of the input data. When your model has to predict a numeric value instead of a category, then the task becomes a regression problem. In clustering, the goal is to organize similar items into groups. The goal in association analysis is to come up with a set of rules to capture associations within items or events. The rules are used to determine when items or events occur together. When your data can be transformed into a graph representation with nodes and links, then you want to use graph analytics to analyze your data. This kind of data comes about when you have a lot of entities and connections between those entities, like social networks.
+
+Modeling starts with selecting, one of the techniques we listed as the appropriate analysis technique, depending on the type of problem you have. Then you construct the model using the data you've prepared. To validate the model, you apply it to new data samples. This is to evaluate how well the model does on data that was used to construct it.
+
+The common practice is to divide the prepared data into a set of data for constructing the model and reserving some of the data for evaluating the model after it has been constructed. You can also use new data prepared the same way as with the data that was used to construct model.
+
+Evaluating the model depends on the type of analysis techniques you used. Let's briefly look at how to evaluate each technique. For classification and regression, you will have the correct output for each sample in your input data. Comparing the correct output and the output predicted by the model, provides a way to evaluate the model. For clustering, the groups resulting from clustering should be examined to see if they make sense for your application. For association analysis and graph analysis, some investigation will be needed to see if the results are correct.
+
+After you have evaluated your model to get a sense of its performance on your data, you will be able to determine the next steps. The ideal situation would be that your model performs very well with respect to the success criteria that were determined when you defined the problem at the beginning of the project. In that case, you're ready to move on to communicating and acting on the results that you obtained from your analysis.
+
+<h3>Step 4: Communicating Results</h3>
+
+The fourth step in our data science process is reporting the insights gained from our analysis. This is a very important step to communicate your insights and make a case for what actions should follow. It can change shape based on your audience and should not be taken lightly. So how do you get started? The first thing to do is to look at your analysis results and decide what to present or report as the biggest value or biggest set of values.
+
+In deciding what to present you should ask yourself these questions. What is the punchline? In other words, what are the main results? What added value do these results provide or how can the model add to the application? How do the results compare to the success criteria determined at the beginning of the project? Answers to these questions are the items you need to include in your report or presentation. So make them the main topics and gather facts to back them up. All findings must be presented so that informed decisions can be made. Visualization is an important tool in presenting your results. The techniques that we discuss and explore in data can be used here as well. This time you're not plotting the input data, but you're plotting the output data with similar tools. You should also have tables with details from your analysis as backups, if someone wants to take a deeper dive into the results.
+
+<h3>Step 5: Turning Insights into Action</h3>
+
+Now that you have evaluated the results from your analysis and generated reports on the potential value of the results, the next step is to determine what action or actions should be taken, based on the insights gained? Remember why we started bringing together the data and analyzing it in the first place? To find actionable insights within all these data sets, to answer questions, or for improving business processes. This is the first step in turning insights into action. Now that you've determined what action to take, the next step is figuring out how to implement the action.
+
+The stakeholders need to be identified and become involved in this change. Just as with any process improvement changes, we need to monitor and measure the impact of the action on the process or application. Assessing the impact leads to an evaluation. Evaluating results from the implemented action will determine your next steps.
 
 
 
