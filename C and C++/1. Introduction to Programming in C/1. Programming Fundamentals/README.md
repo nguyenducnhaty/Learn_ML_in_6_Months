@@ -315,9 +315,345 @@ The other possible behavior that the programmer might want to have is for the ex
 
 
 
+<h2>Everything Is a Number</h2>
+
+<h3>Hardware Representations</h3>
+
+First and foremost, as far as the computer is concerned, there is no way to move “past numbers” because to the computer, everything is a number. A computer stores everything as a series of 0’s and 1’s. Each 0 or 1 is called a bit, and there are many ways to interpret these bits. This is where types come in. A type is a programming language construct that specifies both a size and an interpretation of a series of bits stored in a computer. For example, the type for working with integers is an int, whose size is typically 32 bits and whose interpretation is an integer number directly represented in binary.
+
+__Binary Numbers:__
+
+Before we delve into how to represent numbers in binary, let us briefly discuss the decimal system, which should be familiar to all of us. A decimal number is a number represented in base 10, in which there are 10 possible values for each digit (0–9). When these digits are concatenated to make strings of numbers, they are interpreted column by column. Beginning at the far right and moving to the left, we have the 1’s column, the 10’s column, the 100’s column, and so forth. The number 348, for example, has 8 ones, 4 tens, and 3 hundreds. The value of each column is formed by taking the number 10 and raising it to increasing exponents. The ones column is actually 10^{0}=1, the tens column is 10^{1}=10, the hundreds column is 10^{2}=100, and so forth. When we see a number in base 10, we automatically interpret it using the process shown in the figure below, without giving it much thought.
+
+<img src="../1. Programming Fundamentals/images/Binary_Numbers.png">
+
+A binary number is a number represented in base 2, in which there are only 2 possible values for each digit (0 and 1). The 0 and 1 correspond to low and high voltage values stored in your computer. Although it might be possible for a computer to store more than two voltage values and therefore support a base larger than 2, it would be extremely difficult to support the 10 voltage values that would be required to support a base 10 number system in hardware. A familiarity with base 2 is helpful in understanding how your computer stores and interprets data.
+
+Binary numbers are interpreted such that each bit (the name for a binary digit) holds the value 2 raised to an increasing exponent, as shown in the figure part b). We begin with the rightmost bit (also called the least significant bit) which holds the value 2^{0}=1, or the ones column. The next bit holds the value 2^{1}=2, or the twos column. In base 10, each column is ten times larger than the one before it. In base 2, each column’s value grows by 2. The number 10_{2} (the subscript indicates the base) has 1 two and no ones. It corresponds to the value 2 in base 10.
+
+<h3>Looking under the Hood</h3>
+
+When you are driving a car in traffic, it is probably not a good idea to think too much about what the engine is doing—in fact, you really do not need to know how it works in order to drive. This example illustrates an important concept in programming: _abstraction_—the separation of interface (what something does or how you use it) from implementation (how something works).
+
+Abstraction often comes in multiple levels. Driving a car, the level of abstraction you care about is that the steering wheel turns the car, the gas pedal makes it go faster, and the brake makes it slow down. Your mechanic’s level of abstraction is how the pieces of the engine fit together, what level is appropriate for the brake fluid, and if your oil filter is screwed on tightly enough. The engineers who designed the car thought about the physics to make it all work efficiently. At each deeper level, you can think about details that were not important at higher levels, but are still crucial to making the system work. We could continue to lower and lower levels of abstraction until we start thinking about quantum interactions of atoms—fortunately you don’t need to worry about that to merge onto the interstate!
+
+There are times, however, when it is a good idea to take a look “under the hood”—to go deeper than the abstraction levels that you typically care about. At the very least, you might want to know whether the car has a diesel engine before filling up the tank, or to be aware that your car has oil, and you should get it changed sometimes.
+
+Similarly, you need not constantly consider the inner workings of your CPU in order to write good code. Thinking about variables as boxes that store values is a good level of abstraction. But, having some knowledge of what goes on under the hood can be important. When you first declare your variables and assign them a type, it is a good idea to pause and consider what this actually means at the hardware level.
+
+<img src="../1. Programming Fundamentals/images/hardware.png">
+
+As mentioned earlier, a type indicates both a size and an interpretation. The figure above shows you the now-familiar figure with code and its conceptual representation. For this module, we will add a third column, showing you the underlying representation at the hardware level. When you declare a variable x of type int, you should think about this conceptually as a box called x with a value 42 inside. But at a hardware level, the type int means that you have allocated 32 bits dedicated to this variable, and you have chosen for these bits to be interpreted as an integer number in order to yield the value 42.
+
+__Hexadecimal:__
+
+As you may well imagine, reading and writing out a series of 32 of 1’s and 0’s is tedious at best and error-prone at worst. Because of this, many computer scientists choose to write out the values of numbers they are thinking about in binary using an encoding called _hexadecimal_, or _hex_ for short. Hex is base 16, meaning that it represents a number with a 1’s column, a 16’s column, a 256’s column, and so on. As a hex digit can have 16 possible values (0–15), but our base 10 digits have only 10 possible symbols (0–9) we use the letters A-F to represent the values 10-15 in a single digit. The number eleven, for example, is represented by the single digit ’B’ in hex.
+
+Numbers represented in binary can easily be converted to hex by simply grouping them into 4-digit clusters, each of which can be represented by a single hex digit. For example, the 4 rightmost bits in the figure above (colored blue) are 1010, which has the decimal value 10 and the hex value A. The next 4 bits in the figure (colored green) are 0010, which has the decimal value 2 and the hex value 2. The remaining 24 bits in the number are all zeroes. Instead of writing out the entire 32 bit binary sequence, we can use 8 digits of hex (0x0000002A) or the shorthand 0x2A. (In both cases, the leading 0x (interchangeable with just x) indicates that the number is in hex.)
 
 
+<h2>Basic Data Types</h2>
 
+C supports a very small number of data types, each with a unique combination of size and interpretation. Basic data types are shown in the figure below. Note that while the sizes shown are typical and what we will use in general discussion in this book, they are not guaranteed. In particular, sizes depend on the hardware and the compiler—the program that turns your code into instructions the computer can actually execute (more on this later).
+
+<img src="../1. Programming Fundamentals/images/data_types.png">
+
+<h3>char</h3>
+
+A char (pronounced either “car” or “char”) is the smallest data type—a mere 8 bits long—and is used to encode characters. With only 8 bits, there are only 2^{8}=256 possible values for a char (from 00000000 to 11111111). On most machines you will use, these 8 bits are interpreted via the American Standard Code for Information Interchange (or ASCII) character-encoding scheme, which maps 128 number sequences to letters, basic punctuation, and upper- and lower-case letters. A subset of this mapping is shown in the figure below - please don’t try to memorize it. Another, much more expressive character-encoding scheme you may encounter (particularly when needing to encode non-English characters) is Unicode (which requires more than 1 byte).
+
+<img src="../1. Programming Fundamentals/images/char.png">
+
+Now if you look at the first line of code in this next figure:
+
+<img src="../1. Programming Fundamentals/images/char_two.png">
+
+you can see the char c declared and initialized to the value 'A'. Writing down this literal gives us the numerical value for A without us having to know that it is 65. If we did need to know, we could consult an ASCII table like the one in the figure above. Being able to write 'A' instead of 65 is another example of abstraction—we do not need to know the ASCII encoding, we can just write down the character we want.
+
+Figure caption: Examples of chars and ints. At first glance, c and x appear identical since they both have the binary value 65. However, they differ in both size (c has only 8 bits whereas x has 32) and interpretation (c’s value is interpreted using ASCII encoding whereas x’s value is interpreted as an integer). Similarly, y and z are identical in hardware but have differing interpretations because y is unsigned and z is not.
+
+<h3>int</h3>
+
+We have said that an int is a 32-bit value interpreted as an integer directly from its binary representation. As it turns out, this is only half of the story—the positive half of the story. If we dedicate all 32 bits to expressing positive numbers, we can express 2^{32} values, from 0 up to 4,294,967,295. We request this interpretation by using the qualifier unsigned in the declaration, as shown in the second line of the figure below.
+
+What about negative numbers? ints are actually represented using an encoding called two’s complement, in which half of the 2^{32} possible bit patterns are used to express negative numbers and the other half to express positive ones. Specifically, all numbers with the most significant bit equal to 1 are negative numbers. A 32-bit int is inherently signed (i.e., can have both positive and negative values) and can express values from -2,147,483,648 to 2,147,483,647. Note that both unsigned and signed ints have 2^{32} possible values. For the unsigned int they are all positive; for the signed int, half are positive and half are negative.
+
+In two's complement, the process for negating a number may seem a bit weird, but actually makes a lot of sense when you understand why it is setup this way. To compute negative X, you take the bits for X, flip them (turn 0s into 1s and 1s into 0s), and then add 1. So if you had 4-bit binary and took the number 5 (0101) and wanted negative 5, you would first flip the bits (1010) and then add 1 (1011). Why would computer scientists pick such a strange rule? It turns out that this rule makes it so that you can just add numbers naturally and get the right result whether the numbers are positive or negative. For example -5 + 1 = -4, and in binary 1011 + 0001 is 1100. To see that 1100 is -4, flip the bits (0011) and add 1 (0100) which is 4.
+
+Another pair of qualifiers you may run into are short and long which decrease or increase the total number of bits dedicated a particular variable, respectively. For example, a short int (also referred to and declared in C simply as a short) is often only 16 bits long. Technically, the only requirement that the C language standard imposes is that a short int has fewer than or equal to as many bits as an int, and that a long int has greater than or equal to as many bits as an int.
+
+<img src="../1. Programming Fundamentals/images/int.png">
+
+<h3>float and double</h3>
+
+The final two basic data types in C allow the programmer to express real numbers. Since there are an infinite number of real numbers, the computer cannot express them all (that would require an infinite number of bits!). Instead, for values that cannot be represented exactly, an approximation of the value is stored.
+
+If you think about the fact that computers can only store values as 0s and 1s, you may wonder how it is possible to store a real number, which has a fractional part. In much the same way that decimal representations of a number can have a fractional portion with places to the right of a decimal point (the tenth’s, hundredth’s, thousandth’s, etc. places), binary representations of numbers can have fractional portions after the binary point. The places to the right of the binary point are the half’s, quarter’s, eighth’s, etc. places.
+
+One way we could (but often do not) choose to represent real numbers is fixed point. We could take 32 bits, and interpret them as having the binary point in the middle. That is, the most significant 16 bits would be the “integer” part, and the least 16 bits would be the “fractional” part. While this representation would be conceptually simple, it is also rather constrained—we could not represent very large numbers, nor could we represent very small numbers precisely.
+
+Instead, the most common choice is similar to scientific notion. Recall that in decimal scientific notation, number 403 can be expressed as $4.03\times 10^{2}$. Computers use floating point notation, the same notation but implicitly in base 2: $m\times 2^{e}$. m is called the mantissa (though you may also hear it referred to as the significand). e is the exponent.
+
+A float has 32 bits used to represent a floating point number. These 32 bits are divided into three fields. The lowest 23 bits encode the mantissa; the next 8 bits encode the exponent. The most significant bit is the sign bit, s, which augments our formula as follows: $(-1)^{s}\times m\times 2^{e}$. (When s = 1, the number is negative. When s = 0, the number is positive.) A double has 64 bits and uses them by extending the mantissa to 52 bits and the exponent to 11 bits. Examples of both a float and a double are shown in the figure below.
+
+<img src="../1. Programming Fundamentals/images/float.png">
+
+__Standards__. There would be many possible ways to divide a given number of bits into the mantissa and exponent fields. The arrangement here is part of the IEEE (Institute of Electrical and Electronics Engineers) Standard. Industry standards like these make it possible for engineers from a variety of companies to agree upon a single encoding by which floating point numbers can be represented and subsequently interpreted across all languages, platforms, and hardware products. Part of the IEEE Standard for floating point notation involves two adjustments to the bit-wise representations of a float and a double. These adjustments (normalization and adding a bias) make the actual binary representation of these numbers less accessible to a first time observer. We encourage the interested reader to read the actual IEEE floating point Standard and allow the less curious reader simply to trust that there is a bit-wise encoding for the numbers in the figure above, which is just outside the scope of this course.
+
+__Precision__. There are an infinite number of values between the numbers 0 and 1. It should be unsurprising, then, that when we use a finite number of bits to represent all possible floating point values, some precision will be lost. A float is said to represent _single-precision_ floating point whereas a double is said to represent _double-precision_ floating point. (Since a double has 64 bits, it can dedicate more bits to both the mantissa and exponent fields, allowing for more precision.)
+
+<img src="../1. Programming Fundamentals/images/precision.png">
+
+How does precision play out in practice? The figure above shows how unexpected (or at least unintuitive) things can happen due to imprecision. It is important for programmers to understand precision when they choose types for their variables and when they perform tests on variables whose values are assumed to be known. Some programs will need more precision in order to run correctly. Some programs will have to allow for a small degree of imprecision in order to run correctly. Understanding exactly the level of precision required for your code is critical to writing correct code.
+
+It is also important to understand the cost. A double takes up twice as much space as a float. This may not matter for a single variable, but some programs declare thousands or even millions of variables at a time. If these variables do not require the precision of a double, choosing a float can make your code run faster and use less memory with no loss of correctness.
+
+<h3>Printing redux</h3>
+
+As we learned in the lesson on printing, C supports printing formatted information via the function printf. Now that we have multiple types, we can explore the various format specifiers, which allow us to print variables of a variety of types. The figure below shows the most common specifiers.
+
+<img src="../1. Programming Fundamentals/images/printing_specifiers.png">
+
+The figure below shows some examples of these format specifiers being used. Here, the code (shown on the left) declares a few variables, and prints them out using the format specifiers described in the figure above. Note that while we have already discussed hexadecimal (base 16), this example also makes reference to octal—which is base 8.
+
+<img src="../1. Programming Fundamentals/images/printing_specifiers_example.png">
+
+
+<h2>Expressions Have Types</h2>
+
+<h3>Expressions Have Types</h3>
+
+In the Expressions lesson, we learned that expressions are evaluated to values—if you have `a+b*2`, the current value of b is read out of its box, multiplied by 2, then the value of a is read out of its box, and added to the product of b*2. The expression evaluates to the resulting sum.
+
+Expressions also have types, which are determined by the types of the sub-expressions that make them up. The simplest expressions are constants, which have type int if they are integer constants (e.g., 2 or 46), or type double if they are real constants (e.g., 3.14, or -8.19). The types of constants can be modified by applying a letter suffix if needed (U for unsigned, L for long, and f for float): 3.14f is a constant with type float, and 999999999999L is a constant with type long int. The next simplest type of expression is a variable, which has whatever type it was declared to have.
+
+Most (but not all) expressions with binary operators—e1 op e2 (e.g., a + b or c * 4)—have the same type as their operands. If a and b are doubles, then a + b is a double as well. Likewise, if c is an int, then c * 4 is also an int (note that 4 is an int).
+
+The type of a function is its declared return type. That is, if you have
+
+```c
+int f (int x, int y) {...};
+int g (double d, char c) {...};
+```
+
+then the expression __f(3, 4) + g(42.6, 'a')__ has type int. We can see this from the fact that __f(3, 4)__ has type int (f is declared to return an int), as does __g(42.6, 'a')__. As we just discussed, adding two ints results in an int.
+
+<h3>Type Conversion</h3>
+
+The next natural question is “what happens if you have a binary operator, and its operands have different types?” For example, if a is an int and b is a double, then what type is a + b? The answer to this question depends on the types involved.
+
+Fundamentally, the first thing that must happen is that the two operands must be converted to the same type. Most operations can only be performed on operands of the same type. The processor has one instruction to add two 32-bit integers, a different instruction to add two 16-bit integers, a third one to add two 32-bit floats, a fourth to add two 64-bit doubles, and so on. The compiler must translate your code into one of these instructions, so, it must pick one of them and arrange to have the inputs in a proper format in order to be able to perform the math.
+
+When the two operands have different types, the compiler attempts to add a _type conversion_ (sometimes called a _type promotion_) to make the types the same. If no type conversion is possible, the compiler will issue an error message and refuse to compile the code. When the compiler inserts a type conversion, it typically must add instructions to the program which cause the processor to explicitly change the bit representation from the size and representation used by the original type to the size and representation used by the new type. The compiler chooses which operand to convert based on what gives the “best” answer. In our int + double example, the compiler will convert the int to a double to avoid losing the fractional part of the number.
+
+There are four common ways that the bit representations must be changed to convert from one type to another during a type promotion. When converting from a smaller signed integer type to a longer signed integer, the number must be sign extended—the sign bit (most significant bit) must be copied an appropriate number of times to fill in the additional bits. When converting from a smaller unsigned integer type to a longer unsigned integer type, the number must be zero extended—the additional bits are filled in with all zeros. The third common way that the bit representation can be changed during an automatic conversion happens when a longer integer type is converted to a shorter integer type. Here, the bit pattern is truncated to fit—the most significant bits are thrown away, and only the least significant bits are retained.
+
+The fourth way that the bit representation may need to be changed is to fully calculate what the representation of the value is in the new type. For example, when converting from an integer type to a real type, the compiler must insert an instruction which requests that the CPU compute the floating point (binary scientific notation) representation of that integer.
+
+There are other cases where a type conversion does not need to alter the bit pattern, instead just changing how it is interpreted. For example, converting from a signed int to an unsigned int leaves the bit pattern unchanged. However, if the value was originally negative, it will now be interpreted as a large positive number. Consider the following code:
+
+```c
+unsigned int bigNum = 100;
+int littleNum = -100;
+
+if (bigNum > littleNum) {
+    printf("Obviously, 100 is bigger than -100!\n");
+}
+else {
+    printf("Something unexpected has happened!\n");
+}
+```
+
+When this code runs, it prints “Something unexpected has happened!”. The bit pattern of littleNum (which has a leading 1 because it is negative) is preserved; the value is changed to a number larger than 100 (because under an unsigned interpretation, this leading 1 indicates a very large number). We will note that the compiler produces a warning (an indication that you probably did something bad—which means you should go fix your code!) for this behavior, as comparing signed integers to unsigned integers is typically a bad idea for exactly this reason.
+
+When you declare a variable and assign it a particular type, you specify how you would like the data associated with that variable—the bit pattern “in the box”—to be interpreted for the entirety of its life span. There are some occasions, however, when you or the compiler may have to temporarily treat the variable as though it were of another type. When a programmer does this, it is called _casting_ and when a compiler does it, it is called _type conversion_ or _type promotion_. It is extremely important to understand when to do the former and when the compiler is doing the latter because it can often be the cause of confusion and consequently errors. We will note that while understanding when to cast is important, understanding that you should generally not cast is even more important—sprinkling casts into your code to make errors go away indicates that you are not actually fixing your code, but rather hiding the problems with it.
+
+<h3>Casting</h3>
+
+Sometimes, the programmer wants to explicitly request a conversion from one type to another—either because the compiler has no reason to insert it automatically (the types are already the same, but a different type of operation is desired), or because the compiler does not consider the conversion “safe” enough to do automatically. This explicitly requested conversion is called casting and is written in the code by placing the desired type in parentheses before the expression whose value should be converted. For example, __(double)x__ evaluates x (by reading the value in its box), then converts it to a double.
+
+To see why we would want this capability, let us begin with a seemingly benign example. We want to write a program that calculates how many hours you would work per day if you stretched the 40 hour work week across 7 days instead of 5. A naïve implementation of the code might begin with two ints, nHours and nDays.
+
+```c
+int main(void) {
+    int nHrs = 40;
+    int nDays = 7;
+
+    float avg = nHrs/nDays;
+    printf("%d hours in %d days\n", nHrs, nDays);
+    printf("work %.1f hours per day!\n", avg);
+    //...
+}
+```
+
+Here, int is a perfectly reasonable type as we are working only in integer numbers of hours (40) and days (5). This code then divides the number of hours by the number of days and stores the result in the float avgWorkDay. If you execute this code carefully by hand, you will find that when it prints the answer out, it will print 5.0. Somehow our work week just got shortened to 35 hours!
+
+In this case, the problem lies in the fact that we divided two ints, and integer division always produces an integer result—in this case 5. When the compiler looks at this expression, there are only integers involved, so it sees no need to convert either operand to any other type. It therefore generates instructions that request the CPU to perform integer division, producing an integer result.
+
+However, when the compiler examines the assignment, it sees that the type on the left (the type of the box it will store the value in) is float, while the type of the expression on the right (the type of the value that the division results in) is int. It then inserts the type conversion instruction at the point of the assignment: converting the integer division result to a floating point number as it puts it in the box.
+
+Here, what we really wanted to do was to convert both operands to a real type (float or double) before the division occurs, then perform the division on real numbers. We can achieve this goal by introducing an explicit cast—requesting a type conversion.
+
+```c
+int main(void) {
+    int nHrs = 40;
+    int nDays = 7;
+
+    float avg = nHrs/float(nDays);
+    printf("%d hours in %d days\n", nHrs, nDays);
+    printf("work %.1f hours per day!\n", avg);
+    //...
+}
+```
+
+<h3>Overflow and Underflow</h3>
+
+The fact that each type has a set size creates a limit on the smallest and largest possible number that can be stored in a variable of a particular type. For example, a short is typically 16 bits, meaning it can express exactly 2^16 possible values. If these values are split between positive and negative numbers, then the largest possible number that can be stored in a short is 0111111111111111, or 32767.
+
+What happens if you try to add 1 to this number? Adding 1 yields an unsurprising 1000000000000000. The bit pattern is expected. But the interpretation of a signed short with this bit pattern is -32768. If the short were unsigned, the same bit pattern 1000000000000000 would be interpreted as an unsurprising 32768.
+
+This odd behavior is an example of overflow: an operation results in a number that is too large to be represented by the result type of the operation. The opposite effect is called underflow in which an operation results in a number that is too small to be represented by the result type of the operation. Overflow is a natural consequence of the size limitations of types.
+
+Note that overflow (and underflow) are actions that occur during a specific operation. It is correct to say “Performing a 16-bit signed addition of 32767 + 1 results in overflow.” It is not correct to say “-32768 overflowed.” The number -32768 by itself is perfectly fine. The problem of overflow (or underflow) happens when you get -32768 as your answer for 32767 + 1. The operation does not have to be a “math” operation to exhibit overflow. Assignment of a larger type to a smaller type can result in overflow as well.
+
+
+<h2>"Non-numbers"</h2>
+
+It is worth restating: *__everything is a number__*. This rule is fundamental to understanding how computers work and is one of the most important concepts in programming. For every variable you create in any programming language, the value of that variable—the data that you place “in the box” of every conceptual diagram you draw—is stored in your computer as a series of zeros and ones. This fact is easy to accept for a positive integer, whose base 10 representation is simply converted to base 2 and then stored in a series of bits. Understanding how negative numbers and floating point numbers are also represented as a series of zeros and ones may be a little less straightforward, but is still appeals to our general intuition about numbers.
+
+Extending this rule to things that do not seem like numbers—words, colors, pictures, songs, movies—may seem like a much harder conceptual leap. However, with our newfound understanding that computers can only operate on numbers, we must realize that all of these things must be numbers too—after all, our computers operate on them regularly.
+
+Finding a way to encode these “non-number” data types is simply a matter of coming up with a new convention for encoding the information as bits, and interpreting the bits to mean the original information. These new conventions are not included as basic data types of the C programming language (though some of them are basic data types in languages other than C). Instead, new types are formed by combining the basic types to achieve the programmer’s goals. These more complex types may be widely accepted programming conventions (like the representation of strings), or may be something done by one single programmer specific to their programming task.
+
+<h3>Strings</h3>
+
+A string is a sequence of characters that ends with a special character called the _null terminator_, which can be written with the character literal '\0' (pronounced “backslash zero”) that signals the end of the string. A string is referred to by the location of the first character in memory and each 8-bit character is read until the '\0' is detected. A simple drawing of this concept is shown in the figure below:
+
+<img src="../1. Programming Fundamentals/images/strings.png">
+
+Strings are not a basic data type in C, meaning you cannot simply declare and use them as you would an int or a double. To give you a tiny glimpse into the complexity of the matter, consider how large a string should be. Is there pre-defined number of bits that should correspond to a string data type? Since each string has a unique number of characters, this does not seem like a choice that can be made up front. In fact, the size of a string will need to be dynamically determined on a per-string basis. To truly understand how to create and use strings, an understanding of pointers is required. This is one reason why the above figure is deliberately lacking in details.
+
+<h3>Images</h3>
+
+Your computer frequently displays images—whether it's the windows and icons on your screen, or the lolcats you view in your web browser. These may seem like they are not numbers, however, they are actually just many numbers put together. The first step to representing an image as a number is to represent a color as a number.
+
+While there are many ways to represent a color as a number, the most common is RGB encoding, which encodes each color by specifying how much red, green, and blue they contain. Typically, this encoding is done with each component being represented on a scale from 0 to 255. The RGB values for the color red are: R=255, G=0, B=0. Orange is R=255, G=127, B=0. If you search the Internet, you will find many online tools that will let you select a color, and then tell you its corresponding RGB encoding.
+
+Once we can encode a single color numerically, an image is encoded as a 2D grid of colors. Each “dot” in this grid is called a pixel. As with strings, understanding how to store a 2D sequence requires an understanding of pointers.
+
+You may have noticed that computers typically have a variety of image formats, such as JPG, BMP, PNG, TIFF, and many others. Each of these encodes the image numerically, however, the specific details differ between the formats. Some image formats compress the image data—performing math on the colors (after all, the colors are just numbers!) to encode the image data in fewer bits, reducing the size of the data that must be stored on disk and/or transferred across the Internet.
+
+<h3>Sound and Video</h3>
+
+Sound is another common aspect of computer use that seems like it is not a number. However, sound is a naturally a waveform, which can easily be represented as a sequence of numbers. The most direct numeric representation of a sound wave is to record the “height” of the wave at periodic intervals, forming a sequence of numbers. The frequency of these intervals is called the sampling rate (higher sampling rates result in better quality of the sound), and is typically 22 kHz or 44kHz—that is 22,000 or 44,000 samples per second. Stereo sound simply has 2 sequences of numbers—one for the left channel and one for the right channel. As with images, there are many typical formats (e.g., WAV, AIFF, AAC, etc.), some of which are compressed.
+
+A video is a sequence of images (called “frames”) and the corresponding sound. We have already seen how to encode images and sound as numbers. The simplest approach would be to encode the video as the sequence of images plus the sound. While this approach gives us a bunch of numbers, it would be huge—one minute of a 512 pixel x 256 pixel video at 32 frames per second with a stereo sound track at 44 kHz would require about 725 Megabytes (almost 1 GB). Correspondingly, all common movie formats (e.g., MP4, MOV, etc.) apply compression, not only to the images and sound themselves, but also in terms of not storing the entire image for all frames, but rather storing a way to compute the next frame’s image based on the changes from the previous frame.
+
+
+<h2>Complex, Custom Data Types</h2>
+
+<h3>Structs</h3>
+
+You may be starting to notice that the definitions of many data types are essentially a set of agreed upon conventions. One of the great things about rich programming languages like C is that they give a programmer the power to create new data types and associated conventions. Some conventions, like the IEEE floating point standard, are agreed upon across multiple programming languages, compilers, machine languages, and the architecture of the processors they run on. This requires the coordination of hundreds of companies and tens of thousands of engineers. Other conventions can be more local, existing only in a particular code base, or a collection of files that all use a common library. This may require the coordination of multiple people (who are usually working together already) or may only affect a single person who simply wishes to produce clean, modifiable, and debuggable programs.
+
+Suppose you are designing a program that regularly draws and computes various properties of rectangles. It would be very convenient to have a data type that captures the basic properties of a rectangle. In C, this is accomplished via the keyword __struct__.
+
+<img src="../1. Programming Fundamentals/images/struct_A.png">
+
+A __struct__ allows a programmer to bundle multiple variables into a single entity. For example, if we wish to define a rectangle via its 4 coordinates on an X-Y plane as shown in the left-most figure above (Visualization), these four coordinates can be bundled into a single, conglomerate data structure, whose internal structure will look like the code in center figure above (Code Fragment). Structs are represented conceptually with a single box in which all the component fields reside, each with their own box. The right-most figure above (Conceptual Representation) shows a variable called myRect with its 4 fields.
+
+Syntactically, there are multiple ways to declare, define, and use structs. The figure below shows four different syntactic options that all create the same conceptual struct. Regardless of which syntactic option you choose, the drawing of your conceptual representation will be the same. It is not important for you to be “fluent” in all four options. You may choose a single approach and stick with it. However, it is important for you to know about all four options because others contributing to the same code base as you may have a different style, and internet searches will also result in many versions of the effectively the same code. You need to be aware of these differences so that you can correctly understand and extend code whose syntax differs from your preferred style.
+
+<img src="../1. Programming Fundamentals/images/structOptions.png">
+
+Struct declarations do not go inside functions; they live in the global scope of the program, next to function declarations and definitions. All of them use the keyword struct. Option 1 in the figure above begins with the keyword __struct__, followed by the tag of our choosing. In this case, we use the tag rect_t. Ending the tag in “_t” is a convention that makes it easier to recognize the name as identifying a type throughout your code. A name such as rect would be acceptable, just a little less reader-friendly. Everything inside the braces belongs to the definition of the newly defined struct named rect_t. The semi-colon indicates the completion of the definition.
+
+The far right column in the above figure shows how to instantiate a variable for each syntactic option. For Option 1, the type of the variable is struct rect_t, and the name of the variable is myRect. Once you declare the variable, you can access the fields of the struct using a dot (period): myRect.top gives you access to the field top of type int inside the myRect variable. Note: when you instantiate a variable of type struct rect_t, you choose a top level name (myRect) only. The names of the fields are determined in the definition of the structure and cannot be customized on a per-instance basis.
+
+A key part of good programming is using good abstractions. Structs are another form of abstraction. Once we have a rectangle struct, other pieces of code can operate on rectangles without looking at the implementation. We could write many functions to manipulate rectangles, and those functions could be the only pieces of code that know the internal details of rectangles—the rest of the code could just call those functions.
+
+However, part of using good abstractions is using them correctly. In the case of structs, remember that their primary purpose is to group together data that belongs logically together. In this example, we use a struct for a rectangle—something that logically makes sense as a combination of other pieces of data. In the first figure above we illustrate the connection between the conceptual idea (the visualization on the left), and the declaration in the middle. We can think about operations on rectangles and understand what they are conceptually, without looking at the implementation details.
+
+<h3>Typedef</h3>
+
+<img src="../1. Programming Fundamentals/images/structOptions.png">
+
+Many consider Option 1 in the figure above to be somewhat unwieldy, because the type of the variable includes the word struct in it. For example, suppose you wanted a function called shrinkRect that takes a rectangle as its input and returns a smaller rectangle as its output. Using the syntax of Option 1, the function would have the signature __struct rect_t shrinkRect(struct rect_t shrinkThisRectangle)__. Depending on how often you need to write out the type of the structure, this syntax can become cumbersome and make your code appear cluttered.
+
+The solution to needing to type out “struct rect_t” every time you want to declare, pass, or use your new struct is to create a new data type that is explicitly of type struct. We do this using the keyword typedef. The exact syntax is shown in Option 2 above. The first lines declare the rect_tag struct in the same way as before. However, after this struct definition, the last line (typedef struct rect_tag rect_t;) is the declaration of the type “rect_t” which is defined as having the type “struct rect_tag”. Using "_tag" makes code easier to read and encourages the use of the type over the tag. Options 3 and 4 also “typedef” a new type, however, they both combine the typedef into a single statement with the structure declaration.
+
+Although typedefs can simplify the use of structs, that is far from their only use. Any time that you are writing code in a specific context, typedefs can help you make your code more readable, by naming a type according to its meaning and use. For example, suppose you are writing a program that deals with colors.
+
+In the context of programming color characteristics, you might want to define a new data type for the colors in an RGB value. For example, you could create a new data type called rgb_t (which represents one of the red, green, or blue components of the color), that is of type unsigned int (because we know the values should be positive integers) and then declare variables red, green, and blue of type rgb_t. An example of this is shown on the left side of the figure below.
+
+<img src="../1. Programming Fundamentals/images/typedef.png">
+
+Typedefs provide a helpful abstraction for programmers. Instead of having to write “unsigned int” throughout her code, or frankly even think about the range of acceptable values in RGB representations, the programmer simply uses the custom type rgb_t and gives it no further thought.
+
+Typedefs have another nice property of limiting the definition of a particular type to a single place in the code base. Suppose a programmer wished to conserve the space dedicated to variables and therefore wished to use an unsigned char instead of an unsigned int (after all, the values from 0 to 255 all fit within the 8-bits of an unsigned char). Without a typedef, this change would require a tedious and error-prone search of many (but by no means all—it may be used for variables unrelated to colors) instances of unsigned int throughout the code, changing these types to unsigned char. With a typedef, the programmer simply changes the single line of code in which rgb_t was defined (see the right side of the figure). No other code changes are required.
+
+__Heads up about typedef:__ The use of typedefs is somewhat controversial in some programming circles. In the context of structs, there are those who believe that it is important not to abstract the struct away from a type. They believe that programmers should always know when a particular variable is a struct and when it is not. Similarly, they believe that programmers should always be aware of the actual types of the data they use lest they fall prey to typing errors that could have been otherwise avoided. Use typedefs when the abstraction simplifies rather than obfuscates your code.
+
+<h3>Enumerated Types</h3>
+
+The last form of custom type that a programmer can create is called an enumerated type. Enumerated types are named constants that can increase the readability and the correctness of your code. They are most useful when you have a type of data with a set of values that you would like to label by their conceptual name (rather than using a raw number) and either the particular numerical values do not matter (as long as they are distinct), or they occur naturally in a sequential progression. For example, until 2011 the United States’ Homeland Security maintained a color-coded terrorism threat advisory scale that it used to maintain heightened or more relaxed security in various locations including major airports. There were five threat levels from green to red in ascending order of severity.
+
+These five threat levels could be recorded in an enumerated type which we can create ourselves as shown in the following code.
+
+```c
+enum threat_level_t {
+    LOW,
+    GUARDED,
+    ELEVATED,
+    HIGH,
+    SEVERE
+};
+```
+
+We begin with the keyword enum, followed by the name of the new enumerated type, in this case threat_level_t. The various threat levels are placed in curly braces, as shown. Each level is assigned a constant value, starting with 0. The enumerated names are constant—they are not assignable variables. Their values cannot change throughout the program. The convention for indicating that a name denotes a constant is to write the name in all uppercase. However, variables of the enumerated type can be created, and assigned to normally.
+
+Because enumerated types have integer values, they can be used in constructs such as simple value comparisons, switch statements, and for loops. the following code shows an example of the first two.
+
+```c
+void printThreat(enum threat_level_t threat) {
+    switch(threat) {
+        case LOW:
+            printf("Green/Low.\n");
+            break;
+        case GUARDED:
+            printf("Blue/Guarded.\n");
+            break;
+        case ELEVATED:
+            printf("Yellow/Elevated.\n");
+            break;
+        case HIGH:
+            printf("Orange/High.\n");
+            break;
+        case SEVERE:
+            printf("Red/Severe.\n");
+            break;
+    }
+}
+
+void printShoes(enum threat_level_t currThreat) {
+    if (currThreat >= ELEVATED) {
+        printf("Please take off your shoes.\n");
+    }
+    else {
+        printf("Please leave your shoes on.\n");
+    }
+}
+
+int main(void) {
+    enum threat_level_t myThreat = HIGH;
+    printf("Current threat level is:\n");
+    printThreat(myThreat);
+    printShoes(myThreat);
+    return 0;
+}
+```
+
+Another example of enumerated types would be if we wanted to make a program that regularly refers to a small set of fruits: grapes, apples, oranges, bananas, and pears. Suppose we want to represent each of these as a number (because we regularly use constructs like switch statements on the fruits themselves), but we do not really care which number each is represented as. We can make a enumerated type, __enum fruit_t {GRAPE, APPLE,...};__ and then use these constants throughout our code.
 
 
 
