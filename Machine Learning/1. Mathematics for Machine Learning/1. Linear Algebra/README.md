@@ -60,7 +60,6 @@
 <h3>Going from Gaussian elimination to finding the inverse matrix</h3>
 
 
-
 <h2>Special matrices and Coding up some matrix operations</h2>
 
 <h3>Determinants and Inverses</h3>
@@ -68,6 +67,30 @@
 
 
 <h1>Week 4: Matrices make linear mappings</h1>
+
+
+
+<h2>Matrices as objects that map one vector onto another; all the types of matrices</h2>
+
+<h3>Introduction: Einstein summation convention and the symmetry of the dot product</h3>
+
+
+<h2>Matrices transform into the new basis vector set</h2>
+
+<h3>Matrices changing basis</h3>
+
+<h3>Doing a transformation in a changed basis</h3>
+
+
+<h2>Making Multiple Mappings, deciding if these are reversible</h2>
+
+<h3>Orthogonal matrices</h3>
+
+
+<h2>Recognising mapping matrices and applying these to data</h2>
+
+
+
 
 
 

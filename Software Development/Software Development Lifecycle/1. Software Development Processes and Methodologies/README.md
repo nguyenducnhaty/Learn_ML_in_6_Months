@@ -305,11 +305,108 @@ I also want to make this note. Technically speaking, inheritance weakens cohesio
 
 <h2>Implementation</h2>
 
+<h3>Deployment</h3>
+
+So deployment is the end stage of active development for any piece of software. And, realistically, it's less of a stage. It's more of a gate. It's an event in between the testing and maintenance stages after it's already in place, but that shouldn't minimize the importance of deployment, especially now, when you start seeing things like automated deployment become so important in our work.
+
+The idea of planning for deployment is going to largely be determined by the project scope. That should make sense. But what's important about deployment is not only the planned steps of how you put this product into place. You have to think about some other things. The most important is which of those steps is most likely to have a problem? We've talked before about making sure that you focus on the things that are most error-prone, and this is true for these kinds of process issues as well, just the same as it is in testing or any other part of the process. Make sure that when you're deploying, you've practice the deployment. When you're deploying, you're making sure that the deployment area is prepared for that deployment. And even more important than that, you have to make sure that you plan for recovery in case your deployment fails and you have to rollback your software.
+
+When you're talking about your deployment plan, there are different concerns you should think of:
+
+- Physical Environment: means what machines are you going to use? How are you going to actually put this onto something?
+- Hardware: where are you going to put the machines? Is there any difference between testing and production that you need to be aware about when you're doing the installs.
+- Documentation: if you don't have documentation in many large-scale companies, you don't make a change in deployment. You don't make a change in production.
+- Training: You should not put to your newest developers for production deployment. If you're deploying to production, make sure the developers know what they're doing. And if not, you need to make sure that they are trained properly before they go and do this
+- Database related activities: tend to be a little bit more of a pain than some of the other issues when you're doing this kind of thing. Working in the database isn't usually as easy as drop something here.
+- 3rd party software
+- Software being deployed: You usually have to update a database and potentially its structure when you make changes to its production system, making sure that those database-related activities have also been fully flushed out, having a rollback plan is important.
+
+Maybe, you should go so far as to say that these are your sections for your plan document.
+
+<h3>Deployment: Rollback</h3>
+
+Rollback is what happens when that deployment doesn't go as you intended. We have to have a plan for how we're going to reverse the actions we were making when it doesn't go the way we thought it was going to.
+
+There's lots of reasons why you rollback, but most of them have something to do with things not going quite the way you expected them to. There's problems that take longer to debug and fix, than you have time for. IIf it's still something that you probably could fix and you might already know how, but if you need production back on line by a certain time and you aren't sure, for example, that you'll be able to get it fixed on time, you might consider rolling back. The real purpose is to keep production alive.
+
+<h3>Deployment: Cutover Strategies</h3>
+
+At the very bottom, the first cutover strategy you should consider is __cold back-up__, sometimes also called __cold storage__. Now this is the case where you really don't have anything ready, but you have potentially, for example, the physical hardware. You have a separate server ready to go.
+
+One step up you have __Warm standby__ meaning that you actually have a running machine ready to go. So you already have it apportioned.
+
+__Hot failover__ is the final cutover strategy. A hot failover system is everything. The machine or virtual machine is up ready and running. The systems themselves are up, ready, waiting for transactions but they just don't receive the information. This is different than load balancing. Load balancing says that you use a set of production servers that are all supposedly identical and you distribute load across all of them. A hot failover in its purest sense doesn't do that. It means that it's truly a system that data does not go to even though it could handle it at any moment.
 
 
 <h2>Testing and Verification</h2>
 
+<h3>Software Testing: Introduction</h3>
 
+<img src="../1. Software Development Processes and Methodologies/images/software_testing.png">
+
+Definition that you see above here, there's a couple of different ones depending on who they're from and the source that they came from. But it's all about the process of finding errors. So, you can see what's common between all of them. It's now pretty much universally accepted that the purpose of testing is to find problems, find problems in one way or another. Note that the first definition though, excludes the testing of documentation, which is definitely something that we do. We do a lot of testing that involves documentation and making sure the documentation, which will eventually lead to the program, is also correct.
+
+First, we start with the quintessential question, what's a test? We start with the software under test. You can't test something that, you haven't created yet though test-driven development, like you would see an agile development, where we decide what the test will be before we write the code is another perspective we can take. We're talking about this in terms of actually running the test, something you can only do once you have software to execute. I also want you to know that when we say software here, we don't necessarily mean the entire finished software product. Quite the contrary, even though we will eventually get to that point. Software under test means, whatever part or subset of the program we have completed, where we can exercise something, we can exercise some behavior. This is some module or unit of code.
+
+Therefore, unit testing. And units in this context usually mean something like a method, a function, a subroutine, a procedure, something small. A defined set of steps, or tasks that we have an expectation of how it should behave when we run that code. To run a test against our software, against our unit, we must provide it with the information on which to act. The input, the test data. There are lots, and lots, and lots of ways that we can select, or even generate that test data. We can generate test data based on a profile we constructed of how we think the user will act based on probability, or user studies, or we can attack the code with some data that often causes errors, inputting zero, that value is larger than what it asked for, giving it a word instead of a number, that sort of thing.
+
+Once the software is given the test data, we match the output. The behavior of the program given that input. The question then is what do we do with that? Is it right? Has the software provided the correct result given the test data? Something has to do that, something has to say is that true or not? That something is called the Oracle. Now, traditionally the Oracle has been the developer, or the tester, who's running the tests. The tester has the software running. They input the data. They watch what happens and they decide whether, or not the behavior match what they expected. Now, as you may or may not know, humans aren't particularly reliable. Can you tell the difference between the number one and a lowercase L in some fonts on the screen? So, what we're starting to see are things like Automated Oracles, which compare some known, or determined, or retrieved expected output to the actual output, the output that the software generated, the actual output of running the software under test given the test data, to gather the input and output we should see if the program is operating as we hope it will. The test data and the expected output make up test cases.
+
+There's a distinct difference between _test data_ and _test cases_. The _test data_ is just the input to the program. And that's usually what we think of. When I ask you, for example, to test the square root function, you're really thinking about inputs, negative one, four, 16, so on and so forth. But we also really want to make sure that you recognize that a _test case_ has the data, the input and what you expect for each individual output. Because while humans have traditionally been the Oracle, we're going to have automated oracles in the future, which means that you need both. You need input and output, that way a computer can read all those pairs and run the test quickly.
+
+<h3>Software Testing: Definitions</h3>
+
+The most important words in software testing come as __Verification__ and __Validation__.
+
+<img src="../1. Software Development Processes and Methodologies/images/software_testing_def.png">
+
+When it comes to satisfying conditions imposed, what we mean by that is that the conditions imposed on the system, by the developers as we try and transition from what the user wants, the requirements, into what the system does in order to meet those requirements. So those are the conditions imposed, whatever we have the system actually do.
+
+Validation then is whether it satisfies the specified requirements. Meaning the requirements that is specified as in told, explained by the users. So the requirements are not necessarily a written-down document that we would really like it to be, but it's what the user wants. So whether it satisfies what the user said they wanted, that's essentially what validation is.
+
+<img src="../1. Software Development Processes and Methodologies/images/software_testing_def_2.png">
+
+<h3>Software Testing: Strategies</h3>
+
+<img src="../1. Software Development Processes and Methodologies/images/incremental_testing.png">
+
+__Incremental Testing__ is our first look at __Regression Testing__. You start with say, two modules A and B, and three test cases numbered one, two, three. When you're done testing A and B, you don't get rid of the tests, you keep them. When you then add Module C, you also add the test case, or cases used to test just Module C in isolation, the unit tests. You add that test to the test for Modules A and B then, you run them all. This way, you can determine if something has changed in the previously correct code based on something you added, as well as testing that the current modules still works as intended. You keep adding modules and their tests and re-running all the tests as you go. This technique of re-running older tests in a larger suite is called Regression Testing. That's a big part of Incremental Testing.
+
+<img src="../1. Software Development Processes and Methodologies/images/stub.png">
+
+Now, when you're developing Top-down you have to develop something to stand in for the elements at lower levels that you haven't created yet. These are what we call __Stubs__. So, we have Level One Software, that's the software that we've been building. But the lower level software that it relies on, Level Two, in various different entities that we're going to rely on, for example, an object that I instantiate to do some task. Maybe there's three or four of those. Well, they haven't been built yet, but I still need to be able to do those tasks in order to make sure that my program works. So, one of the things that we can do is write a _Stub_. A _Stub_ is typically something that is maybe a single line, or a few lines of code that when called it essentially just returns a hard coded value that stands in for a real return value.
+
+The same kind of thing can be done with what's called a __Mock__. And if you take software testing, for example, you'll see the differences between _Stubs_ and _Mocks_. A _Mock_ is something where you don't actually hard code something, you just say, was this method called, yes, you move on. So, when it comes to Stub or a Mock eventually, you will build out that Level Two software potentially and then, those levels, of course, rely on again underlying software potentially. So, you'd have to make Stubs for Level Three. So, as you move down you continue to build levels of software down and Stubs below those to continue your work down towards the underlying levels.
+
+<img src="../1. Software Development Processes and Methodologies/images/driver.png">
+
+The opposite case then, is when you're developing from bottom-up. When you have the lower lying implementation's complete but you don't have the larger picture integration execution driver hence, __Drivers__. These _Drivers_ walk through the process of what possible calls to our lower level in this case Level Three, elements might be and makes reasonable calls to ensure that Level Three is operational. The issue with building good _Drivers_ is that it's sometimes hard to know the kinds of inputs and the order of inputs that would be necessary to properly use Level Three before having built Level Two software. But you do the best you can and again it's usually hard coded. You try and make your best assumption of what the most common, or most important orders of operations are going to be and make sure that all your Level Three operations is complete. Once those are done, you start building Level Two software. And of course, with Level Two software we need to build a level above that. So, you could have, for example, a Level One Driver that drives all Level Two software.
+
+<img src="../1. Software Development Processes and Methodologies/images/back_to_back.png">
+
+Then, we have __Back to Back__ Testing. Back to Back Testing is one way that we make use of earlier iterations of a program as an effective automated Oracle. This is particularly useful for expanding test data without necessarily including expected output or if you don't already have automated tests from before. The idea is that the program worked before, at least we think it did. For all the things that worked before, you run test data for that working behaviors through both the old version and the new version. The outputs then, since it worked before should continue to work, the output should be the same. So, we can just do a direct comparison of the output. Alternatively, anything that developers have modified hopefully to fix something, or add some feature you run the test data through both iterations again to make sure that they are different. It still takes some manual inspection to show that the change in the changed result is what you actually wanted to change and that it changed in the right way. But at least it's a start, especially, when you're working with scratch you don't have any automated tests from the beginning.
+
+So, we have some this overall idea of Test Scaffolding. The goal is setting up an environment for executing your tests. So, we have the Driver. The Driver initializes non-local variables, initializes parameters and activates units under test. Then, your Stubs will use templates of modules not actual working modules usually, that's why it's a Stub. Templates of the modules used by the unit including the functions called and templates of any other entity, or data structure that is used within the unit, that is the Program Unit. The Oracle then, is at the end which verifies the correspondence between produced and expected results. Again, often times the Oracle is us just a human, you run it, you make sure that what happened is what you expected. But there are increasingly automated Oracles that we are using in things like the Star unit, JUnit, PI unit testing frameworks that we can use to automatically verify that our Stub, Driver, and Program Unit have operated properly.
+
+<img src="../1. Software Development Processes and Methodologies/images/tradeoffs.png">
+
+<h3>Software Testing: Perspectives</h3>
+
+<img src="../1. Software Development Processes and Methodologies/images/b_and_w_testing.png">
+
+<img src="../1. Software Development Processes and Methodologies/images/v_v_process.png">
+
+__Stages of Testing:__
+
+- _Unit Testing:_ we're talking about testing of individual components. This usually means as individual method or potentially one class within the solution.
+
+- _Module Testing:_ is a set of units that come together as a collection or dependent components. This is the first form of integration testing. How we test when things come together.
+
+- _Sub System Testing:_ is testing a collections of modules integrated into subsystems. This testing is primarily concerned with ensuring that the interfaces between the subsystems and components, between the module's components. Often divided between developing teams, meet the specifications they were given.
+
+- _System Testing:_ is testing the complete system prior to delivery and making sure that the whole system is working and it gets back to some things we talked about before with security, performance, usability, that kind of thing.
+
+- _Acceptance Testing:_ is sometimes called alpha testing, beta testing and in fact, it is true that in deployment, once it's actually delivered to users, even though we don't call it an alpha or beta, when the users use it, find bugs and report them back to us somehow, that's still a form of testing.
 
 
 

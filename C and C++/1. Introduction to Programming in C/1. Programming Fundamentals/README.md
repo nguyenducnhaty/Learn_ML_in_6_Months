@@ -654,7 +654,3 @@ int main(void) {
 ```
 
 Another example of enumerated types would be if we wanted to make a program that regularly refers to a small set of fruits: grapes, apples, oranges, bananas, and pears. Suppose we want to represent each of these as a number (because we regularly use constructs like switch statements on the fruits themselves), but we do not really care which number each is represented as. We can make a enumerated type, __enum fruit_t {GRAPE, APPLE,...};__ and then use these constants throughout our code.
-
-
-
-<h1>Week 4: Project</h1>
