@@ -338,3 +338,58 @@ The stakeholders need to be identified and become involved in this change. Just 
 
 
 <h1>Week 3: Foundations for Big Data Systems and Programming</h1>
+
+
+
+<h2>Basic Scalable Computing Concepts</h2>
+
+<h3>What is a Distributed File System?</h3>
+
+The way operating system manages files is called a file system. How this information is stored on disk drives has high impact on the efficiency and speed of access to data, especially in the big data case. While the files have exact addresses for their locations in the drive, referring to the data units of sequence of these blocks, that's called the flat structure, or hierarchy construction of index records, that's called the database. They also have human readable symbolic names, generally followed by an extension.
+
+A file system is responsible for the organization of the long term information storage in a computer. When many storage computers are connected through the network, we call it a distributed file system.
+
+Data sets, or parts of a data set, can be replicated across the nodes of a distributed file system. Since data is already on these nodes, then analysis of parts of the data is needed in a data parallel fashion, computation can be moved to these nodes. Additionally, distributed file systems replicate the data between the racks of storage drives, and also computers distributed across geographical regions.
+
+Data replication makes the system more fault tolerant. That means, if some nodes or a rack goes down, there are other parts of the system, the same data can be found and analyzed. Data replication also helps with scaling the access to this data by many users.
+
+As a summary distributed file systems provide _data scalability, fault tolerance,_ and _high concurrency_ through partitioning and replication of data on many nodes.
+
+Note that a problem with having such a distributive replication is, that it is hard to make changes to data over time. However, in most big data systems, the data is written once and the updates to data is maintained as additional data sets over time.
+
+<h3>Scalable Computing over the Internet</h3>
+
+Most computing is done on a single compute node. If the computation needs more than a node or parallel processing, like many scientific computing problems, we use parallel computers. Simply put, a parallel computer is a very large number of single computing nodes with specialized capabilities connected to other network.
+
+Commodity clusters are affordable parallel computers with an average number of computing nodes. They are not as powerful as traditional parallel computers and are often built out of less specialized nodes. In fact, the nodes in the commodity cluster are more generic in their computing capabilities. The service-oriented computing community over the internet have pushed for computing to be done on commodity clusters as distributed computations. And in turn, reducing the cost of computing over the Internet. In commodity clusters, the computing nodes are clustered in racks connected to each other via a fast network.
+
+<img src="../1. Introduction to Big Data/images/commodity_cluster.png">
+
+Computing in one or more of these clusters across a local area network or the internet is called distributed computing.
+
+<img src="../1. Introduction to Big Data/images/distributed_computing.png">
+
+Such architectures enable what we call data-parallelism. In data-parallelism many jobs that share nothing can work on different data sets or parts of a data set. This type of parallelism sometimes gets called as _data parallelism_.
+
+Large volumes and varieties of big data can be analyzed using this mode of parallelism, achieving scalability, performance and cost reduction. As you can imagine, there are many points of failure inside systems. A node, or an entire rack can fail at any given time. The connectivity of a rack to the network can stop or the connections between individual nodes can break. The ability to recover from such failures is called Fault-tolerance. For Fault-tolerance of such systems, two neat solutions emerged. Namely, _Redundant data storage_ and _restart of failed individual parallel jobs_.
+
+<h3>Programming Models for Big Data</h3>
+
+A programming model is an abstraction or existing machinery or infrastructure. It is a set of abstract runtime libraries and programming languages that form a model of computation. This abstraction level can be low-level as in machine language in computers. Or very high as in high-level programming languages, for example, Java. So we can say, if the enabling infrastructure for big data analysis is distributed file systems as we mentioned, then the programming model for big data should enable the programmability of the operations within distributed file systems. What we mean by this being able to write computer programs that work efficiently on top of distributed file systems using big data and making it easy to cope with all the potential issues.
+
+__Requirements for big data programming models:__
+
+- Support common big data operations like splitting large volumes of data: This means for partitioning and placement of data in and out of computer memory along with a model to synchronize the datasets later on.
+
+- The access to data should be achieved in a fast way: It should allow fast distribution to nodes within a rack and these are potentially, the data nodes we moved the computation to. This means scheduling of many parallel tasks at once.
+
+- Enable reliability of the computing and fault tolerance from failures: This means it should enable programmable replications and recovery of files when needed. It should be easily scalable to the distributed notes where the data gets produced.
+
+- Scaling out: Enable adding new resources to take advantage of distributive computers and scale to more or faster data without losing performance.
+
+- Since there are a variety of different types of data, such as documents, graphs, tables, key values, etc. A programming model should enable operations over a particular set of these types. Not every type of data may be supported by a particular model, but the models should be optimized for at least one type.
+
+MapReduce is a big data programming model that supports all the requirements of big data modeling we mentioned. It can model processing large data, split complications into different parallel tasks and make efficient use of large commodity clusters and distributed file systems. In addition, it abstracts out the details of parallelization, fault tolerance, data distribution, monitoring and load balancing.
+
+
+<h2>Getting Started with Hadoop</h2>

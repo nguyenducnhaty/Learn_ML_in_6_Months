@@ -89,8 +89,7 @@
 
 <h2>Recognising mapping matrices and applying these to data</h2>
 
-
-
+<h3>The Gram–Schmidt process</h3>
 
 
 

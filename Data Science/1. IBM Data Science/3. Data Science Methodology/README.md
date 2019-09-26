@@ -1,4 +1,4 @@
-<img src="../3. Data Science Methodology/images/data_science_methodology.png">
+<img src="../3. Data Science Methodology/images/methodology.png">
 
 <h1>Week 1: From Problem to Approach and From Requirements to Collection</h1>
 
@@ -81,3 +81,28 @@ The second phase of evaluation that may be used is statistical significance test
 
 
 <h1>Week 3: From Deployment to Feedback</h1>
+
+
+<h2>From Deployment to Feedback</h2>
+
+<h3>Deployment</h3>
+
+While a data science model will provide an answer, the key to making the answer relevant and useful to address the initial question, involves getting the stakeholders familiar with the tool produced. In a business scenario, stakeholders have different specialties that will help make this happen, such as the solution owner, marketing, application developers, and IT administration. Once the model is evaluated and the data scientist is confident it will work, it is deployed and put to the ultimate test.
+
+In preparation for solution deployment, the next step is to assimilate the knowledge for the business group who would be designing and managing the intervention program to reduce readmission risk.
+
+<h3>Feedback</h3>
+
+Once in play, feedback from the users will help to refine the model and assess it for performance and impact. The value of the model will be dependent on successfully incorporating feedback and making adjustments for as long as the solution is required.
+
+Throughout the Data Science Methodology, each step sets the stage for the next. Making the methodology cyclical, ensures refinement at each stage in the game. The feedback process is rooted in the notion that, the more you know, the more that you'll want to know.
+
+<h3>Course Summary</h3>
+
+<img src="../3. Data Science Methodology/images/problem_to_approach.png">
+
+<img src="../3. Data Science Methodology/images/working_with_data.png">
+
+<img src="../3. Data Science Methodology/images/deriving_answer.png">
+
+<img src="../3. Data Science Methodology/images/methodology.png">
