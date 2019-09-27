@@ -94,3 +94,27 @@
 
 
 <h1>Week 5: Eigenvalues and Eigenvectors: Application to Data Problems</h1>
+
+<h2>What are eigen-things?</h2>
+
+<h3>What are eigenvalues and eigenvectors?</h3>
+
+The word, 'eigen' is perhaps most usefully translated from the German as meaning characteristic. So when we talk about an eigenproblem, we're talking about finding the characteristic properties of something.
+
+For a linear transformation, an eigenvector is a vector which, after applying the transformation, stays in the same span.
+
+
+<h2>Getting into the detail of eigenproblems</h2>
+
+<h3>Special eigen-cases</h3>
+
+
+<h3>Calculating eigenvectors</h3>
+
+
+
+<h2>When changing to the eigenbasis is really useful</h2>
+
+
+
+<h2>Making the PageRank algorithm</h2>

@@ -414,9 +414,209 @@ __Stages of Testing:__
 
 
 
+<h2>Waterfall Models</h2>
+
+<h3>Software Development Models</h3>
+
+There are a lot of software development models, but we can classify these models so that it allows us easier understanding of these models. One of the classification of these models is __predictive__ versus __adaptive__.
+
+Predictive means that you have a pretty good understanding of the requirements of the software or the product that you are building. So in this case, the client or the analyst or the customer knows what exactly they want, and so they have a very high confidence of the requirements or what they're looking for. So once the requirements are defined completely, then the team goes through this design implementation and testing phase of the process and then finally produces the product that the client is looking for.
+
+In adaptive models, the client or the customer generally has an idea of what they want to build, but they are not 100% sure what they want to build. So in this case, they start with an idea. The team that is working on it build something like a really small version of it or like a low fidelity version of it. And then they show it to the customer or the actual users using it. Then they build the next version based on the feedback and start morphing the product into something else. And so in the end you might end up getting something different than you were originally thinking, but what you get is what users need.
+
+<img src="../1. Software Development Processes and Methodologies/images/predictive_vs_adaptive.png">
+
+Most of the models that we will talk about, they're not always 100% predictive or not always 100% adaptive. They are sometimes somewhere in between and depends on how much you allow change during the process.
+
+The second kind of classification of models is __incremental__ versus __iterative__ and this is about how you actually build the software.
+
+In an incremental model, you have a fairly good idea of what you want to build, but instead of building it in one shot, like in the predictive model, you build in increments. In this model it will be useful if your organization can benefit from some of these intermediate products. Or if they are going to change the later increments based on the feedback from the previous increments.
+
+In the iterative model you don't have a clear idea, but you have some idea. You sometimes are actually replacing what you've built with something different. So the difference between incremental and iterative is that, in iterative model you are building on top of the existing product and in iterative model you're just breaking the product in smaller pieces and there are enhancements that are happening during the process as well.
+
+Now if you look at the incremental model, it can go predictive as well as adaptive. If you take the feedback from each of your increments and change your future increments, then it becomes a little bit adaptive model. Whereas if you don't take the feedback from each of your increments and just keep building one increment and then another increment, then it’s more like a predictive model.
+
+<img src="../1. Software Development Processes and Methodologies/images/incremental_vs_iterative.png">
+
+<h3>Waterfall Model</h3>
+
+In the waterfall method what we do is we put all of these software engineering processes one after the another in a logical sequence.
+
+<img src="../1. Software Development Processes and Methodologies/images/waterfall_model.png">
+
+Now, what if something goes wrong, or let's say you are doing the implementation and you found out that, this is not what we need? To fix that problem, you are not going to just continue going down the line, you're going to fix it. So, to fix that problem, we sometimes add a feedback loop from each of the phase to the previous phase, which means that if you find something wrong in the implementation phase, you will go back to the design phase if the problem was in the design phase, or you can go into the requirement phase if the problem was in the requirement phase.
+
+Now, one thing you might notice is that the later you find a problem in your model, the more costly it's going to be. So, you may have heard of the cost of change curve, which basically shows, how cost exponentially increases when you find bugs in later stages of development.
+
+<img src="../1. Software Development Processes and Methodologies/images/Change_Cost.jpg">
+
+So to find problems early on, we make some assumptions. The first assumption we make is that we _know the requirements very well and they won't change_. If the requirements change during later in the phase, it will be costly to go back and then repeat our steps. And so for this model to be successful, we need to make sure that the requirements are solid.
+
+The second assumption we make in this model is that _the team has experienced building similar software_.
+
+The third assumption, is that _the translation from the requirement to the product is going to be perfect_, which means that the designers or the people who are coding understood the requirements really well.
+
+In terms of the predictive and adaptive scale this model is pretty much a very predictive model because you don't start until your requirements are done, then your design and so the requirement has to be known very clearly upfront.
+
+__Pros:__
+- it's a very simple and easy to understand model
+- if you have the requirement fixed then it's a very predictive model because in the very beginning you know what you need, then you can identify how long is it going to take. Once your design is ready, you know how long it's going to take to implement and so on.
+- it also gives you predictability from point of view of how many resources you need and then you also have predictability of what I'm going to get.
+- it's a very efficient process since you know all the requirements, you can consider all the aspects of the product and you can design it perfectly.
+
+<img src="../1. Software Development Processes and Methodologies/images/waterfall_model_summary.png">
+
+<h3>V-Model</h3>
+
+The V-model looks very similar to the waterfall method, but it's just bent into a shape of a V. But if you look closely, the left side of the model is about project definition or the product definition, where it's getting finer and finer. So from the concept, you go to the requirement, and to the design, and to the implementation. And then the right side is showing all the validation steps that are corresponding to the steps on the left. So for example, the verification and validation is corresponding to the requirement phase. So in the V-model, when you are doing your requirements, you start talking about your verification and validation, what it basically means is that you're introducing the testing activities related to the testing phase earlier in the model.
+
+<img src="../1. Software Development Processes and Methodologies/images/v_model.png">
+
+If you see that on the y-axis, it's increasing in the abstraction when you go from bottom to the top. And then if you go from the left to right, it kind of shows the project completion.
+
+If you look at it from the predictive and the adaptive scale, I would say that the V-model is very much a predictive model. Because it doesn't allow any kind of feedback or doesn't allow any kind of changes during the phases. It just allows you to introduce the verification earlier in the process.
+
+<img src="../1. Software Development Processes and Methodologies/images/v_model_summary.png">
+
+<h3>Sashimi Model</h3>
+
+In Sashimi Model the idea is that we allow to overlap the different phases of software development life cycle. For example, while you're working on the requirements, instead of waiting for the requirement phase to complete, you will start with your design while the requirements are being created.
+
+<img src="../1. Software Development Processes and Methodologies/images/sashimi_model.png">
+
+The primary idea behind this phase is that the next phase doesn't have to wait for the previous phase to start.
+
+You can also overlap your phase so much so that sometimes you can have even more than one phase be overlapping.
+
+In the predictive and the adaptive scale, it's not 100% predictive because while you're working on the requirements and if you started designing and if you learn something, you can still fix your requirement. So, there is a scope of adaptability as you're working in it. So, it's a little bit going towards adaptive, but still it's primarily a predictive model.
+
+<img src="../1. Software Development Processes and Methodologies/images/sashimi_model_summary.png">
 
 
+<h2>Incremental Models</h2>
 
+In incremental model instead of building the whole application in one shot, you build in increments. You can still use waterfall steps but only in that increment.
+
+<img src="../1. Software Development Processes and Methodologies/images/incremental_waterfall.png">
+
+You can also overlap the models and use different models for each of the implements. Like V-model for the second increment phase or Sashimi model for the third increment phase. In terms of predictive and adaptive scale, it depends on how much overlap you have and how much feedback you apply from one increment to another.
+
+<img src="../1. Software Development Processes and Methodologies/images/incremental_waterfall_summary.png">
+
+<img src="../1. Software Development Processes and Methodologies/images/incremental_model_variation_1.png">
+
+<img src="../1. Software Development Processes and Methodologies/images/incremental_model_variation_2.png">
+
+
+<h2>Iterative Models</h2>
+
+<h3>Unified Process and its Variants</h3>
+
+<img src="../1. Software Development Processes and Methodologies/images/unified_process.png">
+
+__Inception Phase:__
+
+- Establish Business case and Scope
+- Feasibility study
+- Build vs Buy
+- Preliminary Schedule and Cost
+
+__Elaboration:__
+
+- Capture requirements
+- Address known risks
+- Validate the system architecture
+    - Executable architecture baseline: build the core components of the system which demonstrate that the system will work
+- Credible Construction Estimate
+
+__Construction:__
+
+- Software is built
+- Multiple iteration- each results in a release
+- Iterative and incremental
+
+__Transition:__
+
+- Deployment
+- Get feedback and refine
+- System conversion and user training
+
+__Characteristics of this Model:__
+
+1. It is a framework. It incorporates other methods/models: for example, during the Construction phase, you could be using Agile, you could be using Sashimi model, you could be using incremental model or whatnot. So, you could use any model during the Construction phase. Similarly, during Elaboration you can use any of the models. So, it's a framework and not really a defined process.
+
+2. Any step may involve different kinds of work (requirements, design, etc) but relative effort and emphasis might be different.
+
+3. Architecture Centric.
+
+4. Use case centric: means when we do the Elaboration, or when we talk about what needs to be built, we consider a user into the picture and ask what the user wants to do from the system. Then for each of these use cases you define what's the trigger point, and what does the use case looks like, what are the exceptions, what are the extensions, what are the variations of that use case. So, what that does is that you look at the system, not just from a system perspective, but from a user perspective which gives you a holistic view of the system.
+
+5. Focus on risk mitigation: One of the goal of the Elaboration phase is to identify and resolve or mitigate risk. So, that's one of the key idea behind this framework.
+
+<img src="../1. Software Development Processes and Methodologies/images/unified_process_summary.png">
+
+<img src="../1. Software Development Processes and Methodologies/images/unified_process_variants.png">
+
+<h3>Spiral Model</h3>
+
+<img src="../1. Software Development Processes and Methodologies/images/spiral_model.png">
+
+It's a cyclic process but each of those cycle actually has four basic steps. So you determine the objectives as your first step, like what do you want to achieve in that particular cycle. Then you identify and resolve risks, and then you double up based on what you need for your objectives. And then you plan for next iteration.
+
+- 1st Step: Determine Objective:
+    - Define Objectives
+    - Define Constraints
+    - Define Alternatives
+
+- 2nd Step: Identify and Resolve Risk:
+    - Identify Risks
+    - Resolve what you can
+
+- 3rd Step: Development and Test:
+    - Work done to meet objectives (feasibility study, design, development, integration, etc)
+
+- 4th Step: Plan for the next iteration:
+    - Review work done and commitment for next iteration
+
+How do you track progress in a Spiral Project? You can track progress through milestones
+- __Life Cycle Objective:__ sufficient definition of a technical and management approach
+- __Life Cycle Architecture:__ sufficient definition of the preferred approach and significant risks eliminated or mitigated.
+- __Initial Operational Capability:__ sufficient preparation of the software site, users, operators and maintainers.
+
+__Characteristics of this model:__
+
+- Risk Driven Model: identify and resolve risk is primary step of this process.
+- Effort and Detail Driven by Risk: meaning you don't need to go through a rigorous requirements documents or a very detailed document. You just do enough so that the goal or objective is achieved. So, again, how much is the risk based on that you put effort in terms of resolving the risk as well as in the development and the test stage.
+- Process model generator. Incorporates other models: you use other models wherever appropriate to execute.
+
+<img src="../1. Software Development Processes and Methodologies/images/spiral_model_summary.png">
+
+
+<h2>Applying traditional software development models</h2>
+
+<h3>Phase Gates / Stage Gates</h3>
+
+This is a concept that you will see in the organization if they are primarily doing waterfall models. This concept allows organization to give opportunity for leaders or the organization to see the middle of the project to see if we want to continue or if you want to pivot.
+
+<img src="../1. Software Development Processes and Methodologies/images/gates.png">
+
+Let's say this was the kind of software development process. So once you apply the stage gates, or sometimes called phase gates into different places of the software development process they give the organization the ability to validate what they are attempting to do aligns with their strategic point of view or not and if it isn't aligned, then you drop the idea.
+
+__What do you check at Gate Check?__
+
+- Check quality of execution of previous step
+- Business case still makes sense?
+- If yes, does the action plan for the next step reasonable and sound?
+
+<img src="../1. Software Development Processes and Methodologies/images/gate_structure.png">
+
+__Examples of Gate in different models:__
+
+<img src="../1. Software Development Processes and Methodologies/images/waterfall_gate.png">
+
+<img src="../1. Software Development Processes and Methodologies/images/incremental_gate.png">
+
+<img src="../1. Software Development Processes and Methodologies/images/gate_summary.png">
 
 
 
