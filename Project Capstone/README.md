@@ -38,6 +38,8 @@
 
 - WRSPM Model
 
+<h4>What is the software architecture that I will be using</h4>
+
 
 <h2>Data Wrangling</h2>
 

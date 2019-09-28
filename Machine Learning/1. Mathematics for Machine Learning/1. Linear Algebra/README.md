@@ -101,7 +101,7 @@
 
 The word, 'eigen' is perhaps most usefully translated from the German as meaning characteristic. So when we talk about an eigenproblem, we're talking about finding the characteristic properties of something.
 
-For a linear transformation, an eigenvector is a vector which, after applying the transformation, stays in the same span.
+For a linear transformation, an eigenvector is a vector which, after applying the transformation, stays in the same span, meaning the angle does not change for the vectors during the transformation
 
 
 <h2>Getting into the detail of eigenproblems</h2>
@@ -115,6 +115,11 @@ For a linear transformation, an eigenvector is a vector which, after applying th
 
 <h2>When changing to the eigenbasis is really useful</h2>
 
+<h3>Changing to the eigenbasis</h3>
+
+<img src="../1. Linear Algebra/images/Changing_to_the_eigenbasis.png">
 
 
 <h2>Making the PageRank algorithm</h2>
+
+<h3>Introduction to PageRank</h3>

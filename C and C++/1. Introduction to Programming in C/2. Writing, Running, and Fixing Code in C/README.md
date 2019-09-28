@@ -99,10 +99,386 @@ Sometimes, you may wish to use one of these special characters literally—that 
 
 <h1>Week 2: Compiling and Running</h1>
 
+<h2>Introduction</h2>
+
+<h3>Compiling Overview</h3>
+
+Compiling a program is the act of translating the human-readable code that a programmer wrote (called “source code”) into a machine-executable format. The compiler is the program that performs this process for you: it takes your source code as input, and writes out the actual executable file, which you can then run.
+
+At its simplest, compiling your program is a matter of running the compiler and giving it a command line argument specifying the .c file with the source code for your program. There are many different C compilers, but the most popular one is called __gcc__, which stands for __“GNU Compiler Collection.”__ If you write a program in a file called _myProgram.c_, you could execute the command _gcc myProgram.c_ to compile your code. Assuming that there are no errors in your code, the compiler would produce an executable program called _a.out_, which you could then execute by typing the command _./a.out_.
+
+<h3>Compilation Process</h3>
+
+<img src="../2. Writing, Running, and Fixing Code in C/images/compiler.png">
+
+This figure illustrates a high-level view of the process that gcc takes to compile a program. Light blue boxes represent code you have written; light green boxes represent built-in parts of C. The orange clouds indicate steps of this process (each is a separate program, but gcc invokes these programs for you), and the white boxes represent intermediate files that gcc generates to pass information from one stage to the next. The dark blue box in the upper right represents the final executable—the program that you can run to make your computer do whatever the program tells it to do.
+
+<h3>Preprocessing</h3>
+
+The first step, in the upper left is the _preprocessor_, which takes your C source file and combines it with any _header files_ that it includes, as well as expanding any _macros_ that you might have used. To help understand this process, we will look at our first complete C program, which is algorithmically simple (all it does is print Hello World), but useful for explaining the compilation process.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+#define EXIT_SUCCESS 0
+
+int main (void) {
+    printf("Hello World\n");
+    return EXIT_SUCCESS;
+}
+```
+
+The first two lines are *include __directives__*. These lines of code are not actually statements which are executed when the program is run, but rather directives to the preprocessor portion of the compiler. In particular, these directives tell the preprocessor to literally include the contents of the named file at that point in the program source, before passing it on to the later steps of the compilation process.
+
+__Header Files__
+
+These _#include_ directives name the file to be included in angle brackets (<>) because that file is one of the standard C header files. If you wrote your own header file, you would include it by placing its name in quotation marks (e.g., _#include "myHeader.h"_). (This is not a formal rule, but a very common convention.) Preprocessor directives begin with a pound sign (#) and have their own syntax.
+
+In this particular program, there are two include directives. The first of these directs the preprocessor to include the file stdio.h and the second directs it to include stdlib.h. These header files—and header files in general—primarily contain three things: _function prototypes_, macro definitions, and type declarations.
+
+A function prototype looks much like a function definition, except that it has a semicolon in place of the body. The prototype tells the compiler that the function exists somewhere in the program, as well as the return and argument types of the function. Providing the prototype allows the compiler to check that the correct number and type of arguments are passed to the function, and that the return value is used correctly without having the entire function definition available. In the case of printf, stdio.h provides the prototype. The actual implementation of printf is inside the C standard library.
+
+__Macros__
+
+Header files may also contain macro definitions. The simplest use of a macro definition is to define a constant, such as
+
+```c
+#define EXIT_SUCCESS 0
+```
+
+This directive (from stdlib.h) tells the preprocessor to define the symbol EXIT_SUCCESS to be 0. Whenever the preprocessor encounters the symbol EXIT_SUCCESS, it sees that it is defined as a macro and expands the macro to its definition. In this case, the definition is just 0, so the preprocessor replaces EXIT_SUCCESS with 0 in the source it passes on to the later stages of compilation. Note that the preprocessor splits the input into identifiers, and checks each identifier to see if it is a defined macro, so EXIT_SUCCESS_42 will NOT expand to 0_42, but rather will not be considered a macro and preprocessor will leave it alone (unless it is defined elsewhere).
+
+Using macro definitions for constants provides a variety of advantages to the programmer over writing the numerical constant directly. For one, if the programmer ever needs to change the constant, only the macro definition must be changed, rather than all of the places where the constant is used. Another advantage is that naming the constant makes the code more readable. The naming of the constant in __return__ EXIT_SUCCESS gives you a clue that the return value here indicates that the program succeeded. In fact, this is exactly what this statement does. The return value from main indicates the success or failure of your program to whatever program ran it.
+
+A third advantage of using macro defined constants is _portability_. While 0 may indicate success on your platform—the combination of the type of hardware and the operating system you have—it may mean failure on some other platform. If you hardcode the constant 0 into your code, then it may be correct on your platform, but may need to be rewritten to work correctly on another platform. By contrast, if you use the constants defined in the standard header files, then when you recompile your program on the new platform, it will just work correctly—the header files on that platform will have those constants defined to the correct values.
 
 
+<h2>Compiler Details</h2>
+
+<h3>More about Macros and Header Files</h3>
+
+__More about Macros:__
+
+The standard header file limits.h contains constants specifically for portability. These constants describe the maximum and minimum value of various types on the current platform. For example, if a program needs to know the maximum and minimum values for an __int__, it can use INT_MAX and INT_MIN respectively. On platforms where an __int__ is 32 bits, these would be defined like this:
+
+```c
+#define INT_MAX  2147483647
+#define INT_MIN -2147483648
+```
+
+On a platform with a different size for the __int__ type, these would be defined to whatever value is appropriate for the size of the __int__ on that platform.
+
+Macros can also take arguments, however, these arguments behave differently from function arguments. Recall that function calls are evaluated when the program runs, and the values of the arguments are copied into the function’s newly created frame. Macros are expanded by the preprocessor (while the program is being compiled, before it has even started running), and the arguments are just expanded textually. In fact, the macro arguments do not have any declared types, and do not even need to be valid C expressions—only the text resulting from the expansion needs to be valid (and well typed).
+
+We could (though as we shall see shortly, we shouldn’t) define a SQUARE macro as follows:
+
+```c
+#define SQUARE(x) x * x
+```
+
+The preprocessor would then expand SQUARE(3) to 3 * 3, or SQUARE(45.9) to 45.9 * 45.9. Note that here, we are using the fact that macro arguments do not have types to pass it an __int__ in the first case and a __double__ in the second case. However, what happens if we attempt SQUARE(z-y)? If this were a function, we would evaluate z-y to a value and copy it into the stack frame for a call to SQUARE, however, this is a macro expansion, so the preprocessor works only with text. It expands the macro by replacing x in the macro definition with the text z-y, resulting in z-y * z-y. Note that this will compute z- (y*z) -y, which is not z-y squared.
+
+__More about Header Files:__
+
+Header files may also contain type declarations. For example, stdio.h contains a type declaration for a FILE type, which is used by a variety of functions which manipulate files. The functions also have their prototypes in stdio.h.
+
+Another example of type declarations in standard header files are the integer types in stdint.h. As mentioned previously, integers come in different sizes, and the size of an __int__ varies from platform to platform. Often programmers do not care too much about the size of an int, but sometimes using a specifically sized __int__ is important. stdint.h defines types such as int32_t (which is guaranteed to be a 32-bit signed __int__ on any platform), or uint64_t (which is always a 64-bit __unsigned int__).
+
+<h3>The Actual Compiler</h3>
+
+The output of the preprocessor is stored in a temporary file, and passed to the actual compiler. At first, it may seem a bit confusing that one of the steps of the compilation process is the actual compiler. However, we often refer to complex processes by their eponymous step. For example, if you say “I am going to bake a cake,” even though only part of the process involves actually baking the cake (cooking the cake batter in the oven), we still understand that you will go through the entire process: finding a recipe, getting the ingredients, mixing the batter, baking the cake, letting it cool, and icing it.
+
+The compiler reads the pre-processed source code—which has all the specified files included and all macro definitions expanded—and translates it into assembly. Assembly is the lowest level type of human readable code. In assembly, each statement corresponds to one machine instruction. Machine instructions correspond to very simple operations such as adding two numbers or moving a value to or from memory.
+
+<h3>Compiler Errors</h3>
+
+The compiler is a rather complex program. Its first task is to read in your program source and “understand” your program according to the rules of C—a task called the program. In order for the compiler to parse your program, the source code must have the correct syntax. If your code is not syntactically correct, the compiler will print an error message and attempt to continue parsing, but may be confused by the earlier errors.
+
+__Dealing With Compilation Errors: Tip 1__ Remember that the compiler can get confused by earlier errors. If later errors are confusing, fix the first error, then try to recompile before you attempt to fix them.
+
+__Dealing With Compilation Errors: Tip 2__ If parts of an error message are completely unfamiliar, try to ignore them and see if the rest of the error message(s) make sense. If so, try to use the part that makes sense to understand and fix your error. If not, search for the confusing parts on Google and see if any of them are relevant.
+
+http://aop.cs.cornell.edu/errors/index.html provides more details on a variety of error messages, and will likely prove useful in helping you diagnose errors you may encounter.
+
+Once the compiler finishes checking your code for errors, it will translate it into assembly—the individual machine instructions required to do what your program says. You can ask the compiler to _optimize_ your code—transform it to make the resulting assembly run faster—by specifying the -O option followed by the level of optimization that you want. Programs are usually compiled with no optimizations for testing and debugging (the code transformation makes the program very difficult to debug), and then re-compiled with optimizations once they are ready for release/use. Typically, real programs compiled with gcc are compiled with -O3 when they are optimized. gcc provides a variety of other options to control optimization at a finer level of detail
+
+<h3>Assembling</h3>
+
+The next step is to take the assembly that the compiler generated and _assemble_ it into an _object file. gcc_ invokes the assembler to translate the assembly instructions from the textual/human readable format into their numerical encodings that the processor can understand and execute.
+
+Generally errors here are limited to cases in which you explicitly write the specific assembly level instructions that you want into your program (which is possible in C, but limited to very advanced situations) and make errors in those.
+
+The important thing to understand about this step is that it results in an _object file_. The object file contains the machine-executable instructions for the source file that you compiled, but is not yet a complete program. The object file may reference functions that it does not define (such as those in the C library, or those written in other files). You can request that gcc stop after it assembles an object file by specifying the -c option. By default, the name of the object file will be the name of the .c file with the .c replaced by .o. For example, _gcc -c xyz.c_ will compile _xyz.c_ into _xyz.o_. If you wish to provide a different name for the object file, use the -o option followed by the name you want. For example, _gcc -c xyz.c -o awesomeName.o_ will produce an object file called _awesomeName.o_.
+
+This ability to stop is important for large programs, where you will split the code into multiple different C files. Splitting the program into large files is primarily useful to help you keep the code split into manageable pieces. However, each source file can be individually compiled to an object file, and those object files can then be linked together.  If you change code in one file, you can recompile only that file (to generate a new object file for it), and re-link the program without recompiling any of the other source files.
+
+<h3>Linking</h3>
+
+The final step of the process is to _link_ the program. Linking the program takes one or more object files and combines them together with _various_ libraries, as well as some startup code, and produces the actual executable binary. The object files refer to functions by name, and the linker’s job is to resolve these references—finding the matching definition. If the linker cannot find the definition for a name (called a “symbol”) that is used, or if the same symbol is defined multiple times, it will report an error.
+
+Linker errors—indicated by the fact that they are reported by _ld_ (the linker’s name)—are typically less common than other compiler errors. If you encounter an unresolved symbol error, it means that you either did not define the symbol, did not include the object file that defines the symbol in the link, or that the symbol was specified as only visible inside that object file (which can be done by using the _static_ keyword). If you encounter errors from duplicate definitions of a symbol, first make sure you did not try to name two different functions with the same name. Next, make sure you did not include any files twice on the compilation command line. Finally, make sure you do not _#include_ a .c file—only header files—and that you only include function _prototypes_ in the header file, not the function’s definition (there are some advanced exceptions to these rules, but if you are at that stage, you should understand the linking process and static keyword well enough to fix any problems).
+
+Sometimes you may wish to use an external library—a collection of functions that are already written and packaged up to use for some purpose (e.g., drawing graphics, playing sound, advanced math, or many other purposes). The C library is one such example, which is linked in by default. For other libraries, you must specifically request that the linker link with the library with the -l command line option, specifying the name of the library right after the l.
+
+If all goes well, the linker will resolve the all the symbol references, and combined the various object files and libraries together into an executable binary.
 
 
+<h2>More Tools</h2>
+
+<h3>Build Tool: make</h3>
+
+As the program size increases, so does the compilation time. Fortunately, most of the time, one does not need to recompile all of the source code, if the object (.o) files from previous compilations are kept. Instead, only the file (or files) that were changed need to be recompiled, then the program needs to be linked again. Compiling each source file to an object file is accomplished with the -c option, and the various object files can then be listed on the command line to gcc in order to pass them to the linker.
+
+However, orchestrating this process manually is tedious and error-prone. If the programmer forgets to recompile a file, then the program will not work correctly, possibly in strange ways. Doing this manually not only requires the programmer to remember all files that were changed, but also which files _#include_ files that were changed. For example, if the programmer changes _myHeader.h_, then any file which _#includes myHeader.h_ must also be recompiled, as the source files’ contents have _effectively_ changed.
+
+Long ago, programmers developed the make utility to not only automate this process, but also to simplify compiling programs in general. The make command reads a file called Makefile (though you can ask it to read an input file by a different name) which specifies how to compile your program. Specifically, it names the _targets_ which can be made, their _dependencies_, and the _rules_ to make the target.
+
+When make is run, it starts from a particular target—something that it can build out of other things. A common starting target might be your entire program. make first checks if the target is up-to-date. Checking that a target is up-to-date requires checking that all of the files that the target depends on are themselves up-to-date, and that none of them are newer than the target. For example, the target for the whole program may depended on many object files. If any such file is not itself up-to-date (for example, the object file may depend on a .c file, which just got changed), it is rebuilt first. make then follows whatever rule was specified for the target to build it from its dependencies. If the target is already up to date, then it does nothing.
+
+Using make to compile the program is also useful when the command line to compile the program becomes complex, especially when other people may need to do the compilation. Large complicated programs may require linking with several libraries, as well as a variety of other command line options. Trying to remember all of these and type them in every time you compile is painful. Even worse, many real programs need to be compiled by other people—whether it is multiple members of a large development team, or people who you distribute the program to. Expecting these other people to figure out the command line required to make your program leads to much frustration for them. Providing a _Makefile_ allows anyone to build the program simply by typing _make_.
+
+<h3>Fancier make Options</h3>
+
+Recall that the input to make is a Makefile, which contains one or more rules that specify how to produce a target from its prerequisites (the files it depends on). The rule is comprised of the target specification, followed by a colon, and then a list of the prerequisite files. After the list of prerequisites, there is a newline, and then any commands required to rebuild that target from the prerequisites. The commands may appear over multiple lines; however, each line must begin with a TAB character (multiple spaces will not work, and accidentally using them instead of a TAB is often the source of problems with a Makefile).
+
+When you run make, you can specify a particular target to build (if you do not specify one, make uses the first target in the Makefile as the default target). To build the target, make will first check if it is up to date. Checking if a target is up to date first requires ensuring that each prerequisite is up to date by potentially rebuilding it. This process bottoms out when make encounters a file that exists which is not itself the target of any rules. Such a file is up to date.
+
+Once all files which a target depends on are ensured to be up to date, make checks if the target itself needs to be (re)built. First, make check if the target file exists. If not, it must be built. If the target file already exists, make compares its last-modified time (which is tracked by all major filesystems) to the last-modified times of each of the prerequisites specified in the rule. If any dependency is newer than the target file, then the target is out of date, and must be rebuilt. Note that if any of the prerequisites were rebuilt in this process, then that file will have been modified more recently than the target, thus forcing the target to be rebuilt.
+
+__An example:__
+
+To be a bit more concrete, let us look at a specific example of a Makefile:
+
+```
+myProgram: oneFile.o anotherFile.o
+    gcc -o myProgram oneFile.o anotherFile.o
+oneFile.o: oneFile.c oneHeader.h someHeader.h
+    gcc -std=gnu99 -pedantic -Wall -c oneFile.c
+anotherFile.o: anotherFile.c anotherHeader.h someHeader.h
+    gcc -std=gnu99 -pedantic -Wall -c anotherFile.c
+```
+
+In this Makefile there are three targets: myProgram, oneFile.o, and anotherFile.o. If we just type make, then make will attempt to (re)build myProgram, as that is the first target in the file, and thus the default. This target depends on oneFile.o and anotherFile.o, so the first thing make will do is make the oneFile.o target (much as if we had typed make oneFile.o).
+
+oneFile.o depends on one .c and two .h files, none of which are targets of other rules. Therefore, make does not need to rebuild them. If they do not already exist, make will give an error like this:
+
+```c
+make: *** No rule to make target 'oneHeader.h', needed by 'oneFile.o'.  Stop.
+```
+
+Assuming that all three of these .c/.h files exist, make will see if oneFile.o does not exist, or if any of those three files are newer than it. If so, then make will rebuild the file by running the specified gcc command. If oneFile.o already exists and is newer than the relevant source files, then nothing needs to be done to build it.
+
+After processing oneFile.o, make does a similar process for anotherFile.o. After that completes, it checks if it needs to build myProgram (that is, if either myProgram does not exist, or either of the object files that it depends on are newer than it). If so, it runs the specified gcc command (which will link the object files and produce the binary called myProgram). If not, it will produce the message:
+
+```c
+make: 'myProgram' is up to date.
+```
+
+Observe that, because of the way this procedure works, if you were to change code in oneFile.c, then only one of the two object files would be recompiled (oneFile.o), and then the program would be re-linked. The other object file (anotherFile.o) would not need to be recompiled.
+
+__Variables:__
+
+The way we have written our example Makefile has a lot of copying and pasting—something we want to avoid in anything we do. In particular, we might notice that we have the same compiler options in many places. If we wanted to change these options (e.g., to turn on optimizations, or add a debugging flag), we would have to do it in every place. Instead, we would prefer to put the compiler options in a variable, and use that variable in each of the relevant rules. For example, we might change our previous example to the following:
+
+```
+CFLAGS=-std=gnu99 -pedantic -Wall
+myProgram: oneFile.o anotherFile.o
+    gcc -o myProgram oneFile.o anotherFile.o
+oneFile.o: oneFile.c oneHeader.h someHeader.h
+    gcc $(CFLAGS) -c oneFile.c
+anotherFile.o: anotherFile.c anotherHeader.h someHeader.h
+    gcc $(CFLAGS) -c anotherFile.c
+```
+
+Here, we define a variable CFLAGS, which we set equal to our desired compilation flags. We then use that variable by putting its name inside of `$()` in the rules. Note that changes to the Makefile do not automatically outdate targets which use them, so they will not necessarily be rebuilt with the new flags if you just type make after making the change (although you could make them all depend on Makefile).
+
+__Clean:__
+
+A common target to put in a Makefile is a clean target. The clean target is a bit different in that it does not actually create a file called clean (it is therefore called a “phony” target). Instead, it is a target intended to remove the compiled program, all object files, all editor backups (*.c~ *.h~), and any other files that you might consider to be cluttery. This target gets used to either force the entire program to be rebuilt (e.g., after you change various compilation flags in the Makefile), or if you just need to clean up the directory, leaving only the source files (e.g., if you are going to zip or tar up the source files to distribute them to someone).
+
+We might add a clean target to our Makefile as follows:
+
+```
+.PHONY: clean
+clean:
+    rm -f myProgram *.o *.c~ *.h~
+```
+
+Note that the .PHONY: clean tells make that clean is a phony target—we do not actually expect it to create a file called “clean”, nor would we want to consider it up to date and skip its commands if a file called “clean” already existed (as there are no prerequisites, it would be considered up to date if it existed). If we wanted other phony targets, we would list them all as if they were prerequisites of the .PHONY target (e.g. .PHONY: clean depend).
+
+In general, you should add a clean target to your Makefiles, as most people will expect one to be present, and it can be quite useful.
+
+__Generic rules:__
+
+Our example Makefile improved slightly when we used a variable to hold the compilation flags. However, our Makefile still suffers from a lot of repetition, and would be a pain to maintain if we had more than a few sources files. If you look at what we wrote, we are doing pretty much the same thing to compile each of our .c source files into an object file. Whenever we find ourselves repeating ourselves, there should be a better way.
+
+In make, we can write generic rules. A generic rule lets us specify that we want to be able to build (something).o from (something).c, where we represent the something with a percent-sign (%). As a first step, we might write (note that # indicates a comment to the end of the line):
+
+```
+# A good start, but we lost the dependencies on the header files
+CFLAGS=-std=gnu99 -pedantic -Wall
+myProgram: oneFile.o anotherFile.o
+    gcc -o myProgram oneFile.o anotherFile.o
+%.o: %.c
+    gcc $(CFLAGS) -c $<
+.PHONY: clean
+clean:
+    rm -f myProgram *.o *.c~ *.h~
+```
+
+Here, we have replaced the two rules we had for each object file with one generic rule. It specifies how to make a file ending with .o from a file of the same name, except with .c instead of .o. In this rule, we cannot write the literal name of the source file, as it changes for each instance of the rule. Instead, we have to use the special built-in variable `$<`, which make will set to the name of the first prerequisite of the rule (in this case, the name of the .c file).
+
+However, we have introduced a significant problem now. We have made it so that our object files no longer depend on the relevant header files. If we were to change a header file, then make might not rebuild all of the relevant object files. Such a mistake can cause strange and confusing bugs, as one object file may expect data in an old layout but the code will now be passed data in a different layout. We could make every object file depend on every header file (by writing %.o : %.c *.h), however, this approach is overkill—we would definitely rebuild everything that we need to when we change a header file, because we would rebuild every object file, even if we only need to rebuild a few.
+
+We can fix this in a better way by adding the extra dependency information to our Makefile:
+
+```
+# This fixes the problem
+CFLAGS=-std=gnu99 -pedantic -Wall
+myProgram: oneFile.o anotherFile.o
+    gcc -o myProgram oneFile.o anotherFile.o
+%.o: %.c
+    gcc $(CFLAGS) -c $<
+.PHONY: clean
+clean:
+    rm -f myProgram *.o *.c~ *.h~
+oneFile.o: oneHeader.h someHeader.h
+anotherFile.o: anotherHeader.h someHeader.h
+```
+
+Here, we still have the generic rule, but we also have specified the additional dependencies separately. Even though it looks like we have two rules, make understands that we are just providing additional dependence information because we have not specified any commands. If we did specify commands in the, they would supersede the generic rules for those targets.
+
+Managing all of this dependency information by hand would, of course, be tedious and error-prone. The programmer would have to figure out every file which is transitively included by each source file, and keep the information up to date as the code changes. Instead, there is a tool called makedepend which will edit the Makefile to put all of this information at the end. In its simplest usage, makedepend takes as arguments all of the source files (i.e., all of the .c and/or .cpp files), and edits the Makefile. It can also be given a variety of options, such as -I path to tell it to look for include files in the specified path. See man makedepend for more details.
+
+__Built-in generic rules:__
+
+Some generic rules are so common that they are built into make, and we do not even have to write them. As you may suspect, building a .o file from a similarly named .c file is quite common, as it is what C programmers do most often. Accordingly, we do not even need to explicitly write our %.o: %.c rule if we are happy with the built-in generic rule for this pattern.
+
+We can see the all of the rules (including both those that are built-in and those that are specified by the Makefile) by using make -p. Doing so also builds the default target as usual—if we want to avoid building anything, we can do make -p -f/dev/null to use the special file /dev/null as our Makefile (reading from /dev/null results in end-of-file right away, so the result will be a Makefile with no rules, thus it will not do anything).
+
+If we use make -p to explore the built-in rules for building .o files from .c files, we will find:
+
+```
+%.o: %.c
+# commands to execute (built-in):
+    $(COMPILE.c) $(OUTPUT_OPTION) $<
+```
+
+Understanding this rule requires us to look at the definitions of COMPILE.c and OUTPUT_OPTION, which are also included in the output of make -p:
+
+```
+COMPILE.c = $(CC) $(CFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -c
+OUTPUT_OPTION = -o $@
+```
+
+By default, CFLAGS (flags for the C-compiler) and CPPFLAGS (flags for the C preprocessor143), as well as TARGET_ARCH (flags to specify what architecture to target) are empty. By default CC (the C-compiler command) is cc (which may or may not be gcc depending on how our system is configured). The defaults for any of these variables (or any other variables) can be overridden by specifying their values in our Makefile. Note that `$@` in OUTPUT_OPTION is a special variable which is the name of the current target (much like `$<` is the name of the first prerequisite).
+
+All of that may sound a bit complex but it basically boils down to the fact that the default rule is: cc -c -o something.o something.c, and we can override the specifics to get the behavior we want, while still using the default rule. That is, we might use the following Makefile:
+
+```
+CC = gcc
+CFLAGS = -std=gnu99 -pedantic -Wall
+myProgram: oneFile.o anotherFile.o
+    gcc -o myProgram oneFile.o anotherFile.o
+.PHONY: clean depend
+clean:
+    rm -f myProgram *.o *.c~ *.h~
+depend:
+    makedepend anotherFile.c oneFile.c
+# DO NOT DELETE
+anotherFile.o: anotherHeader.h someHeader.h
+oneFile.o: oneHeader.h someHeader.h
+```
+
+Here, we have specified that we want to use gcc as the C-compiler (CC), and specified the CFLAGS that we want. Now, when we try to compile an object file from a C file, the default rule will result in
+
+__gcc -std=gnu99 -pedantic -Wall -c -o something.o something.c__
+
+You should also note that we have added another phony target, depend which runs makedepend with the two C source files that we are working with. the # DO NOT DELETE line and everything below it are what makedepend added to our Makefile when I ran make depend. Note that if we re-run makedepend (preferably via the make depend), it will look for this line to tell where to delete the old dependency information and add its new information.
+
+__Built-in functions:__
+
+Our Makefile is looking more like something we could use in a large project, but we have still manually listed our source and object files in a couple places. If we were to add a new source file, but forget to update the makedepend command line, we would not end up with the right dependencies for that file when we run make depend. Likewise, we might forget to add object files in the correct places (e.g., if we add it to the compilation command line, but not the dependencies for the entire program, we may not rebuild that object file when needed).
+
+We can fix these problems by using some of make’s built-in functions to automatically compute the set of .c files in the current directory, and then to generate the list of target object files from that list. The syntax of function calls in make is `$(functionName arg1, arg2, arg3)`. We can use the `$(wildcard pattern)` function to generate the list of .c files in the current directory: SRCS = `$(wildcard *.c)`. Then we can use the `$(patsubst pattern, replacement, text)` function to replace the .c endings with .o endings: OBJS = `$(patsubst %.c, %.o, $(SRCS))`. Once we have done this, we can use `$(SRCS)` and `$(OBJS)` in our Makefile:
+
+```
+CC = gcc
+CFLAGS = -std=gnu99 -pedantic -Wall
+SRCS=$(wildcard *.c)
+OBJS=$(patsubst %.c,%.o,$(SRCS))
+myProgram: $(OBJS)
+    gcc -o $@ $(OBJS)
+.PHONY: clean depend
+clean:
+    rm -f myProgram *.o *.c~ *.h~
+depend:
+    makedepend $(SRCS)
+# DO NOT DELETE
+anotherFile.o: anotherHeader.h someHeader.h
+oneFile.o: oneHeader.h someHeader.h
+```
+
+At this point, we have a Makefile that we could use on a large-scale project. The only thing we need to do when we add source files or include new header files in existing source files is run make depend to update the dependency information. Other than that, we can build our project with make, which will only recompile the required files.
+
+We could, however, be a little bit fancier. In a real project, we likely want to build a debug version of our code (with no optimizations, and -ggdb3 to turn on debugging information—see the next module for more info about debugging), and an optimized version of our code that will run faster (where the compiler works hard to produce improve the instructions that it generates, but those transformations generally make debugging quite difficulty). We could change our CFLAGS back and forth between flags for debugging and flags for optimization, and remember to make clean each time we switch. However, we can also just set our Makefile up to build both debug and optimized object files and binaries with different names:
+
+```
+CC = gcc
+CFLAGS = -std=gnu99 -pedantic -Wall -O3
+DBGFLAGS = -std=gnu99 -pedantic -Wall -ggdb3 -DDEBUG
+SRCS=$(wildcard *.c)
+OBJS=$(patsubst %.c,%.o,$(SRCS))
+DBGOBJS=$(patsubst %.c,%.dbg.o,$(SRCS))
+.PHONY: clean depend all
+all: myProgram myProgram-debug
+myProgram: $(OBJS)
+    gcc -o $@ -O3 $(OBJS)
+myProgram-debug: $(DBGOBJS)
+    gcc -o $@ -ggdb3 $(DBGOBJS)
+%.dbg.o: %.c
+    gcc $(DBGFLAGS) -c -o $@ $<
+clean:
+    rm -f myProgram myProgram-debug *.o *.c~ *.h~
+depend:
+    makedepend $(SRCS)
+    makedepend -a -o .dbg.o  $(SRCS)
+# DO NOT DELETE
+anotherFile.o: anotherHeader.h someHeader.h
+oneFile.o: oneHeader.h someHeader.h
+```
+
+Now, if we make, we get both myProgram (the optimized version), and myProgram-debug (which is compiled for debugging).
+
+__Parallelizing computation:__
+
+One useful feature of make, especially on modern multi-core systems is the ability to have it run independent tasks in parallel. If you give make the -j option, it requests that it run as many tasks in parallel as it can. You may wish to ask it to limit the number of parallel tasks to a particular number at any given time, which you can do by specifying that number as an argument to the -j option (, make -j8 runs up to 8 tasks in parallel). On large projects, this may make a significant difference in how long a build takes.
+
+You can use make for much more beyond just compiling C programs. In fact, you can use make for pretty much any task that you can describe in terms of creating targets from the prerequisites that they depend on. For most such tasks, you can put the parallelization capabilities of make to good use to speed up the task.
+
+<h3>valgrind</h3>
+
+_valgrind_ is particularly good at finding errors in your program that did not manifest simply because you got lucky when you ran it. When you run your program directly on the computer, it does not explicitly track whether a variable has been initialized—the compiler generates instructions which do exactly what your program specifies, and the computer does exactly what those instructions tell it to. When you run your program in _valgrind_, however, _valgrind_ explicitly tracks which variables are initialized and which are not. If your program uses the uninitialized value in certain ways, _valgrind_ will report an error to you.
+
+valgrind is useful for detecting many other problems with your program that you might not otherwise discover easily. We highly recommend running your program in valgrind whenever you are testing your program.
+
+<h3>Compiler Options</h3>
+
+Usually, you will want to name the resulting program something meaningful, rather than the default _a.out_. To change the output file name, use the -o option, and specify the output file name after it. For example, _gcc -o myProgram myProgram.c_ would compile _myProgram.c_ (as above), but instead of producing _a.out_, it would name the program _myProgram_.
+
+Another option you will commonly want to use is _--std=gnu99_. This option specifies that the compiler should use the C99 standard with GNU extensions. There are a actually a few different versions of C (referred to as “standards” because they reflect a standardization of features). gnu99 will match what we describe in this course, and is generally a reasonable standard to program in.
+
+Another useful pair of options are _-Wall_ and _-Werror_. The first of these requests that the compiler issue _warnings_ for a wide range of questionable behavior. The compiler checks your program for certain kinds of errors, if it detects errors, it reports them to you and requires you to fix them before proceeding. Warnings are like errors in that the compiler will report a problem that it has detected, however, unlike errors, the compiler will continue and produce a program even if it warned you about something. The _-Werror_ option tells the compiler to treat all warnings as errors—making it refuse to compile the program until the programmer fixes all the warnings.
+
+We strongly recommend compiling with at least the following warning options:
+
+```
+-Wall -Wsign-compare -Wwrite-strings -Wtype-limits -Werror
+```
+These options will help catch a lot of mistakes, and should not pose an undue burden on correctly written code.
+
+Recent versions of gcc also support an option _-fsanitize=address_ which will generate code that includes extra checking to help detect a variety of problems at runtime. Using this option is also strongly recommended during your development cycle. However, we will note that (at least with gcc 4.8.2 and valgrind 3.10.0) you cannot run a program built with this option in valgrind. The two tools detect different, but overlapping sets of problems, so use of both is a good idea—they just have to be used separately.
 
 
 
