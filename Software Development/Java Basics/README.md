@@ -1,6 +1,6 @@
 <h1>Crash Course in Java</h1>
 
-The Software Design and Architecture needs me to have a basic understanding of Java so we will be going through a Java Crash Course.
+The Software Design and Architecture needs me to have a basic understanding of Java so we will be going through a Java Crash Course. Notes are from [Java Tutorial for Beginners [2019] by Programming with Mosh](https://www.youtube.com/watch?v=eIrMbAQSU34).
 
 <h2>Anatomy of a Java Program</h2>
 

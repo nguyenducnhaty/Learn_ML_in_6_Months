@@ -393,3 +393,121 @@ MapReduce is a big data programming model that supports all the requirements of 
 
 
 <h2>Getting Started with Hadoop</h2>
+
+<h3>Hadoop: Why, Where and Who?</h3>
+
+The Hadoop ecosystem frameworks:
+- First provide scalability to store large volumes of data on commodity hardware. As the number of systems increases, so does the chance for crashes and hardware failures.
+- A second goal, supported by most frameworks in the Hadoop ecosystem, is the ability to gracefully recover from these problems.
+- A third goal for the Hadoop ecosystem is the ability to handle different data types for any given type of data.
+- A fourth goal of the Hadoop ecosystem is the ability to facilitate a shared environment. Since even modest-sized clusters can have many cores, it is important to allow multiple jobs to execute simultaneously.
+- Another goal of the Hadoop ecosystem is providing value for your enterprise. The ecosystem includes a wide range of open source projects backed by a large active community. These projects are free to use and easy to find support for.
+
+<h3>The Hadoop Ecosystem: Welcome to the zoo!</h3>
+
+There are over 100 open-source projects for big data and this number continues to grow. With so many frameworks and tools available, how do we learn what they do? We can organize them with a layer diagram to understand their capabilities. Sometimes we also used the term stack instead of a layer diagram.
+
+<img src="../1. Introduction to Big Data/images/layer_diagram.png">
+
+In a layer diagram, a component uses the functionality or capabilities of the components in the layer below it. Usually components at the same layer do not communicate. And a component never assumes a specific tool or component is above it.
+
+Let's look at one set of tools in the Hadoop ecosystem as a layer diagram.
+
+<img src="../1. Introduction to Big Data/images/hadoop_layer_diagram.png">
+
+This layer diagram is organized vertically based on the interface. Low level interfaces like storage and scheduling, on the bottom and high level languages and interactivity at the top. The Hadoop distributed file system, or HDFS, is the foundation for many big data frameworks, since it provides scalable and reliable storage. As the size of your data increases, you can add commodity hardware to HDFS to increase storage capacity so it enables scaling out of your resources.
+
+__Hadoop YARN__ provides flexible scheduling and resource management over the HDFS storage. YARN is used at Yahoo to schedule jobs across 40,000 servers.
+
+__MapReduce__ is a programming model that simplifies parallel computing. Instead of dealing with the complexities of synchronization and scheduling, you only need to give MapReduce two functions, map and reduce. MapReduce only assume a limited model to express data.
+
+__Hive__ and __Pig__ are two additional programming models on top of MapReduce to augment data modeling of MapReduce with relational algebra and data flow modeling respectively. Hive was created at Facebook to issue SQL-like queries using MapReduce on their data in HDFS. Pig was created at Yahoo to model data flow based programs using MapReduce.
+
+Thanks to YARN stability to manage resources, not just for MapReduce but other programming models as well. __Giraph__ was built for processing large-scale graphs efficiently. For example, Facebook uses Giraph to analyze the social graphs of its users.
+
+Similarly, __Storm, Spark, and Flink__ were built for real time and in memory processing of big data on top of the YARN resource scheduler and HDFS. In-memory processing is a powerful way of running big data applications even faster, achieving 100x's better performance for some tasks.
+
+Sometimes, your data or processing tasks are not easily or efficiently represented using the file and directory model of storage. Examples of this include collections of key-values or large sparse tables. NoSQL projects such as __Cassandra__, __MongoDB__, and __HBase__ handle these cases. Cassandra was created at Facebook, but Facebook also used HBase for its messaging platform.
+
+Finally, running all of these tools requires a centralized management system for synchronization, configuration and to ensure high availability. __Zookeeper__ performs these duties. It was created by Yahoo to wrangle services named after animals.
+
+<h3>The Hadoop Distributed File System: A Storage System for Big Data</h3>
+
+The Hadoop Distributed File System is the storage system for big data. As a storage layer, the Hadoop distributed file system, or the way we call it HDFS. Serves as the foundation for most tools in the Hadoop ecosystem. It provides two capabilities that are essential for managing big data.
+- Scalability to large data sets.
+- And reliability to cope with hardware failures.
+
+HDFS achieves scalability by partitioning or splitting large files across multiple computers. This allows parallel access to very large files since the computations run in parallel on each node where the data is stored. Typical file size is gigabytes to terabytes. The default chunk size, the size of each piece of a file is 64 megabytes. But you can configure this to any size.
+
+<img src="../1. Introduction to Big Data/images/hdfs_splits.png">
+
+By spreading the file across many nodes, the chances are increased that a node storing one of the blocks will fail. HDFS is designed for fault tolerance in such case. HDFS replicates, or makes a copy of, file blocks on different nodes to prevent data loss. By default, HDFS maintains three copies of every block. But you can change it globally for every file, or on a per file basis.
+
+HDFS is also designed to handle a variety of data types aligned with big data variety. To read a file in HDFS you must specify the input file format. Similarly to write the file you must provide the output file format. HDFS provides a set of formats for common data types. But this is extensible and you can provide custom formats for your data types.
+
+HDFS is comprised of two components, _NameNode_, and _DataNode_. These operate using a master slave relationship. Where the NameNode issues commands to DataNodes across the cluster, the NameNode is responsible for metadata. And DataNodes provide block storage. There is usually one NameNode per cluster, a DataNode however, runs on each node in the cluster.
+
+<img src="../1. Introduction to Big Data/images/hdfs_nodes.png">
+
+In some sense the NameNode is the administrator or the coordinator of the HDFS cluster. When the file is created, the NameNode records the name, location in the directory hierarchy and other metadata. The NameNode also decides which data nodes to store the contents of the file and remembers this mapping. The DataNode runs on each node in the cluster and is responsible for storing the file blocks. The data node listens to commands from the name node for block creation, deletion, and replication. Replication provides two key capabilities. Fault tolerance and data locality. Replication also means that the same block will be stored on different nodes on the system which are in different geographical locations.
+
+<h3>YARN: A Resource Manager for Hadoop</h3>
+
+YARN is a resource manage layer that sits just above the storage layer HDFS. YARN interacts with applications and schedules resources for their use. YARN enables running multiple applications over HDFC increases resource efficiency and let's you go beyond the map reduce or even beyond the data parallel programming model.
+
+Adding YARN in between HDFS and the applications enabled new systems to be built, focusing on different types of big data applications such as Giraph for graph data analysis, Storm for streaming data analysis, and Spark for in-memory analysis. YARN does so by providing a standard framework that supports customized application development in the HADOOP ecosystem.
+
+Let's take a peek into the architecture of YARN without getting too technical.
+
+<img src="../1. Introduction to Big Data/images/yarn.png">
+
+- The _resource manager_ controls all the resources, and decides who gets what.
+- _Node manager_ operates at machine level and is in charge of a single machine. Together the resource manager and the node manager form the data computation framework.
+- Each application gets an _application master_. It negotiates resource from the Resource Manager and it talks to Node Manager to get its tasks completed.
+- The _container_ is an abstract Notions that signifies a resource that is a collection of CPU memory disk network and other resources within the compute node to simplify and be less precise you can think of a container and the Machine.
+
+<h3>MapReduce: Simple Programming for Big Results</h3>
+
+MapReduce is a programming model for the Hadoop ecosystem. It relies on YARN to schedule and execute parallel processing over the distributed file blocks in HDFS. There are several tools that use the MapReduce model to provide a higher level interface to other programming models. Hive has a SQL-like interface that adds capabilities that help with relational data modeling. And Pig is a high level data flow language that adds capabilities that help with process map modeling.
+
+Traditional parallel programming requires expertise on a number of computing and systems concepts. For example, synchronization mechanisms like locks, semaphores, and monitors are essential. And incorrectly using them can either crash your program, or severely impact performance. And any problem related to these parallel processes, needs to be handled by your parallel program.
+
+The MapReduce programming model greatly simplifies running code in parallel since you don't have to deal with any of these issues. Instead, you only need to create and map and reduce tasks, and you don't have to worry about multiple threads, synchronization, or concurrency issues.
+
+Map and reduce are two concepts based on functional programming where the output the function is based solely on the input. Just like in a mathematical function, f (x) = y, y depends on x. You provide a function, or operation for a map, and reduce. And the runtime executes it over the data. For __Map__, the _operation is applied on each data element_. And in __Reduce__, the _operation summarizes elements in some manner_.
+
+Map-Reduce consists of three main steps: Mapping, Shuffling and Reducing. The process of transferring data from the mappers to reducers is known as shuffling i.e. the process by which the system performs the sort and transfers the map output to the reducer as input.
+
+<img src="../1. Introduction to Big Data/images/MapReduce_Example.jpg">
+
+While MapReduce excels at independent batch tasks, there are certain kinds of tasks that you would not want to use MapReduce for. For example,
+- If your data is frequently changing, MapReduce is slow since it reads the entire input data set each time.
+- The MapReduce model requires that maps and reduces execute independently of each other. This greatly simplifies your job as a designer, since you do not have to deal with synchronization issues. However, it means that computations that do have dependencies, cannot be expressed with MapReduce.
+- Finally, MapReduce does not return any results until the entire process is finished. It must read the entire input data set. This makes it unsuitable for interactive applications where the results must be presented to the user very quickly, expecting a return from the user.
+
+<h3>When to Reconsider Hadoop?</h3>
+
+- If you see a large scale growth in amount of data you will tackle, probably it makes sense to use Hadoop.
+- When you want quick access to your old data which would otherwise go on tape drives for archival storage, Hadoop might provide a good alternative.
+- Other Hadoop friendly features include scenarios when you want to use multiple applications over the same data store. High volume or high variety are also great indicators for Hadoop as a platform choice.
+- Hadoop is good for data parallelism. But if your problem has task-level parallelism, you must do further analysis as to which tools you plan to deploy from the Hadoop ecosystem.
+- Not all algorithms are scalable in Hadoop, or reducible to one of the programming models supported by YARN. Hence, if you are looking to deploy highly coupled data processing algorithms proceed with caution.
+- Hadoop may be a good platform where your diverse data sets can land and get processed into a form digestible with your database. However it may not be the best data store solution for your business case.
+
+<h3>Cloud Computing: An Important Big Data Enabler</h3>
+
+The main idea behind cloud computing is to transform computing infrastructure into a commodity. So application developers can focus on solving application-specific challenges instead of trying to build infrastructure to run on.
+
+We can simply define a cloud computing service, as a rental service for computing. You rent what you want, and return upon usage.
+
+<h3>Cloud Service Models: An Exploration of Choices</h3>
+
+Any cloud computing discussion will involve terms like application as a service, platform as a service, and infrastructure as a service. All of these refer to business models around using the cloud with different levels of engagement and servicing similar to rental agreements.
+
+- __IaaS, infrastructure as a service__, can be defined as a bare minimum rental service. You as the user of the service install and maintain an operating system, and other applications in the infrastructure as a service model. The Amazon EC2 cloud is a good example for this model.
+- __PaaS, platform as a service__, is the model where a user is provided with an entire computing platform. This could include the operating system and programming languages that you need. It could extend to include the database of your choice, or even a web server. You can develop, and run your own application software, on top of these layers. The Google App engine and Microsoft Azure are two examples of this model.
+- __SaaS, the software as a service__ model, is the model in which the cloud service provider takes the responsibilities for the hardware and software environment such as the operating system and the application software. This means you can work on using the application to solve your problem. Dropbox is a very popular software as a service platform.
+
+<h3>Value From Hadoop and Pre-built Hadoop Images</h3>
+
+Assembling your own software stack from scratch can be messy and a lot of work for beginners. The task of setting up the whole stack could consume a lot of project time and man power, reducing time to deployment. Getting pre-built images is similar to buying pre-assembled furniture. You can obtain a ready to go software stack which contains a pre-installed operating system, required libraries and application software. Packaging of these pre-built software images is enabled by virtual machines using virtualization software.
