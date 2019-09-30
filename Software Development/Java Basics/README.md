@@ -204,11 +204,107 @@ So in this example, _point1_ and _point2_ are referencing the exact same _Point 
 
 <h3>Strings</h3>
 
+We can define a string without using a new operator in Java:
 
+```java
+public class Main {
+    public static void main(String[] args) {
+        // Strings are reference type in Java, so there is a short way to create them
+        String message = "Hello World!";
+        System.out.println(message);
 
+        // calling a method inside the String class examples:
+        System.out.println(message.endswith("!")); // true
+        System.out.println(message.indexOf("H")); // 0
+        System.out.println(message.replace(target:"!", replacement:"*")); // Hello World*
+
+        // In Java Strings are immutable so any methods that modify the string will return a new string object, for example:
+        System.out.println(message); // Hello World!
+        // The above returns "Hello World!" without the replaced "*" because we can't mutate the string
+
+        // Lets say we want to add tabs, new lines or double quotes for our string:
+        String newMessage = "Hello \"Mukesh\"";
+        System.out.println(newMessage); // Hello "Mukesh"
+        // We can use the backslash to add new lines (\n), tabs (\t) and the backlash character (\\)
+    }
+}
+```
+
+<h3>Arrays</h3>
+
+In Java, we use arrays to store a list of items like a list of numbers or a list of people.
+
+```java
+import java.util.Arrays;
+
+public class Main {
+    public static void main(String[] args) {
+        int [] numbers = new int[5]; // 5 specifies the size or length of the array
+
+        // Access individual numbers in an array using index:
+        numbers[0] = 1; // We set the first element of the list to one
+        numbers[1] = 2; // Second element to 2
+        // Let's print our numbers list:
+        System.out.println(numbers); // [I@38af3868]
+        // This returns a weird string if we try to print the elements in our array.
+        // This is because by default when we print an array, Java returns the string which is calculated based on the address of this object in memory
+        // So how do we see the actual items in the array: by using the javas' array class
+        System.out.println(Arrays.toString(numbers)); // This will return the string representation of our array: [1, 2, 0, 0, 0], the 0s are because we haven't yet initialized those.
+
+        // The syntax we used to create an array is a older way so if we already know the elements that will be in the array we can use the following syntax:
+        int [] newNumbers = {2, 3, 4, 1, 5};
+        System.out.println(newNumbers.length); // 5
+        // Java arrays have a fixed length so if you want to be able to add or remove additional items from an array you should use one of the collection classes.
+
+        // Creating Multi Dimensional arrays:
+        int [][] multiNumbers = new int[2][3]; // 2 rows and 3 columns
+        // To access individual items in the array: from 1st row 1st column:
+        multiNumbers[0][0] = 1;
+        System.out.println(multiNumbers); // [[I@38af3868], [I@38af7789]]
+        // Since we are dealing with multi dimensional arrays the toString method will not work, so we will be using: deepToString
+        System.out.println(Arrays.deepToString(multiNumbers)); // [[1, 0, 0], [0, 0, 0]]
+
+        // Let's see how we can use the {} to create the multi dimensional array:
+        int [][] newMultiNumbers = { {1, 2, 3}, {4, 5, 6} };
+        System.out.println(Arrays.deepToString(newMultiNumbers)); // [[1, 2, 3], [4, 5, 6]]
+    }
+}
+```
+
+<h3>Constants</h3>
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        final float PI = 3.14F; // 'final' will tell Java to treat PI as a constant so we can't change the value later on
+    }
+}
+```
+
+<h3>Arithmetic Expressions</h3>
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        int result = 10 + 3;
+        System.out.println(result); // 13
+
+        int divResult = 10 / 3;
+        System.out.println(divResult); // Returns 3 because when you divide integers, you can't get a floating point value so we need to cast it into float first
+        double floatResult = (double)10 / (double)3;
+        System.out.println(floatResult); // 3.3333333333
+
+        // Increment and decrement operators:
+        int x = 1;
+        ++x; // you can also apply as x++ but however we will get different results
+
+        // For example:
+        int y = x++;
+        System.out.println(x); // 3
+        System.out.println(y); // 2
+        // This happens because the value of x is copied into y first and then only x gets incremented
+    }
+}
+```
 
 <h3>Casting</h3>
-
-<h3>Numbers, Strings and Arrays</h3>
-
-<h3>Read Input</h3>
