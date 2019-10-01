@@ -484,9 +484,141 @@ Recent versions of gcc also support an option _-fsanitize=address_ which will ge
 
 <h1>Week 3: Testing and debugging</h1>
 
+__Testing__ is the process of finding bugs in your code. Your goal is to discover inputs to the program for which it does not behave correctly. Once a program has failed one or more test cases, you want to debug it. __Debugging__ is the process of fixing bugs in a program.
+
+<h2>Testing</h2>
+
+<h3>Black Box Testing</h3>
+
+The testing methodology that most people think of first is black box testing. In black box testing, the tester considers only the expected behavior of the function—not any implementation details—to devise test cases. The lack of access to the implementation details is where this testing methodology gets its name—the function’s implementation is treated as a “black box” which the tester cannot look inside.
+
+Black box testing does not mean that the tester thinks of a few cases in an ad hoc manner and calls it a day. Instead, the tester—whose goal is to craft test cases that are likely to expose errors—should contemplate what cases are likely to be error prone from the way the function behaves. For example, suppose you needed to test a function to sum a list of integers. Without seeing the code, what test cases might you come up with?
+
+We might start with a simple test case to test the basic functionality of the code—for example, seeing that the function gives an answer of 15 when given an input of {1,2,3,4,5}. However, we should also devise more difficult test cases, particularly those which test corner cases—inputs that require specific behavior unlike other cases. In this example, we might test with the empty list (that is, the list with no numbers in it), and see that we get 0 as our answer. We might make sure to test with a list that has negative numbers in it, or one with many very large numbers in it. You should contemplate what sorts of errors these test cases might expose.
+
+Observe that we were able to contemplate good test cases for our hypothetical problem without going through Steps 1–5. You can actually come up with a set of black box tests for a problem before you start on it. Some programmers advocate a test-first development approach. One advantage is that if you have a comprehensive test-suite written before you start, you are unlikely to skimp on testing after you implement your code. Another advantage is that by thinking about your corner cases in advance, you are less likely to make mistakes in developing and implementing your algorithm.
+
+<h3>Practical Tips for Designing Test Cases</h3>
+
+- Test exactly at the boundary of validity. If a program requires between 7 and 18 things, you should have test cases with 6, 7,8, 17, 18, and 19 things. You need to make sure that 6 and 19 are rejected while 7, 8, 17, and 18 are accepted. Testing exactly at the boundaries is important because of the common “off by one” mistake.
+
+- Think carefully about whether or not there are any special cases where one particular input value (or set of values has to be treated unusually). For example, in poker an Ace is usually ranked the highest, however, it can have the lowest ranking in an “Ace Low Straight” (5 4 3 2 A). If you are testing code related to poker hands, you would want to explicitly test this case, since it requires treating an input value differently from normal
+
+- Think carefully about the requirements, and consider whether something could be misinterpreted, easily mis-implemented, or have variations which could seem correct. Suppose your algorithm works with sequences of decreasing numbers. You should test with a sequence like 7 6 6 5 4, which has two equal numbers in it. Checking equal numbers is a good idea here, since people might have misunderstood whether the sequence is strictly decreasing (equal numbers don’t count as continuing to decrease) or non-increasing (equal numbers do count).
+
+__Consider all major categories of inputs, and be sure you cover them.__
+
+- For numerical inputs, these would generally be negative, zero, and positive. One is also usually a good number to be sure you cover
+
+- For sequences of data, your tests should cover an empty sequence, a single element sequence, and a sequence with many elements.
+
+- For characters: lowercase letters, uppercase letters, digits, punctuation, spaces, non-printable characters
+
+- For many algorithms, there are problem-specific categories that you should consider. For example, if you are testing a function related to prime numbers (e.g., isPrime), then you should consider prime and composite (not prime) numbers as input categories to cover.
+
+- When you combine two ways to categorize data, cover all the combinations. For example, if you have a sequence of numbers, you should test with an empty list, a one element sequence with 0, a one element sequence with a negative number, a one element sequence with a positive number, and have each of negative, zero, and positive numbers appearing in your many-element sequences.
+
+- An important corollary of the previous rules is that if your algorithm gives a set of answers where you can list all possible ones (true/false, values from an enum, a string from a particular set, etc), then your test cases should ensure that you get every answer at least once. Furthermore, if there are other conditions that you think are important, you should be sure that you get all possible answers for each of these conditions. For example, if you are getting a yes/no answer, for a numeric input, you should test with a negative number that gives yes, a negative number that gives no, a positive number that gives yes, a positive number that gives no, and zero [zero being only one input, will have one answer].
+
+- All of this advice is a great starting point, but the most important thing for testing is to think carefully---imagine all the things that could go wrong, think carefully about how to test them, and make sure your test cases are actually testing what you think they are testing.
+
+<h3>White Box Testing</h3>
+
+Another testing methodology is _white box testing_. Unlike black box testing, white box testing involves examining the code to devise test cases. One consideration in white box tests is _test coverage_—a description of how well your test cases cover the different behaviors of your code.
+
+Note that while white box and black box testing are different, they are not mutually exclusive, but rather complimentary. One might start by forming a set of black box test cases, implement the algorithm, then create more test cases to reach a desired level of test coverage.
+
+We will discuss three levels of test coverage:
+- __Statement coverage:__ Statement coverage means that every statement in the function is executed. Statement coverage is a minimal starting point, but if we want to test our code well, we likely want a stronger coverage metric.
+
+- __Decision coverage:__ A stronger level of coverage in which all possible outcomes of decisions are exercised. For boolean tests, this means we construct a test case where the expression evaluates to true, and another where it evaluates to false. If we have a switch/case statement, we must construct at least one test case per choice in the case statement, plus one for the default case, even if it is implicit.
+
+    To understand decision coverage more fully, it helps to visualize it. In order to visualize decision coverage, we need to understand the concept of a _control flow graph_ (often abbreviated “CFG”). A control flow graph is a directed graph (in the mathematical sense) whose nodes are basic blocks (_boxes_) and whose edges represent the possible ways the control flow arrow can move (_arrows_). A _basic block_ is a contiguous sequence of statements which must be executed in an “all-or-nothing” manner; the execution arrow cannot jump into nor out of the middle of a basic block. The CFG shows how the control flow arrow can move from one basic block to the next.
+
+    <img src="../2. Writing, Running, and Fixing Code in C/images/cfg.png">
+
+    We draw the CFG for one function at a time. We could also draw how the execution arrow moves between functions; that is called a _call graph_.
+
+    Decision coverage corresponds to having a suite of test cases which covers every edge in the graph.
 
 
+- __Path coverage:__ An even stronger type of test coverage is path coverage. To achieve path coverage, our test cases must span all possible valid paths through the control flow graph (following the direction of the arrows). The figure below shows the four paths through our example control flow graph, and color codes them based on which of our test cases cover them.
 
+    <img src="../2. Writing, Running, and Fixing Code in C/images/cfg_example.png">
+
+<h3>Generating Test Cases</h3>
+
+One difficulty with testing arises from the fact that you want to test the cases you did not think of—but if you do not think of these cases, then how do you know to write tests for them? One approach to such a problem is to generate the test cases according to some algorithm. If the function we are testing takes a single integer as input, we might iterate over some large range (say -1,000,000 to 1,000,000) and use each integer in that range as a test case.
+
+Another possibility is to generate the test cases (pseudo-)randomly (called, unsurprisingly, random testing). Note that pseudo-random means that the numbers look random (no “obvious” pattern) to a human, but are generated by an algorithm which will produce the same answer each time if they start from the same initial state (called a “seed”). Random testing can be appealing as it can hit a wide range of cases quickly that you might not think of at all. For example, if your algorithm has 6 parameters, and you decide you want to test 100,000 possibilities for each parameter in all combinations, you will need 100,000^6 = 10^30 test cases—even if you can do 10 trillion test cases per second (which would be beyond “fast” by modern standards), they will take about 3 million years to run! With random testing, you could run a few thousands or millions of cases, and rely on the Law of Large Numbers to make it likely that you encounter a lot of varieties of relationships between the parameters.
+
+One tricky part about generating test cases algorithmically is that we need some way to verify the answer—and the function we are trying to test is what computes that answer. We obviously cannot trust our function to check itself, leaving us a seeming “chicken and egg” problem. In a very few cases, it may be appealing to write two versions of the function which can be used to check each other. This approach is appropriate when you are writing a complex implementation in order to achieve high performance, but you could also write a simpler (but slower) implementation whose correctness you would more readily be sure of. Here, it makes sense to implement both, and test the complex/optimized algorithm against the simpler/slower algorithm on many test cases.
+
+<h3>Asserts</h3>
+
+In any form of testing, it can be useful to not only check the end result, but also that the _invariants_ of the system are maintained in the middle of its execution. An invariant is a property that is (or should be) always true at a given point in the program. When you know an invariant that should be true at a given point in the code, you can write an _assert statement_, which checks that it is true. _assert(expr);_ checks that _expr_ is true. If it is true, then nothing happens, and execution continues as normal. However, if expr is false, then it prints a message stating that an assertion failed, and aborts the program—terminating it immediately wherever it is.
+
+Note that _assert statements_ are an example of the principle that if our program has an error we want it to _fail fast_—that is, we would rather the program crash as soon after the error occurs as possible. The longer the program runs after an error occurs, the more likely it is to give incorrect answers and the more difficult it is to debug. Ideally, when our program has an error, we will have an assert fail immediately after it, pointing out exactly what the problem is and where it lies.
+
+Many novice and intermediate programmers worry that _asserts_ will slow their program down. In general, the slowdown is negligible, especially on fast modern computers. In many situations, 1–2% performance just does not matter—do you really care if you get your answer in 0.1 seconds versus 0.11 seconds? However, there are performance critical situations where ever bit of speed matters. For these situations, you can pass the _-DNDEBUG_ option to the compiler to turn off the asserts in your optimized code. For all other situations, keeping them active is generally advisable.
+
+
+<h2>Debugging</h2>
+
+<h3>Step 7: Debugging</h3>
+
+Once you have found a problem in your code, you need to fix it—this process is called _debugging_. Many novice programmers (and even some moderately experienced programmers) debug in an ad hoc fashion—trying to change something in their code, and hoping that it will fix their problem. Such an approach is seldom effective, and often leads to much frustration.
+
+Returning to our doctor analogy from earlier, suppose you were sick and went to the doctor. Does your doctor say “Oh I don’t know what is wrong, but try this medicine. If it doesn’t fix things, come back tomorrow and we’ll try another medicine…” If your doctor does treat you this way, it might be time to find a new doctor! Trying random “fixes” in the hopes that you will get lucky on one is not a good way to diagnose and fix problems. Even worse, if your symptoms change during this process, you have no idea if one of the random “fixes” you tried made things worse, or if your untreated condition is progressing. Similar analogies can be made to any profession that diagnoses and fixes problems (such as mechanics).
+
+Hopefully, your doctor (and mechanic) follow a more scientific approach to diagnosing and fixing problems. As do they, so should you in diagnosing and fixing your program. In fact, debugging should be an application of the _scientific method_, which you may have learned in a science class.
+
+<h3>The Scientific Method</h3>
+
+<img src="../2. Writing, Running, and Fixing Code in C/images/debugging.png">
+
+__Observe a Phenomenon__
+
+The figure above shows a flow-chart of the scientific method. In programming, our observation of phenomena relates to the behavior of our programs on certain inputs (“My program gives the wrong answer when I give it an input of 42!”). These observations typically arise from our test cases, but may happen under other circumstances (for example, the end user reports a problem that we did not discover in testing).
+
+__Ask a Question__
+
+Once you have observed a phenomena, the next step in the scientific method is to ask a question. Asking a good question here is crucial to the success of the rest of our scientific endeavor. While a broad question such as “What is wrong with my program and how do I fix it?” may seem appealing, it may be quite difficult to answer. Instead, we should aim for more focused questions: “On which line of code does my program crash?” or “Why does my program call myFunction with x=3 and y=-42?”.
+
+Answering one question often leads to an observation that leads to another question—restarting the scientific process all over again. Discovering what is wrong in this iterative fashion is perfectly fine, and in fact a great way to proceed.
+
+__Gather Information, Apply Expert Knowledge__
+
+Many people will say that forming a hypothesis is the next step of the scientific method. If you can form a hypothesis immediately, that is great. However, forming a good hypothesis is difficult, and forming one right away is often not possible.
+
+The next step of the scientific method is actually to gather information and combine it with your expert knowledge. In the case of debugging, you need to gather information about what is happening in your program, and combine this with your own expert knowledge on programming. Your expert knowledge comes in two parts here. One is your knowledge of programming in general and your domain knowledge of the particular program you are writing—the expected behaviors of each part of it.
+
+Your expert knowledge will grow with practice in programming, and the domain for which you are writing programs. However, gathering information effectively is a skill of its own. The information gathering aspect of debugging is often conflated with the entirety of debugging—if you ask someone how they debug, they will often explain to you what techniques they use to gather information.
+
+The simplest way to gather information is to insert print statements (in C, calls to _printf_) to display the values of various variables at various points in the program. The resulting output can give you information about the control flow of the program (which statements were executed, and in what order—as shown by what order your print statements print their output), and, of course the values of the variables that you print.
+
+Gathering information by printing has the advantages that it is simple and requires no other knowledge or experience. However, it has several disadvantages as well. One is that changing what you print out requires recompiling and re-running your program. While this disadvantage may seem small, if your bug takes 15 minutes to manifest, restarting the program for each new piece of information you discover that you want can be quite time consuming. Another disadvantage is that the output may be overwhelming (i.e., thousands of lines of output to sift through) if your program executes for even a modest time before experiencing the problem. A third disadvantage is that it cannot replicate or replace many features that debuggers offer.
+
+Another approach to information gathering is to use a _debugger_—a tool specifically designed to aid programmers in the debugging process. The debugger is in fact primarily aimed at this piece of the debugging process—gathering information.
+
+__Form a Hypothesis__
+
+Forming a good hypothesis is the key to proceeding effectively. The first characteristic of a good hypothesis is that it is testable. For a hypothesis to be testable, it must make specific predictions about the behavior of the program: when I give the program inputs that meet (_condition_), I will observe (_behavior_). For such a hypothesis, you can execute test cases to either refute this hypothesis (e.g., if the program’s behavior does not match the predictions that the hypothesis makes) or to become confident enough in our hypothesis that we accept it.
+
+The second characteristic of a good hypothesis for debugging is that it is actionable—if we convince ourselves that it is true, it provides us with an indication of either how to fix the error in our code, or what the next steps towards it are. In the case of our contrived hypothesis, confirmation would likely suggest a special case of the algorithm which we did not consider. The fact that our hypothesis is specific (with regards to what types of inputs trigger the error) identifies the corner cases for us, guiding us to the path to fixing the problem.
+
+<h3>Accept or Reject Your Hypothesis?</h3>
+
+As we test, we will either convince ourselves that our hypothesis is correct, and accept it, or we will find that it is not true and reject it. In the former case, we now know what is wrong with our program and are ready to correct it. Typically, identifying the precise problem and cause are 90% of the battle—thus if our hypothesis was a good one, we are most of the way there. Of course, sometimes our problem is severe and requires significant modifications to our program. In the worst cases, a significant redesign and implementation of large portions of the code from scratch.
+
+The decision to throw away large portions of code and redo them from scratch is not one to be taken lightly, nor an easy one to make. In making such a decision, the programmer should be wary of The Poker Player’s Fallacy — the temptation to make a decision based on prior investments rather than future outcomes. This term comes from a fallacy that many novice poker players succumb to: betting based on how much they have already put into the pot, rather than how likely they are to win the hand (“I’m already in for `$200`, so I may as well bet another `$10` on the off chance I win.”). If you are not likely to win the pot, betting another `$10` is just throwing that money away. The smart poker player will only bet on her current hand if she thinks she can win (whether by a better hand, or a bluff).
+
+Similarly, when evaluating whether to modify the current code or throw it away and start fresh, you should not consider how much time you have already put into it, but rather how much time it will take to fix the current code versus redesigning it from scratch. Note that this is not intended to suggest you should throw away your code and redesign it from scratch every time there is an error. Instead, you should be contemplating the time required for both options, and making a rational tradeoff.
+
+If instead of accepting your hypothesis, you find that you must reject it, do not despair. In investigating this hypothesis, you have gained valuable information which will inform your next hypothesis. One thing to be wary of when rejecting a hypothesis: there may be multiple errors in your code. Do not be mislead by symptoms of other errors masking your current problem.
+
+
+<h2>Debugging Tools</h2>
 
 
 
