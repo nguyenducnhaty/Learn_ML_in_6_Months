@@ -137,10 +137,26 @@ print(new) # {1, 4, 'number'}
 
 
 
+<h2>Conditions and Branching</h2>
+
+Comparison operations compares some value or operand, then based on some condition, they produce a Boolean.
 
 
+<h2>Loops</h2>
+
+While loops are similar to for loops but instead of executing a statement a set number of times a while loop will only run if a condition is met.
 
 
+<h2>Functions</h2>
+
+Functions take some input, then produce some output or change. The function, it's just a piece of code you can reuse.
+
+
+<h2>Objects and Classes</h2>
+
+<img src="../4. Python for Data Science and AI/images/built_in.png">
+
+<img src="../4. Python for Data Science and AI/images/object_type.png">
 
 
 

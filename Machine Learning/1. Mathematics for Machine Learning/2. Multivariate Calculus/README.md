@@ -9,6 +9,7 @@ Essentially, a function is a relationship between some inputs and an output. So,
 
 <h2>Gradients and derivatives</h2>
 
+
 <h3>Rise Over Run</h3>
 
 Calculus is just a set of tools for describing the relationship between a function and the change in its variables.
@@ -32,6 +33,7 @@ Calculus is just a set of tools for describing the relationship between a functi
 
 <h2>Time saving rules</h2>
 
+
 <h3>Product rule</h3>
 
 <img src="../2. Multivariate Calculus/images/product_rule.png">
@@ -48,8 +50,37 @@ Calculus is just a set of tools for describing the relationship between a functi
 
 
 
+<h2>Moving to multivariate</h2>
 
 
+<h3>Variables, constants & context</h3>
+
+
+
+<h3>Differentiate with respect to anything</h3>
+
+<img src="../2. Multivariate Calculus/images/multivariate_partial_derivative.png">
+
+
+<h2>Jacobians - vectors of derivatives</h2>
+
+
+<h3>The Jacobian</h3>
+
+In vector calculus, the __Jacobian matrix__ of a vector-valued function in several variables is the matrix of all its first-order partial derivatives. When this matrix is square, that is, when the function takes the same number of variables as input as the number of vector components of its output, both the matrix and its determinant are referred to as the __Jacobian__.
+
+<img src="../2. Multivariate Calculus/images/jacobian.png">
+
+<h3>Jacobian applied</h3>
+
+<img src="../2. Multivariate Calculus/images/jacobian_coordinates.png">
+
+
+<h2>The Hessian</h2>
+
+In mathematics, the __Hessian matrix__ or __Hessian__ is a square matrix of second-order partial derivatives of a scalar-valued function, or scalar field. It describes the local curvature of a function of many variables.
+
+<img src="../2. Multivariate Calculus/images/hessian.png">
 
 
 

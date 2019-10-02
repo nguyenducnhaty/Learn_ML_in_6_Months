@@ -621,3 +621,113 @@ __Examples of Gate in different models:__
 
 
 <h1>Week 4: Software Development Models: Agile and Lean</h1>
+
+
+
+<h2>Agile Fundamentals</h2>
+
+
+<h3>Why Agile?</h3>
+
+If you look at the waterfall method, it logically makes sense. You define what you want to build, and then you design how you're going to build it, then you build it, then you validate it, and then you deploy, and users use it. So what were some of the challenges that software industry was facing that let to the emergence?
+
+- The first challenge was in the verification phase where you put all the components together and you try to find out whether the system is working as expected. They were seeing a lot of unexpected issues during that phase. This was because software systems are very complex, and to predict how different components are going to interact with each other and how they're going to behave is very difficult.  And since these defects were found very late in the process, it was very expensive to fix.
+
+- The second challenge is that after the software is developed and deployed, the users and clients were unhappy, this was not what they were expecting, or this is not what they need. This was because predicting requirements, or predicting user needs, is very difficult.
+
+- The third challenge could be the market shift. So when we were writing the requirements, the needs were correctly identified, that this is what the user need. But by the time, by the long journey of software development, after we had done development, the market has shifted and the user doesn't need this anymore. And so the problem is not that we are discovering these problems, but the problem is we are discovering these problems very late, which makes them really difficult to fix, or very expensive to fix.
+
+Due to these challenges, several teams and companies were trying our different methods and to have a clear definition, 17 individuals came up with the manifesto for agile software development. It consists of four values and 12 principles. They didn't define a new model or a process, they defined a mindset, an agile mindset, that help teams build better software.
+
+<h3>Agile Manifesto and Principles</h3>
+
+__The four values of the Agile Manifesto:__
+
+<img src="../1. Software Development Processes and Methodologies/images/agile_values.png">
+
+There is value in the items on the right, but we value the items on the left more.
+
+__The Twelve Principles of Agile Manifesto:__
+
+<img src="../1. Software Development Processes and Methodologies/images/agile_principles_a.png">
+
+<img src="../1. Software Development Processes and Methodologies/images/agile_principles_b.png">
+
+<img src="../1. Software Development Processes and Methodologies/images/agile_solving_waterfall.png">
+
+<img src="../1. Software Development Processes and Methodologies/images/agile_challenges.png">
+
+
+<h2>Agile Frameworks</h2>
+
+
+Agile is a mindset, so the question is how do you actually apply these mindsets on a software development process? Well, the good news is that there are lots of frameworks that are available that you can use to apply these Agile mindsets for your team or for your project. But there is no silver bullet. So you have to customize this framework to meet the needs of your team your project or your organization. And the key to customization is to make sure that you stay true to the principles and the value of Agile and not get bogged down by the rituals or practices of a specific framework.
+
+<img src="../1. Software Development Processes and Methodologies/images/agile_frameworks.png">
+
+- __Scrum__: is by far the most popular of all the frameworks. It is based on a one to four-week cycle where you take part of your project and you define, develop, and you test your software, so your product is developed incrementally.
+
+- __Kanban__: which is based on a continuous flow model where you basically try to optimize your existing software development process.
+
+- __Scrumban__: is a combination of Scrum and Kanban where you use Scrum as your primary framework and then you use Kanban to optimize your flow within your sprint.
+
+- __XP__: is similar to Scrum so it has most of the practices of Scrum but it also defines some engineering practices which are very crucial for an Agile team. Then there is also the hybrid of a Scrum and XP.
+
+- __Lean Startup__: helps you if you have lot of unpredictable market or industry and you want to really prove your solution before you implement it.
+
+And there are many more.
+
+<h3>Scrum</h3>
+
+<img src="../1. Software Development Processes and Methodologies/images/scrum_framework.png">
+
+There are three roles that are defined in Scrum. First one is _product owner_ who defines what needs to be done and in what order. Then there's the _Scrum master_ that helps the team stay true to the Scrum values and principles. You will also notice that Scrum master helps facilitate most of the meetings in the team. If there is any road blocks, then he'll be the one who will drive the resolution of some of these road blocks. And finally you have _the team_ that is self organizing and they do most of the building of the software.
+
+Product owner is going to talk to the executives, the team, the stakeholders, clients, users and will try to define what exactly needs to be built. He will create something called a product backlog which is basically a list of user story which are prioritized and defines what needs to be done. Now the product backlog is very different than a typical requirements document. It's basically at very high level and it can change over time.
+
+Once the team is ready to sprint, they get together for a meeting called _Sprint Planning Meeting_, where the whole team gets together and they pick the top stories that they can work on in the existing sprint. The product owner reviews those stories with the team and helps answer any questions or clarifies anything that is not clear. Then the team gets together again and do a tasking out of the stories, which means, like what exactly we need to do to build the software.
+
+This starts their execution and that starts the sprint where everybody is working to implement the software. And during that sprint, the whole team gets together for a daily stand-up in which everybody talks about what they did yesterday, what are they going to do today and if there are any road blocks. At the end of the sprint, you end up having your finished product.
+
+There are two other meetings that happen at the end of the sprint. The first one is called a _Sprint Review_, where the whole team gets together With the stakeholders, with the client and the demonstrating the work that they have done and get the feedback. So, in that meeting, the stakeholders may say, well I have additional idea, I think we should do that also. Or, they may say that, let's tweak some of this functionality.
+
+The second meeting that happens at the end of the sprint is called a _Sprint Retrospective_, where they talk about process and not about the product. So they talk about like how can we do better? So in this case they talk about what went well in the last sprint, what didn't go well in the last sprint and how we can do better.
+
+To keep track of the sprint, like are we going to achieve our goal for the sprint, the team uses something called a burnddown or a burndup chart, which shows the amount of work left or the days of the sprint.
+
+<img src="../1. Software Development Processes and Methodologies/images/agile_framework_with_scrum.png">
+
+<h3>Kanban</h3>
+
+Kanban is a practice that was borrowed from Toyotas' production system which basically, helps team optimize their software development process.
+
+<img src="../1. Software Development Processes and Methodologies/images/kanban.png">
+
+In Scrum, we work in one to four weeks iterations. So In the first iteration, let's say one to four weeks, we will take part of the product, we'll define it, design it, build it, and test it and then there will be some product that will come out of it. And then we will just continue that cycle until we are done and the product changes over time. Now, Kanban doesn't prescribe any of these fixed iterations or any new practices. It's just a set of properties and principles that help optimize software development process as long as that process is a continuous flow.
+
+By continuous flow, we mean things from the backlogs are moving through this software development pipeline and its finished product is coming out at the other end of the pipeline. So, for example, the first item gets done, then another item, then a couple items. This is also an adapter process, where as things are getting completed, we can get feedback from the customer and feed it into the backlog but at the end, we get the whole product. So Kanban basically optimizes the software development pipeline by a set of principles and properties.
+
+The Four Kanban Properties:
+
+- _Visualize your workflow_: To visualize the workflow, you basically create a visual board. It can be an electronic or it could be a physical board. And you move all your columns, or all your states, or all your steps of your process into one column. And then in some columns, you will see doing and done.
+
+<img src="../1. Software Development Processes and Methodologies/images/kanban_board.png">
+
+- _Limit work in progress_: So what you do is for each of your state, you define what's the maximum number of items that can stay in that state.
+
+- _Manage the flow_: But its not always possible to stay within the WIP (Work In Progress) limit, if it is a temporary issue then it is fine but if it will happen again, we need to address it, this is where the third property comes in.
+
+- _Make Process Policies Explicit_: Now, this board will work good only if team members are moving the card from one state to another state consistently. But everyone may have different understanding of the policies of when to move or not, this is where the fourth property comes in.
+
+<img src="../1. Software Development Processes and Methodologies/images/kanban_properties.png">
+
+<h3>Agile and Lean Summary</h3>
+
+
+
+<h3>Lean Startup</h3>
+
+
+
+
+<h2>Model Comparisons and applicability</h2>

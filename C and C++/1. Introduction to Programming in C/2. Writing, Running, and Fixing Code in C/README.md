@@ -250,7 +250,7 @@ __An example:__
 
 To be a bit more concrete, let us look at a specific example of a Makefile:
 
-```
+```makefile
 myProgram: oneFile.o anotherFile.o
     gcc -o myProgram oneFile.o anotherFile.o
 oneFile.o: oneFile.c oneHeader.h someHeader.h
@@ -263,7 +263,7 @@ In this Makefile there are three targets: myProgram, oneFile.o, and anotherFile.
 
 oneFile.o depends on one .c and two .h files, none of which are targets of other rules. Therefore, make does not need to rebuild them. If they do not already exist, make will give an error like this:
 
-```c
+```bash
 make: *** No rule to make target 'oneHeader.h', needed by 'oneFile.o'.  Stop.
 ```
 
@@ -271,7 +271,7 @@ Assuming that all three of these .c/.h files exist, make will see if oneFile.o d
 
 After processing oneFile.o, make does a similar process for anotherFile.o. After that completes, it checks if it needs to build myProgram (that is, if either myProgram does not exist, or either of the object files that it depends on are newer than it). If so, it runs the specified gcc command (which will link the object files and produce the binary called myProgram). If not, it will produce the message:
 
-```c
+```bash
 make: 'myProgram' is up to date.
 ```
 
@@ -281,7 +281,7 @@ __Variables:__
 
 The way we have written our example Makefile has a lot of copying and pasting—something we want to avoid in anything we do. In particular, we might notice that we have the same compiler options in many places. If we wanted to change these options (e.g., to turn on optimizations, or add a debugging flag), we would have to do it in every place. Instead, we would prefer to put the compiler options in a variable, and use that variable in each of the relevant rules. For example, we might change our previous example to the following:
 
-```
+```makefile
 CFLAGS=-std=gnu99 -pedantic -Wall
 myProgram: oneFile.o anotherFile.o
     gcc -o myProgram oneFile.o anotherFile.o
@@ -299,7 +299,7 @@ A common target to put in a Makefile is a clean target. The clean target is a bi
 
 We might add a clean target to our Makefile as follows:
 
-```
+```makefile
 .PHONY: clean
 clean:
     rm -f myProgram *.o *.c~ *.h~
@@ -315,7 +315,7 @@ Our example Makefile improved slightly when we used a variable to hold the compi
 
 In make, we can write generic rules. A generic rule lets us specify that we want to be able to build (something).o from (something).c, where we represent the something with a percent-sign (%). As a first step, we might write (note that # indicates a comment to the end of the line):
 
-```
+```makefile
 # A good start, but we lost the dependencies on the header files
 CFLAGS=-std=gnu99 -pedantic -Wall
 myProgram: oneFile.o anotherFile.o
@@ -333,7 +333,7 @@ However, we have introduced a significant problem now. We have made it so that o
 
 We can fix this in a better way by adding the extra dependency information to our Makefile:
 
-```
+```makefile
 # This fixes the problem
 CFLAGS=-std=gnu99 -pedantic -Wall
 myProgram: oneFile.o anotherFile.o
@@ -359,7 +359,7 @@ We can see the all of the rules (including both those that are built-in and thos
 
 If we use make -p to explore the built-in rules for building .o files from .c files, we will find:
 
-```
+```makefile
 %.o: %.c
 # commands to execute (built-in):
     $(COMPILE.c) $(OUTPUT_OPTION) $<
@@ -367,7 +367,7 @@ If we use make -p to explore the built-in rules for building .o files from .c fi
 
 Understanding this rule requires us to look at the definitions of COMPILE.c and OUTPUT_OPTION, which are also included in the output of make -p:
 
-```
+```makefile
 COMPILE.c = $(CC) $(CFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -c
 OUTPUT_OPTION = -o $@
 ```
@@ -376,7 +376,7 @@ By default, CFLAGS (flags for the C-compiler) and CPPFLAGS (flags for the C prep
 
 All of that may sound a bit complex but it basically boils down to the fact that the default rule is: cc -c -o something.o something.c, and we can override the specifics to get the behavior we want, while still using the default rule. That is, we might use the following Makefile:
 
-```
+```makefile
 CC = gcc
 CFLAGS = -std=gnu99 -pedantic -Wall
 myProgram: oneFile.o anotherFile.o
@@ -403,7 +403,7 @@ Our Makefile is looking more like something we could use in a large project, but
 
 We can fix these problems by using some of make’s built-in functions to automatically compute the set of .c files in the current directory, and then to generate the list of target object files from that list. The syntax of function calls in make is `$(functionName arg1, arg2, arg3)`. We can use the `$(wildcard pattern)` function to generate the list of .c files in the current directory: SRCS = `$(wildcard *.c)`. Then we can use the `$(patsubst pattern, replacement, text)` function to replace the .c endings with .o endings: OBJS = `$(patsubst %.c, %.o, $(SRCS))`. Once we have done this, we can use `$(SRCS)` and `$(OBJS)` in our Makefile:
 
-```
+```makefile
 CC = gcc
 CFLAGS = -std=gnu99 -pedantic -Wall
 SRCS=$(wildcard *.c)
@@ -424,7 +424,7 @@ At this point, we have a Makefile that we could use on a large-scale project. Th
 
 We could, however, be a little bit fancier. In a real project, we likely want to build a debug version of our code (with no optimizations, and -ggdb3 to turn on debugging information—see the next module for more info about debugging), and an optimized version of our code that will run faster (where the compiler works hard to produce improve the instructions that it generates, but those transformations generally make debugging quite difficulty). We could change our CFLAGS back and forth between flags for debugging and flags for optimization, and remember to make clean each time we switch. However, we can also just set our Makefile up to build both debug and optimized object files and binaries with different names:
 
-```
+```makefile
 CC = gcc
 CFLAGS = -std=gnu99 -pedantic -Wall -O3
 DBGFLAGS = -std=gnu99 -pedantic -Wall -ggdb3 -DDEBUG
@@ -621,6 +621,87 @@ If instead of accepting your hypothesis, you find that you must reject it, do no
 <h2>Debugging Tools</h2>
 
 
+<h3>Intro to gdb</h3>
+
+A key tool in the debugging process is a piece of software called a _debugger_, it helps you gather information about what is going on in your code.
+
+<h3>Getting Started with gdb</h3>
+
+The first step in using gdb (or most any other debugging tool) is to compile the code with _debugging symbols_—extra information to help a debugging tool understand what the layout of the code and data in memory is—included in the binary. The -g option to gcc requests that it include this debugging information, but if you are using gdb in particular, you should use _-ggdb3_, which requests the maximum amount of debug information (e.g., it will include information about preprocessor macro definitions) in a gdb-specific format. Note that if you compile your program in multiple steps (object files, then linking), you should include _-ggdb3_ at all steps.
+
+Once you have your program compiled with debugging symbols, you need to run _gdb_. You can run _gdb_ directly from the command line, however, it is much better to run it from inside of emacs. To run _gdb_ inside _emacs_, use the command _M-x gdb_ (that is either _ESC x_ or _ALT-x_ depending on your keyboard setup, then type gdb, and hit enter). At this point, emacs should prompt you for how you want to run _gdb_ (“Run gdb (like this):”), and provide a proposed command line. Typically the options that emacs proposes are what you want; however, you may want to change the name of the program to debug (specified as the last argument on the command line). Once you are happy with the command line, hit enter to start gdb.
+
+At this point, you will end up with a buffer titled _*gdb*_, or _*gdb-prog*_ (where prog is the name of the program). The stars in the buffer name indicate that the buffer corresponds to interaction with a process, not a file on disk. This buffer should contain some output from gdb which tells you its version, some information about where to find the manual, and a message about the ``help'' command.
+
+Some usefull _gdb_ commands:
+
+__*start*__: Begin (or restart) the program’s execution. Stop the program (to accept more commands) as soon as execution enters _main_.
+
+__*run*__: This command runs the program (possibly restarting it). It will not stop unless it encounters some other condition that causes it to stop.
+
+__*step*__: Advance the program one “step”. More specifically, _gdb_ will execute until the execution arrow moves to a different line of source code, whether that is by going to the next line, jumping in response to control flow, or some other reason. In particular, step will go into a function called by the current line. This command can be abbreviated _s_.
+
+__*next*__: Advance the program one line of code. However, unlike step, if the current line of code is a function call, _gdb_ will execute the entire called function without stopping. This command can be abbreviated _n_.
+
+__*print*__: The print command takes an expression as an argument, evaluates that expression, and prints the results. Note that if the expression has side-effects, they will happen, and will affect the state of the program (e.g., if you do print x = 3, it will set x to 3, then print 3). You can put _/x_ after _print_ to get the result printed in hexadecimal format. This command can be abbreviated _p_ (or _p/x_ to print in _hex_). Every time you print the value of an expression, _gdb_ will remember the value in its own internal variables which are named `$1`, `$2`, etc (you can tell which one it used, because it will say which one it assigned to when it prints the value—e.g., `$1 = 42`). You can use these `$` variables in other expressions if you want to make use of these values later. _gdb_ also has a feature to let you print multiple elements from an array—if you put _@number_ after an lvalue, _gdb_ will print number values starting at the location you named. This feature is most useful with arrays—for example, if a is an array, you can do _p a[0]@5_ to print the first 5 elements of _a_.
+
+__*display*__: The _display_ command takes an expression as an argument, and displays its value every time _gdb_ stops and displays a prompt. For example display _i_ will evaluate and print _i_ before each (_gdb_) prompt. You can abbreviate this command _disp_.
+
+If you hit enter without entering any command, _gdb_ will repeat the last command you entered. This feature is most useful when you want to use step or next multiple times in a row.
+
+Note that if you need to pass command line arguments to your program, you can either write them after the _start_ or _run_ command (e.g., _run someArg anotherArg_), or you can use set _args_ to set the command line arguments.
+
+<h3>Investigating the State of Your Program</h3>
+
+One of the most useful feature of a debugger is the ability to investigate the state of your program. The _print_ and _display_ commands that we have discussed so far provide a start, as they allow you to see what value an expression evaluates to, however, there is much more that you can do.
+
+One useful features is the ability to inspect the current set of stack frames, and move up and down within them. The _backtrace_ command lists all of the stack frames (with the current one on top, and _main_ on the bottom), so that you can see what function calls got you to the current place. The backtrace also lists the line where each call was made (or where the execution arrow is, for the current frame).
+
+When you print expressions, _gdb_ uses the variables in the current scope. However, sometimes, you might want to inspect variables in other frames further up the stack. You can instruct _gdb_ to select different frames with _up_ and _down_, which move up and down the stack specifically.
+
+One particularly common use of _up_ is when your program stops in a failed _assert_. When this happens, _gdb_ will stop deep inside the C library, in the code that handles _assert_. However, you will want to get back to your own code, which is a few stack frames up. You can use up a few times until _gdb_ returns to a frame corresponding to your code.
+
+You can also get information about various aspects of the program with the _info_ command, which has various subcommands. For example, _info frame_ will describe the memory layout of the current frame, _info types_ will describe the types that are in the current program. There are a variety of _info_ commands, but most of them are for more advanced uses—you can use help _info_ to see them all.
+
+<h3>Controlling Execution</h3>
+
+The _next_ and _step_ commands give you the basic ability to advance the state of the program, however, there are also more advanced commands for controlling the execution. If we are debugging a large, complex program, we may not want to step through every line one-by-one to reach the point in the program where we want to gather information.
+
+One of the most useful ways to control the execution of our program is to set a _breakpoint_ on a particular line. A breakpoint instructs _gdb_ to stop execution whenever the program reaches that particular line. You can set a breakpoint with the _break_ command, followed by either a line number, or a function name (meaning to set the breakpoint at the start of that function). In emacs, you can also press C-x space to set a breakpoint at the point. It is also possible to set a breakpoint at a particular memory address, although that is a more advanced feature. When we set a breakpoint, _gdb_ will assign it a number, which we can use to identify it to other breakpoint-related commands.
+
+Once we have a breakpoint set, we can _run_ the program (or _continue_, if it is already started), and it will execute until the breakpoint is encountered (or some other condition which causes execution to stop). When the breakpoint is encountered, _gdb_ will return control to us at a (_gdb_) prompt, allowing us to give it other commands—we might inspect the state of the program, set more breakpoints, and continue.
+
+By default, breakpoints are _unconditional breakpoints_—_gdb_ will stop the program and give you control anytime it reaches the appropriate line. Sometimes, however, we may want to stop under a particular condition. For example, we may have a __for__ loop which executes 1,000,000 times, and we need information from the iteration where _i_ is _250,000_. With an unconditional breakpoint, the program would stop, and we would need to continue many times before we got the information we wanted. We can instead, use a _conditional breakpoint_—once where we give _gdb_ a C expression to evaluate to determine if it should give us control, or let the program continue to run.
+
+We can put a condition on a breakpoint when we create it with the break command by writing if after the location, followed by the conditional expression. We can also add a condition later (or change an existing condition) with the cond command. For example, if we want to make a breakpoint on line size for the condition i==25000, we could tell gdb:
+
+```shell
+(gdb) break 7 if i==250000
+```
+
+Alternatively, if the breakpoint already existed, for example, as breakpoint 1, we could write
+
+```shell
+cond 1 i==250000
+```
+
+If we write a _cond_ command with no expression, then it makes a breakpoint unconditional. We can also _enable_ or _disable_ breakpoints (by their numeric id). A disabled breakpoint still exists (and can be re-enabled later), but has no effect—it will not cause the program to stop. We can also _delete_ a breakpoint by its numeric id. You can use the _info breakpoints_ command (which can be abbreviated _i b_) to see the status of current breakpoints.
+
+Two other useful commands to control the execution of the program are _until_, which causes a loop to execute until it finishes (_gdb_ stops at the first line after the loop), and _finish_ (which can be abbreviated fin), which finishes the current function—i.e., causes execution until the current function returns.
+
+<h3>Watchpoints</h3>
+
+Another incredibly useful feature of _gdb_ is a _watchpoint_—the ability to have gdb stop when the value of a particular expression changes. For example, we can write _watch i_, which will cause gdb to stop whenever the value of _i_ changes. When _gdb_ stops in response to a watchpoint, it will print the old value of the expression and the new value.
+
+Watchpoints can be a particularly powerful tool when you have pointer-related problems, and values of variables are changing through aliases. However, sometimes, the alias we have when we setup the watchpoint may go out of scope before the change we are interested in happens. For example, we may want to watch _*p_, but _p_ is a local variable, whose scope ends before the value changes. Whenever we face such a problem, we can _print p_, which will give us the pointer in a _gdb_ variable (e.g., `$6`), and then we can use that `$`-variable (which never goes out of scope—it lives until we restart gdb) to set our watchpoint: watch `*$6`.
+
+<h3>Signals</h3>
+
+Whenever your program receives a signal, _gdb_ will stop the program and give you control. There are three particularly common signals that come up during debugging. The first is SIGSEGV, which indicates a segmentation fault. If your program is segfaulting, then just running it in _gdb_ can help you gather a lot of information about what is happening. When the segfault happens, _gdb_ will stop, and your program will be on the line where the segfault happened. You can then begin inspecting the state of the program (printing out variables) to see what went wrong.
+
+Another common signal is SIGABRT, which happens when you program calls _abort()_ or fails an _assert_. As with segfaults, if your code is failing asserts, then running it in gdb can be incredibly useful—you will get control of the program at the point where _assert_ causes the program to abort, and (after going up a few frames back into your own code), see exactly what was going on when the problem happened.
+
+The other signal that is useful is SIGINT, which happens when the program is interrupted—e.g., by the user pressing Control-c (inside emacs, you have to press C-c C-c: Control-C twice). If your program is getting stuck in an infinite loop, you can run it in _gdb_, and then after a while, press Control-c. You can then see where the program is, and what it is doing. You are not guaranteed to be in the right place (you may interrupt the program before it gets into the infinite loop), but if you wait sufficiently long, you will typically end up where you want. You can then see what is happening, and why you are not getting the behavior you want.
 
 
 
