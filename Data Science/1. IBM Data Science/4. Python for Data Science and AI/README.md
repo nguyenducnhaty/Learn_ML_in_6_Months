@@ -164,9 +164,21 @@ Functions take some input, then produce some output or change. The function, it'
 
 
 
+<h2>Reading Files with Open</h2>
 
 
 
+<h2>Writing Files with Open</h2>
+
+
+<h2>Pandas</h2>
+
+
+
+<h2>One Dimensional Numpy</h2>
+
+
+<h2>Two Dimensional Numpy</h2>
 
 
 

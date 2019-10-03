@@ -702,7 +702,3 @@ Whenever your program receives a signal, _gdb_ will stop the program and give yo
 Another common signal is SIGABRT, which happens when you program calls _abort()_ or fails an _assert_. As with segfaults, if your code is failing asserts, then running it in gdb can be incredibly useful—you will get control of the program at the point where _assert_ causes the program to abort, and (after going up a few frames back into your own code), see exactly what was going on when the problem happened.
 
 The other signal that is useful is SIGINT, which happens when the program is interrupted—e.g., by the user pressing Control-c (inside emacs, you have to press C-c C-c: Control-C twice). If your program is getting stuck in an infinite loop, you can run it in _gdb_, and then after a while, press Control-c. You can then see where the program is, and what it is doing. You are not guaranteed to be in the right place (you may interrupt the program before it gets into the infinite loop), but if you wait sufficiently long, you will typically end up where you want. You can then see what is happening, and why you are not getting the behavior you want.
-
-
-
-<h1>Week 4: Project</h1>

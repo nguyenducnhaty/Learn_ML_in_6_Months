@@ -721,13 +721,19 @@ The Four Kanban Properties:
 
 <img src="../1. Software Development Processes and Methodologies/images/kanban_properties.png">
 
-<h3>Agile and Lean Summary</h3>
-
-
-
 <h3>Lean Startup</h3>
 
+The basic idea behind this approach is, how can you learn faster about your market or your user need? A lot of software development models out there mostly focus on the delivery of the software. This model actually focuses a lot on understanding or fast learning about real user need.
 
+Lean startup model or lean startup concept was made popular by Eric Ries with his book "The Lean Startup" and primarily it was geared towards the startup companies. But now, it has been used by a lot of industry, at least the concept is very popular in the software industry.
+
+<img src="../1. Software Development Processes and Methodologies/images/lean_startup.png">
+
+<img src="../1. Software Development Processes and Methodologies/images/lean_startup_summary.png">
+
+<h3>Agile and Lean Summary</h3>
+
+<img src="../1. Software Development Processes and Methodologies/images/agile_lean_summary.png">
 
 
 <h2>Model Comparisons and applicability</h2>
