@@ -88,8 +88,36 @@ In mathematics, the __Hessian matrix__ or __Hessian__ is a square matrix of seco
 
 
 
+<h2>Chain rule Introduction</h2>
 
 
+<h3>Multivariate chain rule</h3>
+
+<img src="../2. Multivariate Calculus/images/multi_variate_chain_rule.png">
+
+<img src="../2. Multivariate Calculus/images/jacobian_chain_rule.png">
+
+
+<h2>Neural Networks</h2>
+
+
+<h3>Simple neural networks</h3>
+
+<img src="../2. Multivariate Calculus/images/simple_nn.png">
+
+<img src="../2. Multivariate Calculus/images/slp.png">
+
+<img src="../2. Multivariate Calculus/images/slp_matrix.png">
+
+<img src="../2. Multivariate Calculus/images/slp_complete.png">
+
+<img src="../2. Multivariate Calculus/images/mlp.png">
+
+<img src="../2. Multivariate Calculus/images/cost_function.png">
+
+<img src="../2. Multivariate Calculus/images/slp_chain_rule.png">
+
+<img src="../2. Multivariate Calculus/images/mlp_chain_rule.png">
 
 
 
@@ -97,7 +125,38 @@ In mathematics, the __Hessian matrix__ or __Hessian__ is a square matrix of seco
 
 
 
+<h2>Taylor series for approximations</h2>
 
+
+<h3>Power series</h3>
+
+Taylor series are also referred to as power series. And this is because they are composed of coefficients in front of increasing powers of x.
+
+<h3>Power series derivation</h3>
+
+__Maclaurin series:__
+
+<img src="../2. Multivariate Calculus/images/maclaurin_series_derived.png">
+
+Although, what we've written here certainly does count as a tailless series because we're specifically looking at the point x equals 0, we often refer to this case as a Maclaurin series.
+
+<img src="../2. Multivariate Calculus/images/maclaurin_series.png">
+
+<h3>Power series details</h3>
+
+_Maclaurin series_ says that if you know everything about a function at the point x equals zero, then you can reconstruct everything about it everywhere. The __Taylor series__ simply acknowledges that there is nothing special about the point x equals zero. And so says that if you know everything about the function at any point, then you can reconstruct the function anywhere.
+
+<img src="../2. Multivariate Calculus/images/Taylor_series1D.png">
+
+
+<h2>Multivariate Taylor Series</h2>
+
+
+<h3>Linearization</h3>
+
+<img src="../2. Multivariate Calculus/images/Taylor_series_error.png">
+
+<h3>Multivariate Taylor</h3>
 
 
 

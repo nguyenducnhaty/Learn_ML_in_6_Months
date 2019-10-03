@@ -179,8 +179,3 @@ Functions take some input, then produce some output or change. The function, it'
 
 
 <h2>Two Dimensional Numpy</h2>
-
-
-
-
-<h1>Week 5: Analyzing US Economic Data and Building a Dashboard</h1>
