@@ -1,5 +1,10 @@
 <h1>Week 1: What is calculus?</h1>
 
+In addition to the topics below, as a pre rec I also went through Khan Academies:
+- [Finding Taylor polynomial approximations of functions](https://www.khanacademy.org/math/ap-calculus-bc/bc-series-new/bc-10-11/v/maclaurin-and-taylor-series-intuition)
+- [Finding Taylor or Maclaurin series for a function](https://www.khanacademy.org/math/ap-calculus-bc/bc-series-new/bc-10-14/v/function-as-a-geometric-series)
+
+topics to do some refreshing.
 
 
 <h2>Functions</h2>
@@ -161,13 +166,47 @@ _Maclaurin series_ says that if you know everything about a function at the poin
 
 
 
-<h1>Week 5: Intro to optimization</h1>
+<h1>Week 5: Introduction to optimization</h1>
 
 
 
+<h2>Fitting as minimization problem</h2>
+
+
+<h3>Newton-Raphson in one dimension</h3>
+
+
+
+<h3>Gradient Descent</h3>
+
+
+
+
+<h2>Lagrange multipliers</h2>
+
+
+<h3>Constrained optimisation</h3>
 
 
 
 
 
 <h1>Week 6: Regression</h1>
+
+
+
+<h2>Introduction to linear regression</h2>
+
+
+<h3>Simple linear regression</h3>
+
+
+
+<h2>Non-linear regression</h2>
+
+
+<h3>General non linear least squares</h3>
+
+
+
+<h3>Doing least squares regression analysis in practice</h3>
