@@ -734,6 +734,3 @@ Lean startup model or lean startup concept was made popular by Eric Ries with hi
 <h3>Agile and Lean Summary</h3>
 
 <img src="../1. Software Development Processes and Methodologies/images/agile_lean_summary.png">
-
-
-<h2>Model Comparisons and applicability</h2>

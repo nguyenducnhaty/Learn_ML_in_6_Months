@@ -185,7 +185,7 @@ _Maclaurin series_ says that if you know everything about a function at the poin
 <h2>Lagrange multipliers</h2>
 
 
-<h3>Constrained optimisation</h3>
+<h3>Constrained optimization</h3>
 
 
 
