@@ -102,6 +102,105 @@ Why worry about data quality?
 
 
 
+<h2>What is a Data Model?</h2>
+
+
+<h3>Introduction to Data Models</h3>
+
+Regardless of whether the data is big or small, one needs to know or determine the characteristics of data before one can manipulate or analyze them meaningfully.
+
+The three components of a data model:
+- Structure
+- Operations
+- Constraints
+
+<h3>Data Model Structures</h3>
+
+A file which has repeatable pattern is structured data. This file can also miss some values, but still will have some kind of repeatable patterns, whereas in unstructured data it is not possible to figure out how the data is organized and how to identify subparts of the data. Often, compressed data like JPEG images, MP3 audio files, MPEG3 video files, encrypted data, are usually unstructured.
+
+<h3>Data Model Operations</h3>
+
+SInce different data models are typically associated with different structures, the operations on them will be different. But some types of operations are usually performed across all data models.
+
+- One common operation is extracting a part of a collection based on the condition. This operation is called _Subsetting_. Depending on the context, it's also called selection or filtering.:
+
+<img src="../2. Big Data Modeling and Management Systems/images/subsetting.png">
+
+- The next common operation is retrieving a part of a structure that is specified. This produces a new collection of records which has only these fields. This operation like before has many names. The most dominant name is _Projection_.
+
+<img src="../2. Big Data Modeling and Management Systems/images/projection.png">
+
+- The next two operations are about combining two collections into a larger one. The term combine may be interpreted in various ways. The most straightforward of them is called _Union_. The assumption behind the union operation is that the two collections involved have the same structure. In other words, if one collection has four fields and another has 14 fields, or if one has four fields on people and the dates of birth, and the other has four things about countries and their capitols, they cannot be combined through union. And for those that can be combined, union will remove duplicates if there are any as well.
+
+<img src="../2. Big Data Modeling and Management Systems/images/union.png">
+
+- The second kind of combining, called a _Join_, can be done when the two collections have different data content but have some common elements. In this kind of data combination there are two stages. First, for each data item think of a record of collection one, one finds a set of matching data items in collection two. Thus, the first records of the two collections match based on the first field. In the second phase of the operation, all fields of the matching record pairs are put together. This operation is more complex and can be very expensive when the size of the true collections are large.
+
+<img src="../2. Big Data Modeling and Management Systems/images/join.png">
+
+<h3>Data Model Constraints</h3>
+
+A constraint is a logical statement. That means one can compute and test whether the statement is true or false. Constraints are part of the data model because they can specify something about the semantics, that is, the meaning of the data. For example, the constraint that a week has seven and only seven days is something that a data system would not know unless this knowledge is passed on to it in the form of a constraint. There may be many different kinds of constraints.
+
+__Types of Constraints__
+- _Value constraint_: Age is never negative
+- _Uniqueness constraint_: A movie can only have one title
+- _Cardinality constraint_: A person can take between 0 and 3 blood pressure medications at a time
+- _Type constraint_: Type of a name should only be string
+- _Domain constraint_: Numbers of days can only be between 1 and 31
+- _Structural constraint_: Puts restrictions on the structure of the data rather than the data values themselves.
+
+
+<h2>Different Kinds of Data Models (Part 1)</h2>
+
+
+<h3>What is a Relational Data Model?</h3>
+
+A data model is characterized by the structure of the data that it admits, the operations on that structure, and a way to specify constraints.
+
+Relational data is one of the simplest and most frequently used data models today, and forms the basis of many other traditional database management systems, like MySQL, Oracle, Teradata, and so forth.
+
+The primary data structure for a relational model is a table. This table represents a set of tuples, this is a relational tuple, represented as a row in the table. A relational tuple implies that unless otherwise stated represent one unit of information and cannot be decomposed further.
+
+Sets is a collection of distinct elements of the same type, meaning you can't add duplicates into the table. Another kind of tuple that you can't add is when the allowed data type, that is the type constraint for each column is wrong.
+
+<img src="../2. Big Data Modeling and Management Systems/images/schema.png">
+
+Given this schema, it should now be clear why the last red row does not belong to this table. The schema in a relational table can also specify constraints, like the one shown in yellow in the third line of the schema row. Finally, the first column says that ID is a primary key. This means it is unique for each employee. You should now see that a table with a primary key logically implies that the table cannot have a duplicate record because if we do, it will violate the uniqueness constraint associated with the primary key.
+
+Take the following table:
+
+<img src="../2. Big Data Modeling and Management Systems/images/foreign_keys.png">
+
+The employees are identified with the column EmpID, but these are not new values that this table happens to have. They are the same IDs that are present in the ID column of the employee's table, presented earlier. The term _References_ means, the values in this column can exist only if the same values if you are in employees the table being referenced, also called the _parent table_. So in the terminology of the relational model, the EmpID column of EmpSalaries table is called a _foreign key_ that refers to the primary key of the Employees table. Note that EmpID is not a primary key in this EmpSalaries table. Because it is multiple to post with the same EmpID reflecting the salary of the employee at different times.
+
+Here is an example of a relational join performed on the first three columns of employee and EmpSalaries table. Where employees.ID, and EmpSalaries.EmpID columns are matched for equality.
+
+<img src="../2. Big Data Modeling and Management Systems/images/joining_relations.png">
+
+The output table shows all the columns involved. The common column is represented once. This form of join is called a _Natural Join_.
+
+<h3>What is a Semi-structured Data Model?</h3>
+
+Let's take a simple html page:
+
+<img src="../2. Big Data Modeling and Management Systems/images/html.png">
+
+You can see that there are nested elements the structure, for example, the lists are nested inside the paragraph and the paragraph is inside the body element so unlike a relational structure there are multiple. This means while the data object has some structure it is more flexible. This is the hallmark of a semi-structured data model.
+
+XML, or the extensible markup language, is another well known standard to represent data. You can think of XML as a generalization of HTML where the elements, that's the beginning and end markers within the angular brackets, can be any string. And not like the ones allowed by standard HTML. Another interesting issue about XML data processing is that you can actually query for the structure elements. For example, it is perfectly fine to ask, what is the name of the element which contains a sub-element whose textual content is cell type?
+
+<img src="../2. Big Data Modeling and Management Systems/images/xml.png">
+
+Now we cannot perform an operation like this in a relational data model. The same idea can also be seen in JSON or the Java Script Object Notation
+
+<img src="../2. Big Data Modeling and Management Systems/images/json.png">
+
+One way to generalize about all these different forms of semi structured data is to model them as trees. For example, lets look at an XML example:
+
+<img src="../2. Big Data Modeling and Management Systems/images/tree_data_structure.png">
+
+Since the top object of the root element is document, it is also the root of the tree. Now, modeling a document as a tree has significant advantages. A tree is a well-known data structure, that allows what's called a navigational access to data.
 
 
 
@@ -109,7 +208,74 @@ Why worry about data quality?
 
 
 
+<h2>Different Kinds of Data Models (Part 2)</h2>
 
+
+<h3>Vector Space Model</h3>
+
+Text is often thought of as unstructured data. Primarily because it doesn't really have attributes and relationships. Instead, it is a sequence of strings punctuated by line and line breaks. To find text, we not only need the text data itself, but we need a different structure that is computed from the text data. To create the structure, we'll introduce the notion of the document vector model which we call a __vector model__.
+
+Let's look at an example:
+
+<img src="../2. Big Data Modeling and Management Systems/images/document_vector.png">
+
+The row represents each document and the columns represent the words and the values represent the count of each term in each document happen. This is called the _term frequency matrix_. Next, we take the inverse of the document frequency, so that n, the number of documents, is in the numerator.
+
+<img src="../2. Big Data Modeling and Management Systems/images/idf.png">
+
+The intuition behind the IDF vector is that it acts like a penalty factor for terms which are too widely used to be considered informative. So the words that occur more gets penalized (eg: words like the is occur more but provide less information regarding the document).
+
+Let's multiply the tf numbers through the IDF numbers giving us:
+
+<img src="../2. Big Data Modeling and Management Systems/images/tf_idf.png">
+
+This is a column-wise multiplication of the tf numbers with the IDF numbers giving us what we call the _tf-idf matrix_. Therefore for each document, we have a vector represented here as a row. So that row represents the relative importance of each term in the vocabulary. The last column after each document of vector here is the length of the document vector.
+
+To perform a search in the vector space:
+
+<img src="../2. Big Data Modeling and Management Systems/images/search_in_vector_space.png">
+
+We take the document vector of the query and multiply each term by the number of occurrences divided by two which is the maximum term frequency. Then we compute the length of the query vector. Next, we will compute the similarity between the query vector and each document with the idea that we'll measure how far the query vector is from each document
+
+<img src="../2. Big Data Modeling and Management Systems/images/similarity_function.png">
+
+There are many similar functions defined and used for different things. A popular similarity measure is the cosine function. The intuition is that if the vectors are identical, then the angle between them is zero and therefore, the cosine function evaluates to one. As the angle increases, the value of the cosine function decreases to make them more dissimilar. The way to compute the function is to multiply the corresponding elements of the two vectors.
+
+Similarity search is often used for images using a vector space model. One can compute features from images. And one common feature is a scatter histogram.
+
+<img src="../2. Big Data Modeling and Management Systems/images/image_search.png">
+
+You can think of histograms like a vector. Very often the pixel values will be binned before creating a vector. The table shown is a feature vector where the numbers for each row have been normalized with the size of the image to make the row sum equal to one. Similar vectors can be computed of the image texture, shapes of objects and any other properties. Thus making a vector space model significant for unstructured data.
+
+<h3>Graph Data Model</h3>
+
+What distinguishes a graph from other data models is that it bears two kinds of information. One, properties and attributes of entities and relationships, and two, the connectivity structure that constitutes the network itself. One way to look at this data is shown in the figure below:
+
+<img src="../2. Big Data Modeling and Management Systems/images/data_connectivity.png">
+
+In this representation, the graph on the left is represented by two tables on the right. The _vertex_, or _node table_, gives IDs to nodes and lists their properties. The _edge table_ has two parts. The colored part represents the properties of the edge, whereas the white part contains just the direction of the arrows in the network. This form of the graph model is called the property graph model.
+
+__Optimal Path Operations__
+
+- A number of path operations required some sort of optimization. The simplest among these is the well known shortest path query, which is applied to node networks to _find the best route from a source location to a target location_.
+
+- The second class of optimization operations is required to _find an optimal path that must include some user specified nodes_, for the operation has to determine the order in which the nodes once we visited. The classical application is a trip planner, where the user specifies the cities she wishes to visit, and the operation will optimize the criterion, like the total distance covered.
+
+- The third category is a case where the system must _find the best possible path in the network, given two or more optimization criteria, which cannot be satisfied simultaneously_. This is called a pareto-optimality problem on graphs.
+
+An important class of analysis to perform with neighborhoods is __community finding__. A community and a social network can be a very close group of friends.
+
+<img src="../2. Big Data Modeling and Management Systems/images/communities.png">
+
+Finding densely connected parts of a graph helps identify neighborhoods that can be recognized as communities. A more complex class of operations include finding the best possible clusters, which is another name for communities in a graph, so that any other grouping of nodes into communities will be less effective.
+
+If we inspect the neighborhood of every node in a graph, sometimes, we'll find neighborhoods that are different from all others. These neighborhoods are called anomalous.
+
+<img src="../2. Big Data Modeling and Management Systems/images/anomalous_neighborhoods.png">
+
+__Connectedness__ is a fundamental property of a graph. In a connected graph, each node is reachable from every other node through some path. If a graph is not connected, but there are subgraphs of it, which are connected, then these subgraphs are called connected components of the original graph.
+
+<img src="../2. Big Data Modeling and Management Systems/images/connectedness.png">
 
 
 
