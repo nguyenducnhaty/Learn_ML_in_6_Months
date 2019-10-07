@@ -282,6 +282,11 @@ __Connectedness__ is a fundamental property of a graph. In a connected graph, ea
 <h1>Week 4: Working With Data Models</h1>
 
 
+<h2>Data Models vs. Data Formats</h2>
+
+
+
+<h2>Working with Streaming Data</h2>
 
 
 
