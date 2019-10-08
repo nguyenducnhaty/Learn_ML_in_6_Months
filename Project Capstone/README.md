@@ -10,7 +10,7 @@
 
 - Surveillance, I am thinking if you need to find a car that you saw, you still have to manually look for it, so what if we could just manually input some text description of what we saw and the AI finds the frame for it. This is a neat application. It could be as simple as breaking the description into individual words and break the video into individual frames and then run an object detection algorithm, see what it captures and find the frames that matches most with the predicted labels and the description.
 
-
+- Can I make a database, like AsterixDB or Solr where I read a bunch of web pages and people can query for information and they get the answers. Just a voice based search engine but to build that I need to build a different storage system, like the ones I mention above, like a natural language interface. So, after my engine crawls web pages, it reads and stores information in a compact form and I need a way to access those information when someone queries it.
 
 
 <h2>Project Proposal</h2>

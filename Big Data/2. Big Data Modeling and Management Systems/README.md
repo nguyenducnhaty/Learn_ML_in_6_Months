@@ -282,28 +282,65 @@ __Connectedness__ is a fundamental property of a graph. In a connected graph, ea
 <h1>Week 4: Working With Data Models</h1>
 
 
-<h2>Data Models vs. Data Formats</h2>
-
-
-<h3>Data Model vs. Data Format</h3>
-
-
-
-
 
 <h2>Working with Streaming Data</h2>
 
 
 <h3>What is a Data Stream?</h3>
 
+We call the applications that needs to process data as it is generated, or in other words, as it streams as __Streaming Data Processing Applications__. This terminology refers to a constant stream of data flowing from a source, for example data from a sensory machine or data from social media.
+
+A stream is defined as a possibly unbounded sequence of data items or records that may or may not be related to, or correlated with each other. Each data is generally timestamped and in some cases geo-tagged. The data can stream from many sources. Streaming data sometimes get referred to as event data as each data item is treated as an individual event in a synchronized sequence.
+
+Streams pose very difficult challenges for conventional data management architectures. Which are built primarily on the concept of persistence, static data collections. Due to the fact that most often we have only one chance to look at and process streaming data before more gets piled on. Streaming data management systems cannot be separated from real-time processing of data.
+
+Managing and processing data in motion is a typical capability of streaming data systems. However, the sheer size, variety and velocity of big data adds further challenges to these systems. Such systems are designed to manage relatively simple computations. Such as one record at a time or a set of objects in a short time window of the most recent data. The computations are done in near-real-time, sometimes in memory, and as independent computations. The processing components often subscribe to a system, or a stream source, non-interactively. This means they sent nothing back to the source, nor did they establish interaction with the source.
+
+<img src="../2. Big Data Modeling and Management Systems/images/streaming_data_system.png">
+
+The concept of _dynamic steering_ involves dynamically changing the next steps or direction of an application through a continuous computational process using streaming. Dynamic steering is often a part of streaming data management and processing. Open-source Apache projects like Storm, Flink, Spark Streaming, and Samza are examples of big data streaming systems.
 
 <h3>Why is Streaming Data different?</h3>
 
+Analysis of data at rest is called batch or static processing and the analysis of streaming data is called stream processing. Batch processing happens after the data is collected and stream processing happens at the same time data is being generated.
+
+The run time and memory usage of most algorithms that process static data, is usually dependent on the data size, and this size can easily be calculated from files or databases. A key property, of streaming data processing is the size of the data is unbounded and this changes the types of algorithms that can be used. Algorithms that require iterating or looping over the whole data set are not possible since with stream data, you never get to the end.
+
+<img src="../2. Big Data Modeling and Management Systems/images/data_processing_algorithm.png">
+
+<img src="../2. Big Data Modeling and Management Systems/images/streaming_data_management_system.png">
+
+These requirements for streaming data processing are quite different than batch processing where the analytical steps have access to often, all data and can take more time to complete a complex analytical task with less pressure on the completion time of individual data management and processing tasks.
+
+Most organizations today use a hybrid architecture. Sometimes this is referred to as the lambda architecture for processing streaming and batch data at the same time. In these systems, streaming wheel over the real-time data is managed and kept until those data elements are pushed to a batch system and become available to access and process as batch data.
+
+<img src="../2. Big Data Modeling and Management Systems/images/lambda_architecture.png">
+
+In such systems, a stream storage layer is used to enable fast streams and ensure data ordering and consistency. And a processing layer for data is used to retrieve data from the storage layer to analyze it and notify the streaming storage that the data set does no longer need to be in streaming storage. The big data challenges scalability, data replication, and durability, and fault tolerance arise in this type of data very significantly.
+
+<img src="../2. Big Data Modeling and Management Systems/images/streaming_data_changes.png">
+
+<img src="../2. Big Data Modeling and Management Systems/images/streaming_data_changes_frequency.png">
 
 <h3>Understanding Data Lakes</h3>
 
+With big data streaming from different sources in varying formats, models, and speeds it is no surprise that we need to be able to ingest this data into a fast and scalable storage system that is flexible enough to serve many current and future analytical processes. This is when traditional data warehouses with strict data models and data formats don't fit the big data challenges for streaming and batch applications. The concept of a _data lake_ was created in response to these big data storage and processing challenges.
 
+A data lake works as follows. The data gets loaded from its source, stored in its native format until it is needed at which time the applications can freely read the data and add structure to it. This is what we call _schema on read_.
 
+In a traditional data warehouse, the data is loaded into the warehouse after transforming it into a well defined and structured format. This is what we call _schema on write_. Any application using the data needs to know this format in order to retrieve and use the data. In this approach, data is not loaded into the warehouse unless there is a use for it. However, schema on read approach of data lakes ensures all data is stored for a potentially unknown use at a later time.
+
+So how is a data lake from a data warehouse?
+
+<img src="../2. Big Data Modeling and Management Systems/images/data_lake_warehouse.png">
+
+A data lake stores data as flat files with a unique identifier. This often gets referred to as object storage in big data systems. In data lakes each data is stored as a binary large object or BLOB and is assigned a unique identifier. In addition, each data object is tagged with a number of metadata tags. The data can be searched using these metadata tags to retrieve it when there is a need to access it.
+
+<img src="../2. Big Data Modeling and Management Systems/images/data_lake_storage.png">
+
+In Hadoop data architectures, data is loaded into HDFS and processed using the appropriate data management and analytical systems on commodity clusters. The selection of the tools is based on the nature of the problem being solved, and the data format being accessed.
+
+<img src="../2. Big Data Modeling and Management Systems/images/data_lake_summary.png">
 
 
 
@@ -311,9 +348,105 @@ __Connectedness__ is a fundamental property of a graph. In a connected graph, ea
 
 
 
+<h2>Why Data Management?</h2>
+
+
+<h3>DBMS-based and non-DBMS-based Approaches to Big Data</h3>
+
+In old times, database operations were application in file systems, but there were few problems with this approach:
+- Data Redundancy, inconsistency and isolation
+- Each task required a new program to be written
+- Data integrity
+- Atomicity of updates means that all of the changes that we need to do must happen altogether, as a single unit. They should either fully go through or not go through at all.
+
+So, a prime reason for the transition to a DBMS is to alleviate these and other difficulties.
+
+__Advantages of relational DBMS:__
+
+- Data query languages which are declarative: Declarative means that we state what we want to retrieve without telling the DBMS how exactly to retrieve it. No more task based programs.
+- Data independence: Applications don't worry about data storage formats and locations.
+- Efficient access through optimization: The system automatically finds an efficient way to access data.
+- Data integrity and security: Methods to keep the accuracy and consistency of data despite failure.
+    - ACID (atomicity, consistency, isolation and durability) properties of transactions
+    - Failure recovery
+- Concurrent access: Many users can simultaneously access and update data without conflict.
+
+__Parallel and Distributed DBMS:__
+
+- Parallel database system, eg: parallel Oracle, parallel DB2 or post SQL XE:
+    - Improve performance through parallel implementation
+    - Often allows data replication
+        - Data redundancy against table corruption
+        - More concurrent queries
+- Distributed database system:
+    - Data is stored across several sites each site managed by a DBMS capable of running independently. One component knows some part of the schema of it is neighboring DBMS and can pass a query or part of a query to the neighbor when needed.
+
+__DBMS and MapReduce style Systems:__
+
+- Started with a different problem focus:
+    - DBMSs: efficient storage, parallelism, transactions and retrieval. But didn't account for machine failure.
+    - MapReduce style systems: In contrast was developed not for storage and retrieval but for distributed processing of large amounts of data. Since MR implementations were done over Hadoop file systems, issues like node failure were automatically accounted for.
+
+__Shifting Requirements:__
+
+- Data loading- a new bottleneck
+    - Does the application need data sooner than the loading time?
+- Too much functionality
+    - Does the application use only a few data management features?
+
+It has now been recognized that a simple map and reduce operations are not sufficient for many data operations leading to a significant expansion in the number of operations in the MR ecosystems. For example, Spark has several kinds of join and data grouping operations in addition to map and reduce.
+
+
+<h2>From DBMS to BDMS</h2>
+
+
+<h3>From DBMS to BDMS</h3>
+
+__Desired Characteristics of BDMS:__
+
+- A flexible semi-structured data model
+    - "schema first" to "schema never"
+- Support for today's common "Big Data data types"
+    - Textual, temporal, and spatial data values
+- A full query language
+    - Expected to be at least equally powerful as SQL
+- Wide range of query sizes
+- Continuous data ingestion
+    - Stream ingestion
+- Scale gracefully to manage and query large volumes of data
+    - Use large clusters
+- Full data management capability
+    - Ease of operational simplicity
+
+__ACID and BASE:__
+
+- ACID properties hard to maintain in a BDSM because there is too much data and too many updates from too many users. So the effort to maintain ACID properties May lead to a significant slowdown of the system
+- BASE relaxes ACID
+    - BA: Basic Availability means if you make a request, there will be a response to that request. But, the response could still be failure to obtain data or the data is in inconsistent state or changing state.
+    - S: Soft State means the state of the system is very likely to change over time. So even during times without input, there may be changes going on through the system due to eventual consistency.
+    - E: Eventual Consistency means that the system will eventually become consistent once it stops receiving input.
+
+__CAP Theorem:__
+
+It is impossible for a distributed computer system to simultaneously provide all three of the following guarantees.
+- Consistency: means all nodes see the same data at any time.
+- Availability: is a guarantee that every request receives a response about whether it succeeded or failed.
+- Partition Tolerance: means the system continues to operate despite arbitrary partitioning due to network failures.
+
+<h3>Redis: An Enhanced Key-Value Store</h3>
 
 
 
+<h3>Aerospike: a New Generation KV Store</h3>
 
 
-<h1>Week 6: Designing a Big Data Management System for an Online Game</h1>
+
+<h3>Semistructured Data – AsterixDB</h3>
+
+
+
+<h3>Solr: Managing Text</h3>
+
+
+
+<h3>Relational Data – Vertica</h3>
