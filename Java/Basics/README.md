@@ -45,17 +45,17 @@ This is the basic structure of the Java program. In Java, we name our classes in
 
 Now, let's see what happens under the hood the moment a Java program gets executed. There are basically two steps involved here, _compilation_ and _execution_. In the compilation step the Java compiler is used to compile our code into a different format called Java bytecode.
 
-<img src="../Java Basics/images/compiler.png">
+<img src="../Basics/images/compiler.png">
 
 This compiler comes with the Java Development Kit. If you go to java.com/download, you can download Java or more accurately Java runtime environment for various operating systems. This Java runtime environment has a software component called Java Virtual Machine or JVM. This JVM takes our Java bytecode and translate it to the native code for the underlying operating system.
 
-<img src="../Java Basics/images/jvm.png">
+<img src="../Basics/images/jvm.png">
 
 So if you are on Windows machine this Java Virtual Machine converts our Java bytecode into the native code that windows can understand. This architecture is the why Java applications are portable and platform independent. We can write a Java program on a Windows machine and execute it on Linux, Mac or any other operating system that have a Java runtime environment.
 
 <h2>Java Editions</h2>
 
-<img src="../Java Basics/images/editions.png">
+<img src="../Basics/images/editions.png">
 
 - Java Standard Edition is the core Java Platform. This is where we will be writing our code.
 
@@ -97,7 +97,7 @@ Basically we have two categories of types:
 1. Primitive: for storing simple values
 2. Reference: for storing complex objects
 
-<img src="../Java Basics/images/primitives.png">
+<img src="../Basics/images/primitives.png">
 
 Let's look at an example, earlier we used an integer for storing someone's age but as you can see above integers take four bytes and allow us to store values up to two billion and we don't need four bytes of memory to store someone's age, all we need is one byte because with 1 byte we can store values up to 127:
 
@@ -179,7 +179,7 @@ public class Main {
 
 You will see that the value of the _y_ doesn't change because _x_ and _y_ are stored in two different memory locations so they are completely independent of each other so when you change the value of _x_, it doesn't affect the value of _y_.
 
-<img src="../Java Basics/images/primitive_memory.png">
+<img src="../Basics/images/primitive_memory.png">
 
 But in the case of Reference types this is not the case. For example:
 
@@ -201,11 +201,11 @@ public class Main {
 
 Now, when Java runtime environment executes its going to allocate some memory to store the _Point object_ and let's say the address of the memory location is `100`. Then it's going to allocate a separate part of the memory and it's going to attach this label to that memory location _point1_. In that memory location it's going to store the address of our point object. So this is the critical difference between primitive and reference types. When we declare a primitive variable like a byte the value that we assigned to that variable will be stored in that memory location but when we use a reference type like this _point_ class our variable is going to hold the address of the point object in memory, not the actual point object.
 
-<img src="../Java Basics/images/reference_point.png">
+<img src="../Basics/images/reference_point.png">
 
 Now when we copy the variable _point1_ to variable _point2_, we copy the address or the reference to the point object in memory, that is why we refer to these types as reference types because they don't store the actual values, they store a reference to an object somewhere in the memory.
 
-<img src="../Java Basics/images/reference_point_example.png">
+<img src="../Basics/images/reference_point_example.png">
 
 So in this example, _point1_ and _point2_ are referencing the exact same _Point object_ in memory. We only have one point object so these two variables are not independent of each other and referencing the same object. That means if I update this point object through either of these variables the changes will be visible to the other variable.
 
@@ -445,7 +445,7 @@ public class Main{
 }
 ```
 
-<img src="../Java Basics/images/java_operators.png">
+<img src="../Basics/images/java_operators.png">
 
 <h3>Loops</h3>
 
