@@ -46,3 +46,4 @@ $RECYCLE.BIN/
 ml.code-workspace
 /.vscode
 /Big Data/coursera-master
+*.class
