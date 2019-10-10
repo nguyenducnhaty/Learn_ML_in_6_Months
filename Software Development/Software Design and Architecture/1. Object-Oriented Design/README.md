@@ -138,6 +138,504 @@ A CRC card can be as simple as a physical index card marked into three sections.
 
 
 
+<h2>Creating Models in Design</h2>
+
+
+<h3>Models: Bridging Concepts and Solutions</h3>
+
+You don't dive right into code when you are building complex software, there is a design step in between that iteratively deals with both the problem space and the solution space. You need conceptual design to break down the problem further and further into manageable pieces. You also need technical design to describe and refine the solution.
+
+For many kinds of complex problems, it makes sense to think about the concepts using objects. This has led to the popularity of Object-Oriented Programming with object-oriented languages. But even here, you still don't go straight from the problem to writing the code. There's a conceptual design involving object-oriented analysis to identify the key objects in the problem. There's also technical design involving object-oriented design to further refine the details of the objects, including their attributes and behaviors.
+
+The goal during software design is to construct and refine models of all the objects. Initially, the focus will be on the _entity objects_ from the problem space. As a solution in software arises, you introduce _control objects_ that receive events and coordinate actions. You also introduce _boundary objects_ that connect to services outside your system.
+
+The models are often expressed in a visual notation called __Unified Modeling Language__ or __UML__. In Object-Oriented Modeling, you have different sorts of models or UML diagrams to focus on different software issues, like a structural model, to describe what the objects do and how they relate. It's like having a scale model of a building to understand the spatial relationships.
+
+
+<h2>Four Design Principles</h2>
+
+
+<h3>Abstraction</h3>
+
+_Abstraction_ is the idea of simplifying a __concept__ in the problem domain to its essentials within some __context__. Abstraction allows you to better understand a concept by breaking it down into a simplified description that ignores unimportant details.
+
+_Rule of Least Astonishment:_ the abstraction captures the essential attributes and behavior for a concept with no surprises and no definitions that fall beyond its scope. You don't want to surprise anyone trying to understand your abstraction with irrelevant characteristics.
+
+In object oriented modeling, abstraction pertains most directly to the notion of a class. A class is like a template for instances of a concept. An object instantiated from a class then has the essential details to represent an instance of some concept.
+
+<h3>Encapsulation</h3>
+
+_Encapsulation_ forms a self-contained object by bundling the data and functions it requires to work, exposes an interface whereby other objects can access and use it, and restricts access to certain inside details.
+
+Encapsulation involves three ideas:
+1. _Bundle_ attribute values or data, and behaviors or functions, that manipulate those values together into a self-contained object.
+2. _Expose_ certain data and functions of that object, which can be accessed from other objects.
+3. _Restrict_ access to certain data and functions to only within that object.
+
+You naturally bundle when you define a class for a type of object. Abstraction helps to determine what attributes and behaviors are relevant about a concept in some context. Encapsulation ensures that these characteristics are bundled together in the same class.
+
+- Encapsulation helps with data integrity. You can define certain attributes and methods of a class to be restricted from outside to access.
+- Encapsulation can secure sensitive information.
+- Encapsulation achieves what is called, the Abstraction Barrier. Since the internal workings are not relevant to the outside world, this achieves an abstraction that effectively reduces complexity for the users of a class. This increases re-usability.
+
+<h3>Decomposition</h3>
+
+_Decomposition_ is taking a __whole__ thing and dividing it up into different parts. Or, on the flip side taking a bunch of separate __parts__ with different functionalities, and combining them together to form a whole. Decomposition allows you to further break down problems into pieces that are easier to understand and solve.
+
+Important issues to understand are how the parts relate to the whole, such as:
+-  _fixed_: over the lifetime of the whole object it will have exactly that much of the part object
+- _dynamic number_: parts change in number over time.
+- _lifetimes_: of the whole object, and the part objects, and how they could relate or not.
+- _sharing_: whole things sharing parts that contain to other whole things.
+
+<h3>Generalization</h3>
+
+_Generalization_ helps us to reduce the amount of redundancy when solving problems. Methods are a way of applying the same behavior to a different set of data.
+
+Generalization can be achieved by classes through __inheritance__. In generalization we take repeated, common, or shared characteristics between two or more classes and factor them out into another class. Specifically, you can have two classes, a parent class and a child class. When a child class inherits from a parent class, the child class will have the attributes and behaviors of the parent class. There can be multiple child classes that inherit from a parent class, and they all will receive these common attributes and behaviors. The child classes can also have additional attributes and behaviors, which allow them to be more specialized in what they can do. In standard terminology, a parent class is known as a _superclass_ and a child class is called the _subclass_.
+
+One of the advantages of doing this is that any changes to the code that is common to both subclasses, can be made in just a superclass. The second benefit is that we can easily add more subclasses to our system, without having to write out all the common attributes and behaviors for them.
+
+
+<h2>Expressing Design Structure in Java & UML Class Diagrams</h2>
+
+
+<h3>Abstraction in Java and UML</h3>
+
+For software, developers use technical diagrams called UML Diagrams to express their designs. A UML Class Diagram, or just Class Diagram for short, allows you to represent your design in more detail than CRC cards can. Class Diagrams are much closer to the implementation and can easily be converted to classes in code.
+
+Abstraction allows you to better understand a concept by breaking it down into a simplified description that ignores unimportant details. You can first apply abstraction at the design level using UML Class Diagrams then eventually convert the design into code.
+
+For example, this is the Class Diagram representation of a food class.
+
+<img src="../1. Object-Oriented Design/images/food_class.png">
+
+Each class in the Class Diagram is represented by a box. Each box is divided in three sections much like a CRC card.
+- The top part is the __Class Name__. This would be the same as the class name in your Java class.
+- The middle part is the __Property section__. This would be equivalent to the member variables in your Java class and defines the attributes of the abstraction.
+- Finally, the bottom part is the __Operations section__ which is equivalent to the methods in your Java class and defines the behaviors of the abstraction.
+
+_Properties_, which are equivalent to Java's member variables, are mainly composed of the variable name and variable type.
+
+_Variable_ types, much like in Java, can be classes or primitive types.
+
+_Operations_, which are equivalent to Java's methods, are mainly composed of the operation name, parameter list and return type.
+
+Now, if we compare the CRC card to our Class Diagram:
+
+<img src="../1. Object-Oriented Design/images/crc_class_diagram.png">
+
+You might notice how some of the responsibilities on the card turned into properties in the Class Diagram. Some, specifically isOnSale, became an operation.
+
+Class Diagrams are very close to implementation, making the translation to Java very easy. Class name in Class Diagram turns into a class in Java. Properties in the Class Diagram turn into member variables. And finally, Operations turn into methods.
+
+```java
+public class Food {
+    public String groceryID;
+    public String name;
+    public String manufacturer;
+    public Date expiryDate;
+    public Double price;
+
+    public boolean isOnSale() {
+
+    }
+}
+```
+
+Consider the following code:
+
+```java
+public class ClickCounter {
+    private int count;
+
+    public ClickCounter() {
+        count = 0;
+    }
+
+    public void click() {
+        count++;
+    }
+
+    public void setClickCount(int clickCount) {
+        count = clickCount;
+    }
+
+    public int getClickCount() {
+        return count;
+    }
+}
+```
+
+Converting this code to Class Diagram is straightforward.
+
+<img src="../1. Object-Oriented Design/images/java_to_diagram.png">
+
+To convert this code to a Class Diagram, we identify ClickCounter as the class name since that's what the class is named in the code. We, then, set the member variable, count, as a property. This property has a type, int. Finally, the methods setClickCount and getClickCount become operations. setClickCount takes a parameter. getClickCount has a return value.
+
+<h3>Encapsulation in Java and UML</h3>
+
+Let's take a look at some notation in a UML class diagram that expresses encapsulation for a student class:
+
+<img src="../1. Object-Oriented Design/images/uml_encapsulation.png">
+
+The student class has its attributes hidden from public accessibility. This is denoted by the minus signs before GPA and degree program. These minus signs indicate that a method or attribute is private. Private attributes can only be accessed from within the class.
+
+Outside this class instead of being able to directly manipulate the student's GPA attribute, you must set the GPA through a public method setGPA. By only allowing an object's data to be manipulated via a public method, you can control how and when that data is accessed. This control of data is like creating a gate. You only let access to data you allow.
+
+__Getter Methods:__
+
+Getter Methods are methods that retrieve data, and their names typically begin with get and end with the name of the attribute whose value you will be returning. Getters often retrieve a private piece of data.
+
+__Setter Methods:__
+
+Setter Methods change data, and their names typically begin with set and end with the name of the variable you wish to set. Setters are used to set a private attribute in a safe way.
+
+Data integrity is why you have Getter and Setter Methods. In order to change a piece of data, you need to go through the correct channels. Data must be accessed in an approved way.
+
+Let's take a look at the code that implements the above class with an additional method:
+
+```java
+public class Student{
+    private float gpa;
+    private String degreeProgram;
+
+    public float getGPA() {
+        return gpa;
+    }
+
+    public void setGPA(float newGPA) {
+        gpa = newGPA;
+    }
+
+    public String getDegreeProgram() {
+        return degreeProgram;
+    }
+
+    public void setDegreeProgram(String newDegreeProgram) {
+        if (gpa > 2.7) {
+            degreeProgram = newDegreeProgram;
+        }
+    }
+}
+```
+
+In this code attributes that are private cannot be accessed from anywhere other than from inside the class. This hides them from anything outside of the class. The only way you can manipulate the hidden data is by writing public functions that allow access to it. If you look at the `setDegreeProgram` method, this is an example of doing more with the getters and setters where you are using them to change private attribute values instead of just purely returning them.
+
+<h3>Decomposition in Java and UML</h3>
+
+There are three types of relationships found in decomposition:
+- association
+- aggregation
+- composition
+
+They define the interaction between the whole and the parts.
+
+__Association__:
+
+Association is "some" relationship. This means that there is a loose relationship between two objects. These objects may interact with each other for some time.
+
+Association relationship using UML class diagram notation:
+
+<img src="../1. Object-Oriented Design/images/uml_association.png">
+
+This UML examines the relationship between person and airline. The straight line between two UML objects denotes that the relationship between them is an association. You can see that there is a `0..*` found on both sides of the relationship. This means a person object is associated with zero or more airline objects. And an airline object is associated with zero or more person objects.
+
+Association relationship in code:
+
+```java
+public class Student{
+    public void play(Sport sport) {
+
+    }
+}
+```
+
+In this code excerpt, the student is passed a sport object to play. The student does not possess the sport beyond playing it. The relationship is between two completely separate objects. A student can play any number of sports. And any number of students can play a sport.
+
+The two objects interact with each other without belonging to one another. Overall, association is a loose partnership between two objects that exist completely independently. They have numbers that are not tied to each other.
+
+__Aggregation__:
+
+Aggregation is a "has-a" relationship where a whole has parts that belong to it. There may be sharing of parts among the wholes in this relationship. The "has-a" relationship from the whole to the parts is considered weak. What this means is although parts can belong to the wholes, they can also exist independently.
+
+Aggregation relationship using UML class diagram notation:
+
+<img src="../1. Object-Oriented Design/images/uml_aggregation.png">
+
+This UML class diagram describes the relationship between airliner and crew. It says that for an airliner object, it has zero or more crew members. Also, a crew member object can be had by zero or more airline objects. The empty diamond denotes which object is considered the whole and not the part in the relationship. This empty diamond is the symbol for aggregation.
+
+Aggregation relationship in code:
+
+```java
+public class Airliner {
+    private ArrayList<CrewMember> crew;
+
+    public Airliner() {
+        crew = new ArrayList<CrewMember>();
+    }
+
+    public void add(CrewMember crewMember) {
+
+    }
+}
+```
+
+In the airliner class, there is a list of crew members. The list of crew members is initialized to be empty. And a public method allows new crew members to be added. The airliner has a crew. This means that an airliner can have zero or more crew members.
+
+__Composition__:
+
+Composition is an exclusive containment of parts, otherwise known as a _strong_ has-a relationship. What this means is that the whole cannot exist without its parts. If loses any of its parts, the whole ceases to exist. If the whole is destroyed, then all of its parts are destroyed too. Usually, you can only access the parts through its whole. Contained parts are exclusive to the whole.
+
+Composition relationship using UML class diagram notation:
+
+<img src="../1. Object-Oriented Design/images/uml_composition.png">
+
+This UML class diagram describes the relationship between a house and a room, that a house object has one or more room objects. The filled in diamond next to the house means that the house is the whole in the relationship. If the diamond is filled in, it means that has-a relationship is strong. The two related objects cannot exist without each other. The filled diamond denotes the relationship is composition.
+
+Composition relationship in code:
+
+```java
+public class Human {
+    private Brain brain;
+
+    public Human() {
+        brain = new Brain();
+    }
+}
+```
+
+In this example, the brain is created at the same time that the human object is. The brain does not need to be instantiated anywhere else, nor does it need to be passed into the human object on creation. The brain is automatically created with the human. The two parts, human and brain, are tightly dependent with one not being able to exist without the other.
+
+Composition is the most dependent of the decomposition relationships. It forms a relationship that only exists as long as each object exists. Decomposition is simply about whole objects containing part objects. Depending on your design, you can relate wholes to parts in different increasingly tighter ways. You can use association, a very loose interaction between two completely independent objects. An aggregation, one whole has a part, but both can live independently. And finally, in composition, the whole cannot exist without its parts and vice versa.
+
+<h3>Generalization with Inheritance in Java and UML</h3>
+
+Showing inheritance is very simple in a UML class diagram. You simply connect two classes with a solid lined arrow.
+
+<img src="../1. Object-Oriented Design/images/uml_inheritance.png">
+
+A simple inheritance in a UML diagram would have this layout.
+
+<img src="../1. Object-Oriented Design/images/uml_inheritance_example.png">
+
+Below is an example of a UML diagram for the Animal Superclass and a Dog subclass:
+
+<img src="../1. Object-Oriented Design/images/inheritance_example.png">
+
+The hash symbol is used to communicate that the animals attributes are protected.
+
+In Java, a protected attribute or method can only be accessed by:
+- The encapsulating class itself
+- All subclasses
+- All classes within the same package
+
+The code for the UML class diagram is given below:
+
+```java
+public abstract class Animal {
+    protected int numberOfLegs;
+    protected int numberOfTails;
+    protected String name;
+
+    public Animal(String petName, int legs, int tails) {
+        this.name = petName;
+        this.numberOfLegs = legs;
+        this.numberOfTails = tails;
+    }
+
+    public void walk() {}
+    public void run() {}
+    public void eat() {}
+}
+```
+
+Since an animal is a generalization of specific species, we do not want to be able to create an animal object on its own. We use the keyword _abstract_ to declare that this class cannot be instantiated. That means that we cannot create an animal object. The Animal class will be the superclass for our dogs subclass, any class that inherits from the Animal class will have its attributes and behaviors.
+
+```java
+public class Dog extends Animal{
+    public Dog(String name, int legs, int tails) {
+        super(name, legs, tails);
+    }
+
+    public void playFetch() {}
+}
+```
+
+As you would expect, we do not need to declare any of the attributes and behaviors that the dog class inherits from the Animal class. We declare inheritance in Java using the keyword _extends_.
+
+You instantiate objects from a class by using _constructors_. With inheritance, if you want an instance of a subclass, you need to give the superclass a chance to prepare the attributes for the object appropriately. Classes can have _implicit constructors_ or _explicit constructors_.
+
+In the Animal class implementation below, we have an implicit constructor, since we have not written our own constructor. All attributes are assigned zero or null, when using the default constructor.
+
+```java
+public abstract class Animal {
+    protected int numberOfLegs;
+
+    public void walk() {}
+}
+```
+
+In the Animal class implementation below, we have an explicit constructor that will let us instantiate an animal with however many legs we want. Explicit constructors, are used so that we can assign values to attributes during instantiation.
+
+```java
+public abstract class Animal {
+    protected int numberOfLegs;
+
+    public Animal(int legs) {
+        this.numberOfLegs = legs;
+    }
+}
+```
+
+A subclass's constructor must call its superclass's constructor, if the superclass has an explicit constructor. This is because explicit constructors of the superclass must be referenced by the subclass. Otherwise the superclass attributes would not be appropriately initialized. For example:
+
+```java
+public abstract class Animal {
+    protected int numberOfLegs;
+
+    public Animal(int legs) {
+        this.numberOfLegs = legs;
+    }
+}
+
+public class Dog extends Animal{
+    public Dog(int legs) {
+        super(legs);
+    }
+}
+```
+
+In order to access the superclass's attributes, methods and constructors, the subclass uses the keyword called Super. Subclasses can override the methods of its superclass, meaning that a subclass can provide its own implementation for an inherited superclass's method. For example below the dog class overrides the animal class's walk method:
+
+```java
+public abstract class Animal {
+    protected int numberOfLegs;
+
+    public void walk() {
+        System.out.println("Animal is walking");
+    }
+}
+
+public class Dog extends Animal{
+    public void walk() {
+        System.out.println("I'd rather lay on the couch");
+    }
+}
+```
+
+The inheritance that we have been looking at is called _implementation inheritance_. For Java, only single implementation inheritance is allowed. While a superclass can have multiple subclasses. A subclass can only inherit from one superclass.
+
+Note, that a subclass itself can be a superclass to another class. Inheritance can trickle down through as many classes as you want.
+
+<h3>Generalization with Interfaces in Java and UML</h3>
+
+A class denotes a type for its objects. The type signifies what these objects can do through public methods. For example, instances of a dog class are dog typed objects, and these objects do dog things.
+
+In modeling a problem, we may want to express subtyping relationships between two types. For example, we can have dog type as a subtype of animal type. This means a dog object is not only dog typed, it is also animal typed. So a dog object behaves not only like a dog, it should also behave like an animal.
+
+A JAVA _interface_ also denotes a type. Unlike a class, however, an interface only declares method signatures, and no constructors, attributes, or method bodies. It specifies the expected behaviors in the method signatures, but does not provide any implementation details.
+
+In JAVA, an interface is also used for subtyping. If a dog class implements an I animal interface, then a dog object behaves not only like a dog, but it is also expected to behave like an animal by providing all the method bodies for the method signatures listed in the interface. Just like with inheritance, the dog is an animal. However, the difference is that the dog class needs to provide the implementation details for what it means to be an animal. So, an interface is like a contract to be fulfilled by implementing classes.
+
+In both inheritance and interfaces, you achieve consistency between the dog type and the animal type so that a dog object is usable anywhere in your program when you are dealing with an animal type.
+
+Unlike inheritance, interfaces are not a generalization of a set of classes. It is important to understand that interfaces are not classes. They are used to describe behaviors. All that an interface contains are method signatures. In JAVA, we use the key word _interface_ to indicate that we are creating one. Standard JAVA naming convention places the letter _I_ before an actual name to indicate an interface. For example
+
+```java
+public interface IAnimal {
+    public void move();
+    public void speak();
+    public void eat();
+}
+```
+
+In the example above, notice that we never implement or describe how these behaviors are performed. We only show that an animal has these behaviors. Another thing you might have noticed is that the interface does not encapsulate any of the attributes of an animal. This is because attributes are not behaviors.
+
+Now that we have an interface, we need to declare that we are going to fulfill the contract as described in the interface. The keyword in JAVA for this action is _implements_.
+
+```java
+public class Dog implements IAnimal {
+    // Attributes of a dog can go here
+
+    public void move() {};
+    public void speak() {};
+    public void eat() {};
+}
+```
+
+Our dog class has declared that it will implement or describe the behaviors that are in the interface. When you do this, you must have all the method signatures explicitly declared and implemented in the class. This means that we must the move, speak, and eat methods in this class.
+
+The three advantages that an interface:
+- Interfaces can be implemented by multiple classes just like subclass inheritance.
+- Classes can decide how to perform the behaviors described in an interface.
+- A class can implement multiple interfaces, this is one of the advantages inheritance doesn't have.
+
+Interfaces are drawn in a similar way that classes are drawn in UMLs. Interfaces are explicitly noted in UML class diagrams using guillemets `(<< >>)`, or French quotes, to surround the words interface.
+
+<img src="../1. Object-Oriented Design/images/uml_interface.png">
+
+This indicates that the class implements the interface. The standard way to draw interfaces on your UML class diagrams is to have the arrow pointing upward. This means that the interface is always toward the top, and the classes that implement them are always toward the bottom.
+
+Like abstract classes, which are classes that cannot be instantiated, interfaces are a means in which you can implement __polymorphism__. In object oriented languages, polymorphism is when two classes have the same description of a behavior, but the implementations of the behavior may be different.
+
+This can be seen when we compare a cat and a dog. How would you describe how each of these animals speak? Well, to simply put it, a cat meows and a dog barks. The description of the behavior is the same, both animals can speak. But the actual behavior implementation itself is different. This is known as _polymorphism_.
+
+It is simple to achieve in JAVA using an interface. We create our interface the same way as we did before.
+
+```java
+public interface IAnimal {
+    public void move();
+    public void speak();
+    public void eat();
+}
+```
+
+The Cat and Dog class both implement the IAnimal interface, but they each have their own versions of the speak behavior, like shown below:
+
+```java
+public class Dog implements IAnimal {
+    public void speak() {
+        System.out.println("Bark!");
+    }
+}
+
+public class Cat implements IAnimal {
+    public void speak() {
+        System.out.println("Meow!");
+    }
+}
+```
+
+Just like with class inheritance, interfaces can inherit from other interfaces. And just like with class inheritance, interface inheritance should not be abused. This means that you should not be extending interfaces if you are simply trying to create a larger interface. Interface A should only inherit from interface B if the behaviors in interface A can fully be used as a substitution for interface B.
+
+__Multiple inheritance__
+
+This is when a subclass has two or more super classes. While this is possible to do with other object oriented languages, like C++, JAVA doesn't support Multiple Inheritance. This is because inheriting from two or more superclasses can cause Data Ambiguity. When your subclass inherits from two or more superclasses that have attributes with the same name or behaviors with the same method signature, how do you distinguish between them? Since JAVA cannot tell which one you would be referencing, it does not allow for multiple inheritance so that data ambiguity is not an issue.
+
+Interfaces do not run into this issue. In JAVA, a class can implement as many interfaces as we want. This is because of the nature of interfaces. Since they are only contracts and do not enforce a specific way to complete these contracts, overlapping method signatures are not a problem.
+
+```java
+public interface IPublicSpeaking {
+    public void givePresentation();
+    public void speak();
+}
+
+public interface IPrivateConversation {
+    public void lowerVoiceVolume();
+    public void speak();
+}
+
+public class Person implements IPublicSpeaking, IPrivateConversation {
+    public void speak() {
+        System.out.println("This is fine");
+    }
+}
+```
+
+A single implementation for multiple interfaces with overlapping contracts is acceptable. There is no ambiguity here because the Person class only has one definition of a speak method, and it is the same implementation for both interfaces.
+
+<img src="../1. Object-Oriented Design/images/class_interface.png">
 
 
 

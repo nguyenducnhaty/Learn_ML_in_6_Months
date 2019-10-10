@@ -1,4 +1,4 @@
-<h1>Java for Beginner</h1>
+<h1>Java Fundamentals</h1>
 
 The Software Design and Architecture needs me to have a basic understanding of Java so we will be going through a Java Crash Course. Notes are from [Java Tutorial for Beginners [2019] by Programming with Mosh](https://www.youtube.com/watch?v=eIrMbAQSU34).
 

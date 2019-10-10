@@ -12,6 +12,10 @@
 
 - Can I make a database, like AsterixDB or Solr where I read a bunch of web pages and people can query for information and they get the answers. Just a voice based search engine but to build that I need to build a different storage system, like the ones I mention above, like a natural language interface. So, after my engine crawls web pages, it reads and stores information in a compact form and I need a way to access those information when someone queries it.
 
+- Same Spotible idea, transcribing books, but you go to the actors and actresses, rather than having them voice over content, we can ask them to record some stuff and then train an algorithm to mimic their voice and then use those in reading children's books. I got the idea from Vinod Khosla.
+
+- ANN's model the electrical side of neurons, can I model the chemical side and add some components to the basic perceptron structure? Or come up with a different architecture that doesn't rely on the electrical side but rather the chemical component of the neurons.
+
 
 <h2>Project Proposal</h2>
 
