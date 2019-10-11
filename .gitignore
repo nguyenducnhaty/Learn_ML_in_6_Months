@@ -47,3 +47,17 @@ ml.code-workspace
 /.vscode
 /Big Data/coursera-master
 *.class
+.pytest_cache
+
+# Java stuff
+*.iml
+.gradle
+.idea
+gradle
+*.properties
+*.bat
+
+/captures
+.externalNativeBuild
+build
+*.o
