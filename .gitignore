@@ -57,7 +57,7 @@ gradle
 *.properties
 *.bat
 
-/captures
 .externalNativeBuild
 build
 *.o
+/Java/New
