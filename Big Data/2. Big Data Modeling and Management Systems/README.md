@@ -435,18 +435,75 @@ It is impossible for a distributed computer system to simultaneously provide all
 
 <h3>Redis: An Enhanced Key-Value Store</h3>
 
+Redis calls itself an in-memory data structure store. In simple terms, Redis is not a full blown DBMS, it can persist data on disks, and does so to save its state, but it's intended use is to optimally use memory and memory based methods to make a number of common data structures very fast for lots of users.
 
+Redis supports the following data structures: strings, hashes, lists, sets and sorted sets.
+
+A good way to think about them is to think of a data lookup problem. Now, in the simplest case, a lookup needs a key value pair where the key is a string and the value is also a string. So for a lookup we provide the key and get back the value. The Redis string can be binary and can have a size of up to 512 megabytes, although its internal limit is higher. In some application scenarios, keys may have an internal structure. For example, product codes may have product family, manufacturing batch, and the actual product ID strung together into one ID.
+
+Redis has the ability to delete an expired key and can be made to call a function to generate a new key if you no longer need the old key. An interesting side benefits to structured keys that it can encode a hierarchy to the structure. A slightly more complex case occurs when the value is not atomic, but a collection object like a list which by definition is an ordered set. When the lists are long, space saving becomes an important issue. So Redis employs a method called Ziplists which essentially compacts the size of the list in memory without changing the content. Often producing significant reduction in memory used. Of course, while Ziplists are very efficient for retrieval, they are a little more complex for insertion and deletion operations.
+
+Since Redis is an open source system, Twitter made a few innovations on the Redis data structures. One of these innovations is that they created lists of Ziplists. This gave them the flexibility of having constant timing insertions and deletions and at the same time used the compressed representation to save space.
+
+Now the value to be looked up by the keys can actually be more complicated and can be records containing attribute value pairs themselves. Redis values can be hashes which are essentially named containers of unique fields and their values. The hashed attributes are stored very efficiently. And even when the list of attributed value pairs in a hash is really long, retrieval is efficient.
+
+Horizontal scalability or scale out capabilities refers to the ability of a system to achieve scalability when the number of machines it operates on is increased. Redis allows data partitioning through range partitioning and hash partitioning. Range partitioning takes a numeric key and breaks up the range of keys into bins.
+
+Replication is accomplished in Redis through master-slave mode. The slaves have a copy of the master node. And can serve read queries. Clients write to the master node. And master node replicates to the slaves. Clients read from the slaves to scale up the read performance. The replication processes are synchronous. That is that slaves do not get replicated data, it locks them with each other.
+However, the replication process does ensure that they're consistent with each other.
 
 <h3>Aerospike: a New Generation KV Store</h3>
 
+Aerospike calls itself a distributed NoSQL database and key value store, and goes on to say that it is architected for the performance needs of today's web scale applications.
 
+<img src="../2. Big Data Modeling and Management Systems/images/aerospike.png">
+
+The diagram above shows how Aerospike relates to the ecosystem for which it is designed. The top layer shows several applications for real time consumer facing systems, such as travel recommendation systems and etc. Now, all of these systems have the common need that large amounts of data should be accessible to them at any point of time. The Aerospike system can interoperate with Hadoop-based systems, so Spark, or a Legacy database, or even a real time data source. It can exchange large volumes of data with any such source and serve fast lookups and queries to the applications above. Now that translates to a very high availability robust and strong consistency needs.
+
+The figure below presents a high level architecture diagram of Aerospike.
+
+<img src="../2. Big Data Modeling and Management Systems/images/aerospike_architecture.png">
+
+The first item to notice here is what they call a fast bat, which essentially refers to the left side of the architecture. The client system processes transactions. That is data that are primarily managed in a primary index that is a key value store. This index stays in memory for operational purposes. However, the server also interacts with the storage layer for persistence. The storage layer uses three kinds of storage systems, in memory with a dynamic RAM or DRAM, a regular spinning disk, and flash/SSD, which is solid state device for fast loading of data when needed.
+
+The second point of uniqueness is a secondary index. Aerospike built secondary index fields that are non-primary keys. A non-primary key is a key attribute that makes a tuple unique, but it has not been chosen as a primary key. In Aerospike, secondary indices are stored in main memory. They are built on every node in a cluster and co-located with the primary index. Each secondary index entry contains references to records, which are local to the node.
+
+As a key value store, Aerospike uses standard database like scalar types like integer, string, and so forth, as well as lists like Reddis. The map type is similar to the hashtag of Reddis and contains attribute value pairs. Since it is focused on real time web application, it supports geospatial data, like places with latitude and longitude values or regency polygons.
+
+Aerospike also provides a more declarative language called AQL. AQL looks very similar to SQL, the Standard Query Language for relational databases. The language allows advocate functions, like sum and average, and other user defined functions, which the system may evaluate through a map produced time operation.
+
+Aerospike, despite being a distributor information system, actually offers ACID guarantees through:
+- Consistency - all copies of a data item are in sync
+    - Uses synchronous writes to replicas
+    - Mechanisms to relax immediate consistency
+- Durability
+    - Flash storage
+    - Replication management
+- Network partitioning reduced
+    - Tighter cluster control
 
 <h3>Semistructured Data – AsterixDB</h3>
 
-
+AsterixDB is a relatively new big data management system for semistructured data that's currently being incubated by Apache. Since it is a full fledged DBMS, it provides ACID guarantees.
 
 <h3>Solr: Managing Text</h3>
 
+Solr, and its underlying text indexing engine, are typically designed for search problems. So they would typically be part of a search engine.
 
+<img src="../2. Big Data Modeling and Management Systems/images/solr_challenges.png">
+
+Lucene, the engine on which Solr is built is effectively not a database, but a modern inverted index. An inverted index is essentially an index which for every term stores at least the ID of the document where the term occurs. Practically, other computed numbers or properties associated with the terms will also be included in the index.
+
+Solr is an open source enterprise search platform. The heart of Solr is its search functionality built for full text search. However, Solr provides much more than tech search. It can take any structured document, even CSV files which can be broken up into fields, and can index each field separately. Full text indexes where text columns are supplemented by indexes for other types of data, including numeric data, dates, geographic coordinates, and fields where domains are limited to an emergent set of values.
+
+Solr provides other facilities like faceted search and highlighting of terms that match a query. Faceted search essentially extracts individual values of fields and displays them back to the user, usually with a count of the number of records. If a user clicks on a facet, documents with only those values, that's just the tablets, will be presented back to the user.
 
 <h3>Relational Data – Vertica</h3>
+
+Vertica is the relational DBMS designed to operate on top of HTFS. It belongs to a family of DBMS architectures called column stores. Other products in the same family are UCDV, Carrot Cell Xvelocity from Microsoft and so forth.
+
+<img src="../2. Big Data Modeling and Management Systems/images/vertica.png">
+
+<img src="../2. Big Data Modeling and Management Systems/images/vertica_efficiency.png">
+
+<img src="../2. Big Data Modeling and Management Systems/images/working_with_vertica.png">
