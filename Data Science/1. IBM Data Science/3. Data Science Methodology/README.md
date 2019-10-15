@@ -18,7 +18,7 @@ Selecting the right analytic approach depends on the question being asked. The a
 
 <img src="../3. Data Science Methodology/images/analytics_approach.png">
 
-If the question is to determine probabilities of an action, then a predictive model might be used. If the question is to show relationships, a descriptive approach maybe be required. This would be one that would look at clusters of similar activities based on events and preferences. Statistical analysis applies to problems that require counts. For example if the question requires a yes/ no answer, then a classification approach to predicting a response would be suitable.
+If the question is to determine probabilities of an action, then a _predictive model_ might be used. If the question is to show relationships, a _descriptive approach_ maybe be required. This would be one that would look at clusters of similar activities based on events and preferences. _Statistical analysis_ applies to problems that require counts. For example if the question requires a yes/ no answer, then a classification approach to predicting a response would be suitable.
 
 Machine Learning is a field of study that gives computers the ability to learn without being explicitly programmed. Machine Learning can be used to identify relationships and trends in data that might otherwise not be accessible or identified. In the case where the question is to learn about human behavior, then an appropriate response would be to use Clustering Association approaches.
 
@@ -45,11 +45,11 @@ After the initial data collection is performed, an assessment by the data scient
 
 Essentially, the data understanding section of the data science methodology answers the question: Is the data that you collected representative of the problem to be solved?
 
-In order to understand the data you can run descriptive statistics against the data columns that would become variables in the model. First, these include statistics on each variable, such as mean, median, minimum, maximum, and standard deviation.
+In order to understand the data you can run _descriptive statistics_ against the data columns that would become variables in the model. First, these include statistics on each variable, such as mean, median, minimum, maximum, and standard deviation.
 
-Second, you can use pairwise correlations to see how closely certain variables were related, and which ones, if any, were very highly correlated, meaning that they would be essentially redundant, thus making only one relevant for modeling.
+Second, you can use _pairwise correlations_ to see how closely certain variables were related, and which ones, if any, were very highly correlated, meaning that they would be essentially redundant, thus making only one relevant for modeling.
 
-Third, you can use histograms to understand how values or a variables is distributed, and which sorts of data preparation may be needed to make the variable more useful in a model. For example, for a categorical variable that has too many distinct values to be informative in a model, the histogram would help decide how to consolidate those values. The univariate statistics, and histograms are also used to assess data quality. From the information provided, certain values can be re-coded or perhaps even dropped if necessary, such as when a certain variable has many missing values. The question then becomes, does "missing" mean anything? Sometimes a missing value might mean "no", or "0" (zero), or at other times it simply means "we don't know". Or, if a variable contains invalid or misleading values, such as a numeric variable called "age" that contains 0 to 100 and also 999, where that "triple-9" actually means "missing", but would be treated as a valid value unless we corrected it.
+Third, you can use _histograms_ to understand how values or a variables is distributed, and which sorts of data preparation may be needed to make the variable more useful in a model. For example, for a categorical variable that has too many distinct values to be informative in a model, the histogram would help decide how to consolidate those values. The univariate statistics, and histograms are also used to assess data quality. From the information provided, certain values can be re-coded or perhaps even dropped if necessary, such as when a certain variable has many missing values. The question then becomes, does "missing" mean anything? Sometimes a missing value might mean "no", or "0" (zero), or at other times it simply means "we don't know". Or, if a variable contains invalid or misleading values, such as a numeric variable called "age" that contains 0 to 100 and also 999, where that "triple-9" actually means "missing", but would be treated as a valid value unless we corrected it.
 
 <h3>Data Preparation - Concepts</h3>
 
@@ -64,7 +64,7 @@ Feature engineering is also part of data preparation. It is the process of using
 
 <h3>Modeling - Concepts</h3>
 
-Modelling is the stage in the data science methodology where the data scientist has the chance to sample the sauce and determine if it's bang on or in need of more seasoning! This portion of the is geared toward answering two key questions: First, what is the purpose of data modeling, and second, what are some characteristics of this process?
+Modelling is the stage in the data science methodology where the data scientist has the chance to sample the sauce and determine if it's bang on or in need of more seasoning! This portion of the methodology is geared toward answering two key questions: First, what is the purpose of data modeling, and second, what are some characteristics of this process?
 
 Data Modelling focuses on developing models that are either __descriptive__ or __predictive__. An example of a descriptive model might examine things like: if a person did this, then they're likely to prefer that. A predictive model tries to yield yes/no, or stop/go type outcomes. These models are based on the analytic approach that was taken, either statistically driven or machine learning driven. The data scientist will use a training set for predictive modelling. A training set is a set of historical data in which the outcomes are already known. The training set acts like a gauge to determine if the model needs to be calibrated. In this stage, the data scientist will play around with different algorithms to ensure that the variables in play are actually required.
 
@@ -87,7 +87,7 @@ The second phase of evaluation that may be used is statistical significance test
 
 <h3>Deployment</h3>
 
-While a data science model will provide an answer, the key to making the answer relevant and useful to address the initial question, involves getting the stakeholders familiar with the tool produced. In a business scenario, stakeholders have different specialties that will help make this happen, such as the solution owner, marketing, application developers, and IT administration. Once the model is evaluated and the data scientist is confident it will work, it is deployed and put to the ultimate test.
+While a data science model will provide an answer, the key to making the answer relevant and useful to address the initial question involves getting the stakeholders familiar with the tool produced. In a business scenario, stakeholders have different specialties that will help make this happen, such as the solution owner, marketing, application developers, and IT administration. Once the model is evaluated and the data scientist is confident it will work, it is deployed and put to the ultimate test.
 
 In preparation for solution deployment, the next step is to assimilate the knowledge for the business group who would be designing and managing the intervention program to reduce readmission risk.
 

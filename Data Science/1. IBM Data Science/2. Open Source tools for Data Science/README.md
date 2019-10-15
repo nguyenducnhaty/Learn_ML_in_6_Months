@@ -10,11 +10,11 @@ Skills Network Labs, previously known as Data Scientist Workbench or BDU Labs. I
 
 Skills Network Labs is an environment that contains tools such as RStudio, Jupyter Notebook, and Zeppelin Notebook. These tools provides an interactive environment for you to perform data analysis, data visualization, machine learning and image recognition.
 
-It's ready to use in your web browser. So without having to install anything on your computer, you can immediately start using popular data science tools like RStudio IDE, Jupyter Notebooks, Apache Zeppelin and more. In these videos, you'll be learning about these popular tools and how to get familiar working in the environments. Skills Network Labs is also the virtual lab environment for [cognitiveclass.ai](https://cognitiveclass.ai/), a popular website with lots of free online courses in data science, artificial intelligence, and data engineering.
+It's ready to use in your web browser. So without having to install anything on your computer, you can immediately start using popular data science tools like RStudio IDE, Jupyter Notebooks, Apache Zeppelin and more. Skills Network Labs is also the virtual lab environment for [cognitiveclass.ai](https://cognitiveclass.ai/), a popular website with lots of free online courses in data science, artificial intelligence, and data engineering.
 
 <h3>Account Features</h3>
 
-Welcome to Skills Network Labs which you can access with [labs.cognitiveclass.ai](https://labs.cognitiveclass.ai/). On the Skills Network Labs homepage, you have all the data science tools at your fingertips.
+You can access Skills Network Labs with [labs.cognitiveclass.ai](https://labs.cognitiveclass.ai/).
 
 <img src="../2. Open Source tools for Data Science/images/Account_Features.png">
 

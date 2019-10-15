@@ -136,7 +136,7 @@ public class Main {
         employee.baseSalary = 50_000;
         employee.hourlyRate = 20;
 
-        int wage = employee.calculateWage(10, baseSalary, hourlyRate);
+        int wage = employee.calculateWage(10);
         System.out.println(wage);
     }
 }
@@ -585,13 +585,6 @@ public class Main {
 Note:
 - static fields doesn't have to create an object, we can access them directly through the class (`Employee.numberOfEmployees`)
 - static methods only see other static methods, they don't have access to instance members.
-
-
-<h2>Refactoring Towards an Object-oriented Design</h2>
-
-
-
-
 
 
 <h2>Inheritance</h2>
