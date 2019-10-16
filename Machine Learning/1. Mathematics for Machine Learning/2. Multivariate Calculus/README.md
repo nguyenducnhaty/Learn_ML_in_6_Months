@@ -1,5 +1,7 @@
 <h1>Week 1: What is calculus?</h1>
 
+
+
 In addition to the topics below, as a pre rec I also went through Khan Academies:
 - [Finding Taylor polynomial approximations of functions](https://www.khanacademy.org/math/ap-calculus-bc/bc-series-new/bc-10-11/v/maclaurin-and-taylor-series-intuition)
 - [Finding Taylor or Maclaurin series for a function](https://www.khanacademy.org/math/ap-calculus-bc/bc-series-new/bc-10-14/v/function-as-a-geometric-series)

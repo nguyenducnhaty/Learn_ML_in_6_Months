@@ -1,5 +1,7 @@
 <h1>Week 1: Introduction to Linear Algebra and to Mathematics for Machine Learning</h1>
 
+
+
 In addition to the topics below, as a pre rec I also went through Khan Academies: [Linear algebra](https://www.khanacademy.org/math/linear-algebra) topics to do some refreshing.
 
 

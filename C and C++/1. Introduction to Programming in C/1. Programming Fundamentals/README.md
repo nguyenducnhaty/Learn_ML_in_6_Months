@@ -1,13 +1,16 @@
 <h1>Week 1: Introduction</h1>
 
 
+
+In addition to this course I also went through [C Programming & Data Structures by Neso Academy](https://www.youtube.com/playlist?list=PLBlnK6fEyqRhX6r2uhhlubuF5QextdCSM) to relearn some of the concepts that wasn't clear in this course.
+
+
 <h2>How to Write a Program with the Seven Steps</h2>
+
 
 <h3>Programming: Plan First, Then Code</h3>
 
-Many novice programmers attempt to dive right into writing the code (in the programming language) as the first step. However, writing the code is actually a much later step in the process. A good programmer will plan first and write second, possibly breaking down a large programming task into several smaller tasks in the process.
-
-To try to better understand the importance of planning before you write, imagine an analogy to building a house or sky scraper. If you were tasked with building a sky scraper, would you break ground and start building right away, figuring out how the building is designed as you go? Hopefully not. Instead, you (or an architect) would design blueprints for the building first. These blueprints would be iteratively refined until they meet everyone’s specifications—they must meet the requirements of the building’s owner, as well as be possible to build reasonably. Once the blueprints are completed, they must be approved by the local government. Actual construction only begins once the plans are fully completed. Programming should be done in a similar manner— come up with a complete plan (algorithm) first and build (implement in code) second.
+A good programmer should plan first and write code second, possibly breaking down a large programming task into several smaller tasks in the process. To try to better understand the importance of planning before you write, imagine an analogy to building a house or sky scraper. If you were tasked with building a sky scraper, would you break ground and start building right away, figuring out how the building is designed as you go? Hopefully not. Instead, you (or an architect) would design blueprints for the building first. These blueprints would be iteratively refined until they meet everyone’s specifications. Actual construction only begins once the plans are fully completed. Programming should be done in a similar manner— come up with a complete plan (algorithm) first and build (implement in code) second.
 
 <h3>The Seven Steps</h3>
 
@@ -15,11 +18,11 @@ To try to better understand the importance of planning before you write, imagine
 
 This figure shows a high-level overview of the programming process. A programmer starts by devising the algorithm for the task she is trying to solve. We will split this planning phase into four steps in the process of writing a program.
 
-After devising a proper algorithm, she is ready for Step 5 of the programming process: translating her plan into code in the programming language she is using for her current project. Your algorithm may have some complex steps, but that is fine. As we will see later, whenever your algorithm calls for a step that is too complicated to be simply translated into a few lines of code, you should turn that step into its own separate programming task and repeat the programming process on it.
+After devising a proper algorithm, you are ready for Step 5 of the programming process: translating the plan into code in the programming language you are using for the current project. Your algorithm may have some complex steps, but that is fine. As we will see later, whenever your algorithm calls for a step that is too complicated to be simply translated into a few lines of code, you should turn that step into its own separate programming task and repeat the programming process on it.
 
-Once the algorithm is implemented in code, the programmer must test her code, which is the 6th Step of the programming process. By testing the program, the programmer tries to uncover errors in her algorithm or implementation. If the programmer finds errors in her program, she debugs the program (Step 7): finding out the cause of the error, and fixing it. The programmer may need to return to the algorithm design steps (if the error lies in the algorithm) or to translation to code (if the error lies in the implementation) to correct the error. The programmer then repeats all of the later steps.
+Once the algorithm is implemented in code, you must test your code, which is the 6th Step of the programming process. By testing the program, the programmer tries to uncover errors in their algorithm or implementation. If the programmer finds errors in their program, they debug the program (Step 7): finding out the cause of the error, and fixing it. The programmer may need to return to the algorithm design steps (if the error lies in the algorithm) or the translation of code (if the error lies in the implementation) to correct the error. The programmer then repeats all of the later steps.
 
-At some point, the programmer completes enough test cases with no errors to become convinced that her program is correct. When the programmer is convinced her code is correct, she has successfully completed the task at hand.
+At some point, the programmer completes enough test cases with no errors to become convinced that their program is correct. When the programmer is convinced their code is correct, they have successfully completed the task at hand.
 
 <h3>Algorithms</h3>
 
@@ -29,20 +32,19 @@ Algorithms that computers work on deal with numbers.
 
 <img src="../1. Programming Fundamentals/images/algorithm_steps.png">
 
-The above figure shows how you should approach designing your algorithm. We will spend the next few sections discussing each of these steps in detail. However, note that "translate to code" comes only after you have an algorithm that you have tested by hand—giving you some confidence that your plan is solid before you build on it.
+The above figure shows how you should approach designing your algorithm. Note that "translate to code" comes only after you have an algorithm that you have tested by hand—giving you some confidence that your plan is solid before you build on it.
 
 
 <h2>The First Four Steps</h2>
 
+
 <h3>Step 1: Work an Example Yourself</h3>
 
-The first step in trying to design an algorithm is to work at least one instance of the problem—picking specific values for each parameter—yourself (by hand). Often this step will involve drawing a diagram of the problem at hand, in order to work it precisely. The more precisely you can perform this problem (including the more precisely you can draw a diagram of the situation if applicable), the easier the remainder of our steps will be.
+The first step in trying to design an algorithm is to work at least one instance of the problem—picking specific values for each parameter—yourself (by hand). Often this step will involve drawing a diagram of the problem at hand, in order to work it precisely. The more precisely you can perform this problem (including the more precisely you can draw a diagram of the situation if applicable), the easier the remainder of the steps will be.
 
-For example, let's say if you want to check if a number is prime, your first step would be to pick a number and figure out if it is prime. Just saying "ok, I know 7 is prime," is not of much use—you just used a fact you know and did not actually work out the problem. For a problem such as this one, which has a "yes or no" answer, we probably want to work at least one example that comes up with a "yes" answer, and one that comes up with a "no" answer.
+If you get stuck at this step, it typically means one of two things. The first case is that the problem is _ill-specified_-it is not clear what you are supposed to do. In such a situation, you must resolve how the problem should be solved before proceeding.
 
-If you get stuck at this step, it typically means one of two things. The first case is that the problem is _ill-specified_—it is not clear what you are supposed to do. In such a situation, you must resolve how the problem should be solved before proceeding. In the case of a classroom setting, this resolution may require asking your professor or TA for more details. In an industrial setting, asking your technical lead or customer may be required. If you are solving a problem of your own creation, you may need to think harder about what the right answers should be and refine your definition of the problem.
-
-The second case where Step 1 is difficult is when you lack _domain knowledge_—the knowledge of the particular field or discipline the problem deals with. In our primality example, if you did not remember the definition of a prime number, that would be an example of lacking domain knowledge—the problem domain is mathematics, and you are lacking in math knowledge. No amount of programming expertise nor effort ("working harder") will overcome this lack of domain knowledge. Instead, you must consult a source of domain expertise—a math textbook, website, or expert. Once you have the correct domain knowledge, you can proceed with solving your instance of the problem. Note that domain knowledge may come from domains other than math. It can come from any field, as programming is useful for processing any sort of information.
+The second case where Step 1 is difficult is when you lack _domain knowledge_—the knowledge of the particular field or discipline the problem deals with. No amount of programming expertise nor effort ("working harder") will overcome this lack of domain knowledge. Instead, you must consult a source of domain expertise. Once you have the correct domain knowledge, you can proceed with solving your instance of the problem.
 
 <h3>Step 2: Write Down What You Just Did</h3>
 
@@ -74,15 +76,12 @@ Another common type of mistake is that there are cases we did not consider in de
 
 <h2>Variables and Expressions</h2>
 
-<h3>Why You Should Learn to Read Code</h3>
-
-Why would you want to learn to read code and execute it by hand when you could take a quick syntax lesson and start typing? Think for a moment about when you were first learning about written language. Did you learn to write before you could read? Probably not, recognizing a word or sentence and attaching meaning is easier than formulating your own. You've probably misspelled a word or made a grammatical error expressing an idea that you could read just fine. Programming is much like this, you need to read for understanding and understand exactly how code is executed before you can write good code of your own. It's also easier, reading well will help you make fewer mistakes as you go, but also help you troubleshoot when your code does something you did not expect.
 
 <h3>Declaring a Variable</h3>
 
 __Variables__:
 
-Programs track most of their state in variables—you can think of a variable as a box that stores a value. In order to use a variable, the programmer must declare it, specifying its type and name. The type specifies what kind of value can be held in a variable's box (for example, whether it is a number, a letter, or text).
+Programs track most of their state in variables. You can think of a variable as a box that stores a value. In order to use a variable, the programmer must declare it, specifying its type and name. The type specifies what kind of value can be held in a variable's box (for example, whether it is a number, a letter, or text).
 
 __Declaration__:
 
@@ -110,9 +109,9 @@ The declaration and initialization—the first assignment—of a variable may be
 
 <h3>Expressions with Common Operators</h3>
 
-As we mentioned previously, an expression is a combination of values and operations which evaluates to a value. We have already seen the simplest expressions—numerical constants, which evaluate to themselves. We can also use mathematical operators, such as +, –, *, and / to carry out arithmetic operations. For example, 7 + 3 evaluates to 10 and 4 * 6 + 9 * 3 evaluates to 51. These operators have the standard rules of precedence—multiplication and division occur before addition and subtraction—and associativity: 4 – 3 – 1 means (4 – 3) – 1 not 4 – (3 –1). Parenthesis may be used to enforce a specific order of operations—4 * (6 + 9) * 3 evaluates to 180.
+An expression is a combination of values and operations which evaluates to a value. The simplest expressions—numerical constants, evaluate to themselves. We can also use mathematical operators, such as +, –, *, and / to carry out arithmetic operations. For example, 7 + 3 evaluates to 10 and 4 * 6 + 9 * 3 evaluates to 51. These operators have the standard rules of precedence- multiplication and division occur before addition and subtraction—and associativity: 4 – 3 – 1 means (4 – 3) – 1 not 4 – (3 –1). Parenthesis may be used to enforce a specific order of operations—4 * (6 + 9) * 3 evaluates to 180.
 
-Another common operator which you may not be as familiar with is the modulus operator, %. The modulus operator evaluates to the remainder when dividing the first operand by the second. That is a % b (read “a modulus b”, or “a mod b” for short) is the remainder when a is divided by b. For example, 19 % 5 = 4 because 19 / 5 = 3 with a remainder of 4—3 * 5 = 15, and 19 – 15 = 4.
+Another common operator which you may not be as familiar with is the modulus operator, %. The modulus operator evaluates to the remainder when dividing the first operand by the second. That is a % b (read “a modulus b”, or “a mod b” for short) is the remainder when a is divided by b. For example, 19 % 5 = 4 because 19 / 5 = 3 with a remainder of 4.
 
 One slightly tricky thing about division with integers is that dividing an integer by an integer gives an integer. This means that 5 / 2 is 2. Note that we are using _floor_ division (ie: we round down the result). This happens because integer can only hold whole numbers.
 
@@ -123,19 +122,31 @@ We can, however, write perfectly meaningful assignment statements which are not 
 
 <h2>Functions</h2>
 
+
 <h3>Using Functions for Abstraction</h3>
 
-To see why functions are so important, let us take a look back at the closestPoint algorithm, an algorithm which finds the closest point from a list of 2D data points.
+To see why functions are so important, let us take a look at a closestPoint algorithm, an algorithm which finds the closest point from a list of 2D data points.
 
 <img src="../1. Programming Fundamentals/images/closest_point.png">
 
-There are two places here where this algorithm computes the distance between two points. Why is that important? Well, we need to do the same computation twice. Without functions, we would write the same code twice and that is just in this problem. What if we have other problems that also need to compute the distance between two points? We have a few examples of other problems that would need to compute the distance between two points, but there are many others. We could rewrite the code each time, which may not seem like a big deal for something as small as computing the distance but we want to avoid duplicating code whenever possible. Every time we rewrite code, we run the risk of making mistakes and introducing bugs into our program. Furthermore, it is really boring to rewrite the same code again and again. Instead, we should abstract the computation for distance out into a function of its own. Making distance its own function means we can reuse that algorithm any place we need it without rewriting it. How would this work? Well, our closestPoint function would, in its code, call the distance function. That is, it would ask the distance function to perform its computation. To do this, our closestPoint function would first pass in parameter values specifying which points the distance function should compute on.
+There are two places here where this algorithm computes the distance between two points. Why is that important? Well, we need to do the same computation twice. Without functions, we would write the same code twice and that is just in this problem.
+
+What if we have other problems that also need to compute the distance between two points? We have a few examples of other problems that would need to compute the distance between two points, but there are many others. We could rewrite the code each time, which may not seem like a big deal for something as small as computing the distance but we want to avoid duplicating code whenever possible.
+
+Every time we rewrite code, we run the risk of making mistakes and introducing bugs into our program. Furthermore, it is really boring to rewrite the same code again and again. Instead, we should abstract the computation for distance out into a function of its own. Making distance its own function means we can reuse that algorithm any place we need it without rewriting it.
+
+How would this work? Well, our closestPoint function would, in its code, call the distance function. That is, it would ask the distance function to perform its computation. To do this, our closestPoint function would first pass in parameter values specifying which points the distance function should compute on.
 
 <img src="../1. Programming Fundamentals/images/distance_function.png">
 
 The distance function would execute its code, doing whatever statements are in it according to the rules you are learning. It finishes when it comes up with an answer which returns back to the function that called it. When it returns, the distance function is done and the calling function continues its own execution, making use of the answer it got from the function it called.
 
-<img src="../1. Programming Fundamentals/images/usefulness_of_function.png">
+__How does this help you?__
+- Can re-use distance function any time we need.
+- Abstraction
+    - Separate interface from implementation
+    - Can think about what distance does to use it.
+    - Do not need to think about __how__ it does it.
 
 <h3>Anatomy of a Function</h3>
 
@@ -159,7 +170,7 @@ As a first step towards reading code with function calls, we must first group to
 
 <img src="../1. Programming Fundamentals/images/frames.png">
 
-Notice that in the example shown in the figure, one of the functions is named __main__. The function named __main__ is special—execution of a program starts at the start of __main__. We start by drawing an empty frame for __main__ and putting the execution arrow right before the first line of code in __main__. We then execute statements of the code until __main__ returns, which ends the program.
+Notice that in the example shown in the figure, one of the functions is named __main__. The function named __main__ is special because execution of a program starts at the start of __main__. We start by drawing an empty frame for __main__ and putting the execution arrow right before the first line of code in __main__. We then execute statements of the code until __main__ returns, which ends the program.
 
 Calls to functions may appear in expressions, in which case we must evaluate the function to determine its return result. To do this evaluation, we take the following steps:
 1. Draw a frame for the function being called. Place a box in that frame for each parameter that this function takes.
@@ -176,85 +187,70 @@ A function call may also be used as a statement by itself, in which case, it is 
 
 <h3>Scope</h3>
 
-So far, all of our code examples have had only one variable with a particular name. However, in real programs—which may be quite large and developed by multiple people—we may have many different variables with the same name. This possibility means that we need rules to determine which variable a particular name refers to. These rules are based on the notion of _scope_.
-
-The scope of a variable is the region of code in which it is visible. Within a variable’s scope, its name may refer to it. Outside of a variable’s scope, nothing can refer to it directly. Most variables that you will use will be local variables—variables that are declared inside of a function—and function parameters. In C, the scope of a local variable begins with its declaration and ends at the closing curly-brace (}), which closes the block of code—the code between matching open and close curly braces—that the variable was declared in. Function parameters have a scope of the entire function to which they belong.
+The _scope_ of a variable is the region of code in which it is visible. Within a variable’s scope, its name may refer to it. Outside of a variable’s scope, nothing can refer to it directly. Most variables that you will use will be local variables—variables that are declared inside of a function—and function parameters. In C, the scope of a local variable begins with its declaration and ends at the closing curly-brace (}), which closes the block of code—the code between matching open and close curly braces—that the variable was declared in. Function parameters have a scope of the entire function to which they belong.
 
 <img src="../1. Programming Fundamentals/images/scope.png">
 
-This figure shows a snippet of code (we have not learned the details of what most of this code does, but that is not important—we are just interested in the scope of the variables). The figure shows the same piece of code three times, with different scopes highlighted. The leftmost portion of the figures shows the scope of the parameters (__x__ and __y__)—which is the entire function—in a blue box. The middle portion shows the scope of the variable __n__—which starts at its declaration and continues to the close curly brace which ends the function—in a red box. The right portion shows the scope of the variable __q__—which starts at its declaration and ends at the next curly brace—in a green box.
-
-The figure below shows a code fragment with four different __x__'s in it. (As the actual behavior of the code is irrelevant to this example, much of it is replaced with [...]) The first __x__ in the figure is declared outside of any of the functions—it is a global variable. The "box" for a global variable exists outside of any frames and is created when the program starts. If the global variable is initialized in its declaration, the value is also placed in the box before the program starts. The areas where __x__ references this variable are colored purple.
-
-<img src="../1. Programming Fundamentals/images/xscope.png">
-
-We note that there is a time and place to use global variables, but their use should be rare. When novice programmers learn about global variables, they often want to use them for all sorts of inappropriate purposes. Typically these uses reflect a lack of understanding of parameter passing or how functions return values.
-
-The next __x__ in our example is the parameter to the function __f__. The scope for this x begins at the open curly brace ({) of __f__’s body and ends at the matching close curly brace (}). The region of the program where __x__ references the parameter to __f__ are shown in red. Observe that the red begins and ends with the curly braces surrounding the body of __f__, but has a "hole" where there is a different __x__ in a smaller scope in the middle.
-
-The "hole" in the red region corresponds to the portion of the code (shown in blue) where __x__ references the local variable declared inside of the while loop’s body. After this local variable __x__ goes out of scope at the closing curly brace of the block it was declared in, we return to the red region, where the parameter of __f__ is what we reference with the name __x__.
-
-Between the end of __f__ and the declaration of a local variable named __x__ inside of function __g__, the global variable is what the name x references—shown in the figure by coloring this region of code purple. When there is a local variable named __x__ declared inside of __g__, then the name __x__ references it (this area is shown in green) until it goes out of scope, at which point the name __x__ again references the global variable.
-
-If all of that seems complicated, you will be comforted by the fact that thinking through such issues should not come up in well-written code. Ideally, you should write your code such that you have at most one variable by any particular name in scope at a time (related to this point: you should name your variables meaningfully—__x__ is seldom a good name for a variable, unless of course it represent the x-coordinate of a point or something similar). However, you should still know what the rule is, as it is common to many programming languages. You may come across code that has multiple variables of the same name in scope at some point and need to understand how to read it.
+The figure above shows the same piece of code three times, with different scopes highlighted. The leftmost portion of the figures shows the scope of the parameters (__x__ and __y__)—which is the entire function—in a blue box. The middle portion shows the scope of the variable __n__—which starts at its declaration and continues to the close curly brace which ends the function—in a red box. The right portion shows the scope of the variable __q__—which starts at its declaration and ends at the next curly brace—in a green box.
 
 
 <h2>Printing</h2>
 
-Our example programs so far have computed results, but had no way to communicate them to the user. Such programs would be useless in practice. Real programs have means to communicate with their user, both to read input and to provide output. Many programs that you are accustomed to have Graphical User Interfaces (GUIs), however, we will work primarily with programs that use a command line interface. Writing GUIs is a more complex task, and requires a variety of additional concepts.
 
-Command line programs provide output to their user by printing it out on the terminal. In C, printing output is accomplished by calling the __printf__ function, which takes a string specifying what to print. We will learn more about strings later, as they require knowledge of pointers to understand. For now, you can think of them as being text—words, or sentences. In much the same way that we can write down numerical literals (such as 3, or -42), we can write down string literals by placing the string we want inside of quotation marks, e.g., "This is a string". If we wanted to print out the string, “Hello World”, we would type __printf("Hello World");__.
+Command line programs provide output to their user by printing it out on the terminal. In C, printing output is accomplished by calling the __printf__ function, which takes a string specifying what to print. We will learn more about strings later, as they require knowledge of pointers to understand. For now, you can think of them as being text—words, or sentences. In much the same way that we can write down numerical literals (such as 3, or -42), we can write down string literals by placing the string we want inside of quotation marks, e.g., "This is a string". If we wanted to print out the string, “Hello World”, we would type:
 
-The f in __printf__ stands for “formatted,” meaning that __printf__ does not just print literal strings, but can take multiple arguments (of various types), format the output as a string, and print the result. To format output in this way, the string argument of printf (which is called the “format string”) includes special _format specifiers_, which start with a percent sign (%). For now, we will only concern ourselves with %d which specifies that an integer should be formatted as a decimal (base 10) number. For example, if we wrote the following code fragment:
+```c
+printf("Hello World");
+```
+
+The f in __printf__ stands for “formatted,” meaning that __printf__ does not just print literal strings, but can take multiple arguments (of various types), format the output as a string, and print the result. To format output in this way, the string argument of printf (which is called the “format string”) includes special _format specifiers_, which start with a percent sign (`%`). For example, the `%d` specifies that an integer should be formatted as a decimal (base 10) number. For example:
 
 ```c
 int x = 3;
 int y = 4;
-printf("x + y = %d", x + y);
+printf("x + y = %d", x + y); // x + y = 7
 ```
 
-it would print x + y = 7, because it would evaluate the expression x + y to get 3 + 4 which is 7, and format the number 7 as a decimal number in place of the %d specifier. The rest of the string is printed literally.
-
-Another type of special information we can include in the string is _escape sequences_. Escape sequences are two (or more) characters, the first of which is a backslash (\), which gives the remaining characters special meaning. The most common escape sequence you will encounter is \n, which means “newline”. If you want your print statement to print a newline character (which makes the next output begin at the start of the next line), then you do so with \n. If you want a literal backslash (that is, you actually want to print a backslash), \\ is the escape sequence for that purpose. We will note that you generally will want to print a newline in your output, not only so that it looks nice, but also because printf does not actually print the output to the screen until it encounters a newline character, or is otherwise forced to do so.
+Another type of special information we can include in the string is _escape sequences_. Escape sequences are two (or more) characters, the first of which is a backslash (`\`), which gives the remaining characters special meaning. The most common escape sequence is `\n`, which means “newline”. If you want your print statement to print a newline character (which makes the next output begin at the start of the next line), then you do so with `\n`. If you want a literal backslash (that is, you actually want to print a backslash), `\\` is the escape sequence for that purpose.
 
 
 <h2>Conditional Statements</h2>
 
-In addition to computing arithmetic combinations of their variables, programs often make decisions based on the values of their variables—executing different statements based on the value of expressions. In C, an if/else statement specifies that one block of code should be executed if a condition is true, and another block should be executed if that condition is false.
+
+In C, an if/else statement specifies that one block of code should be executed if a condition is true, and another block should be executed if that condition is false.
 
 To write meaningful if/else statements, we need to introduce operators which allow us to compare two expressions and produce a Boolean outcome. In C, however, there are no distinct values for true or false, instead, false is 0, and anything which is non-zero is true. We will refer to true and false because they make more sense conceptually; the distinction should not make a practical difference in most cases.
 
 <img src="../1. Programming Fundamentals/images/conditionals.png">
 
-The table above shows the C operators for conditional expressions. The first six (==, !=, <, <=, >, and >=) are relational operators—they compare two expressions for equality or inequality. For any of these operators, both operands (the expressions on the left and right) are evaluated to a value, then compared appropriately. The operator then produces a true or false value.
+The table above shows the C operators for conditional expressions. The first six (`==, !=, <, <=, >, and >=`) are relational operators—they compare two expressions for equality or inequality. For any of these operators, both operands (the expressions on the left and right) are evaluated to a value, then compared appropriately. The operator then produces a true or false value.
 
-The last three operators in the table (!, &&, and ||) are boolean operators—they operate on true/false values. The first of these, ! performs the boolean NOT operation. It is a unary operator—meaning that is has one operand—which evaluates to true if its operand is false, and evaluates to false if its operand is true.
+The last three operators in the table (`!, &&, and ||`) are boolean operators—they operate on true/false values. The first of these, `!` performs the boolean NOT operation. It is a unary operator—meaning that is has one operand—which evaluates to true if its operand is false, and evaluates to false if its operand is true.
 
-The && and || operators perform the logical AND and logical OR operations respectively. The logical AND of two values is true if and only if both values are true, otherwise it is false. The logical OR of two values is true if and only if either of the values are true, otherwise it is false.
+The `&&` and `||` operators perform the logical AND and logical OR operations respectively. The logical AND of two values is true if and only if both values are true, otherwise it is false. The logical OR of two values is true if either one of the values is true.
 
-Unlike previous operators that we have seen, && and || may know their answer from only one argument. In the case of &&, if either operand is false, then the result is false, regardless of the other value. Similarly for ||, if either operand is true, then the result is true regardless of the other value. C exploits this fact in the way that it evaluates && and || by making them short circuit—they may only evaluate one operand. Specifically, the first operand is always evaluated to a value; however, if the value of that operand determines the result of the entire && or ||—false for && or true for ||—then the second operand is not evaluated at all.
 
 <h3>if/else</h3>
 
-Now that we understand comparison operators, and can compare expressions, we can discuss the evaluation of if/else statements. The syntax for an if/else statement is shown in figure below.
+The syntax for an _if/else_ statement is shown in figure below.
 
 <img src="../1. Programming Fundamentals/images/if_else.png">
 
-The keyword if is followed by an expression in parenthesis. This expression is evaluated to a value, to determine whether the “then” block or the “else” block is executed. The “then” block of code comes immediately after the expression. C does not have a then keyword (although some languages do), however, this block of code serves the same purpose regardless of the syntactic particulars of the language—it is executed if the conditional expression evaluates to true. After the “then” block, we have the keyword else, followed by the “else” block. This block of code is executed if the conditional expression evaluates to false.
+The keyword _if_ is followed by an expression in parenthesis. This expression is evaluated to a value, to determine whether the “then” block or the _else_ block is executed. The “then” block of code comes immediately after the expression—it is executed if the conditional expression evaluates to true. After the “then” block, we have the keyword else, followed by the “else” block. This block of code is executed if the conditional expression evaluates to false.
 
-C permits if with no else, which is equivalent to an empty “else” block (as if the programmer had written else {}). If you execute an if with no else, then simply imagine the empty “else” block. If the conditional expression evaluates to true, you should execute the “then” block as previously described, however, there is no “else” block to skip. Instead, continue executing statements immediately after the end of the “then” block (skipping over the non-existent “else” block). If the conditional expression evaluates to false, then skip the “then” block, and execute whatever statements follow it (doing nothing for the “else” block).
+C permits if with no else, which is equivalent to an empty “else” block (as if the programmer had written else `{}`). If you execute an if with no else and the conditional expression evaluates to true, you should execute the “then”, however, since is no “else” we continue executing statements immediately after the end of the “then” block. If the conditional expression evaluates to false, then skip the “then” block, and execute whatever statements follow it.
 
-if/else statements may be nested—one (or more) may occur in the “then” or “else” block of another if/else statement. When you encounter nested statements, the same rules apply. The inner statement is just one of the (possibly) many statements in the block, and is executed according to its rules—the condition is evaluated, whichever of the “then” or “else” blocks is appropriate is executed, and then execution continues after the end of the “else” block. When the execution arrow reaches the end of the outer “then” or “else” block, it behaves no differently than if there were no inner if statement.
+if/else statements may be nested—one (or more) may occur in the “then” or “else” block of another if/else statement. When you encounter nested statements, the same rules apply.
 
 <h3>switch/case</h3>
 
-Another way that programs can make decisions is to use switch/case. The syntax of switch/case is shown in the figure below. Here, when the execution arrow reaches the switch statement, the selection expression—in parenthesis after the keyword switch—is evaluated to a value. This value is then used to determine which case to enter. The execution arrow then jumps to the corresponding case—the one whose label (the constant immediately after the keyword case) matches the selection expression’s value. If no label matches, then the execution arrow jumps to the default case if there is one, and to the closing curly brace of the switch if not.
+Another way that programs can make decisions is to use _switch/case_. The syntax of switch/case is shown in the figure below.
 
 <img src="../1. Programming Fundamentals/images/switch_case.png">
 
-Once the execution arrow has jumped into a particular case, execution continues as normal until it encounters the keyword break. When the execution arrow reaches the break keyword, it jumps to the close curly brace which ends the switch statement. Note that reaching another case label does not end the current case. Unless the execution arrow encounters break, execution continues from one statement to the next. When the execution arrow passes from one case into the next like this, it is called “falling through” into the next case.
+Here, when the execution arrow reaches the switch statement, the selection expression—in parenthesis after the keyword switch—is evaluated to a value. This value is then used to determine which case to enter. The execution arrow then jumps to the corresponding case—the one whose label (the constant immediately after the keyword _case_) matches the selection expression’s value. If no label matches, then the execution arrow jumps to the _default_ case if there is one, and to the closing curly brace of the switch if not.
 
-For example, if we were executing the code in the figure above, and reached the switch statement with x having a value of 17 and y having a value of 16, then we would first evaluate the selection expression (x - y), and get a value of 1. The execution arrow would then jump to case 1: and begin executing statements after it. We would execute y = 9;. Then we would fall through the next case label—our execution arrow would move past it into the next case (the label itself has no effect). Then we would execute z = 42;. Next, we would execute the break; statement, causing our execution arrow to jump to the close curly brace of the switch, after which we would continue executing whatever other statements are there.
+Once the execution arrow has jumped into a particular case, execution continues as normal until it encounters the keyword _break_. When the execution arrow reaches the break keyword, it jumps to the close curly brace which ends the switch statement. Note that reaching another case label does not end the current case. Unless the execution arrow encounters break, execution continues from one statement to the next. When the execution arrow passes from one case into the next like this, it is called “falling through” into the next case.
 
 <h3>Shorthand</h3>
 
@@ -264,6 +260,7 @@ C (and many other programming languages) has shorthand—also called _syntactic 
 
 
 <h2>Loops</h2>
+
 
 <h3>While Loops</h3>
 
@@ -275,23 +272,25 @@ The keyword __while__ is followed by an expression in parenthesis. Much like an 
 
 <h3>do/while Loops</h3>
 
-Another type of loop in C is the do-while loop. Unlike a while loop, which checks its conditional expression at the top of the loop, the do-while loop checks its conditional expression at the bottom of the loop—after it has executed the body. While this distinction may seem contrived—either way the condition is checked between iterations—it is important at the start of the loop. A while loop may execute its body zero times, skipping the entire loop, if the condition is false initially. By contrast, a do-while loop is guaranteed to execute its body at least once because it executes the loop body before ever checking the condition.
+Another type of loop in C is the _do-while_ loop. Unlike a while loop, which checks its conditional expression at the top of the loop, the do-while loop checks its conditional expression at the bottom of the loop—after it has executed the body.
+
+While this distinction may seem contrived—either way the condition is checked between iterations—it is important at the start of the loop. A while loop may execute its body zero times, skipping the entire loop, if the condition is false initially. By contrast, a do-while loop is guaranteed to execute its body at least once because it executes the loop body before ever checking the condition.
 
 <img src="../1. Programming Fundamentals/images/do_while_loops.png">
 
-The figure above shows the syntax of a do-while loop. The keyword do is followed by the loop body. After the loop body, the keyword while is followed by the conditional expression and a semicolon.
+The figure above shows the syntax of a do-while loop. The keyword _do_ is followed by the loop body. After the loop body, the keyword _while_ is followed by the conditional expression and a semicolon.
 
 Execution of a do-while loop proceeds by first entering the loop body and executing all of the statements contained in it. When the execution arrow reaches the while at the end of the loop body, its conditional expression is evaluated. If the expression evaluates to true, then the execution arrow jumps back to the start of the loop body. If the expression evaluates to false, then it moves past the end of the loop and execution continues with the next statement after the loop.
 
 <h3>For Loops</h3>
 
-The third type of loop in C is a for loop. The for loop is syntactic sugar—it does not introduce any new behavior, but instead provides a more convenient syntax for a common programming idiom. In the case of for loops, the common idiom is counting from one number to another. The following figure shows the syntax of a for loop, and how it is de-sugared into a while loop—that is, how we could write the for loop in terms of the already familiar while loop. Knowing how the for loop de-sugars to a while loop tells us how to execute it. We can imagine the equivalent while loop, and follow the execution rules we have already learned for it.
+The third type of loop in C is a for loop. The _for_ loop is syntactic sugar—it does not introduce any new behavior, but instead provides a more convenient syntax for a common programming idiom. In the case of for loops, the common idiom is counting from one number to another. The following figure shows the syntax of a for loop, and how we could write the for loop in terms of the already familiar _while_ loop.
 
 <img src="../1. Programming Fundamentals/images/for_loop.png">
 
-The for keyword is followed by three pieces, separated by semicolons, inside of parenthesis. The first of these is the “initialization statement”. It happens once before the first time the loop’s condition is checked. In the de-sugaring, this statement appears right before the while loop. The second piece is not a statement (even though it is followed by a semicolon), but rather the conditional expression for the loop. In the de-sugaring, this expression is the conditional expression of the while loop. The third statement is the “increment statement”. In the de-sugaring, it appears immediately before the close curly brace of the loop body. After all of these is the loop body, which (except for the addition of the “increment statement” at the end) is the loop body of the while loop in the de-sugared version.
+The _for_ keyword is followed by three pieces, separated by semicolons, inside of parenthesis. The first of these is the “initialization statement”. It happens once before the first time the loop’s condition is checked. In the  while loop, this statement appears right before the while loop. The second piece is not a statement (even though it is followed by a semicolon), but rather the conditional expression for the loop. In the while loop, this expression is the conditional expression. The third statement is the “increment statement”. In the while loop, it appears immediately before the close curly brace of the loop body. After all of these is the loop body, which (except for the addition of the “increment statement” at the end) is the loop body of the while loop.
 
-If you examine the figure carefully, you will notice that there is a set of curly braces around the entire piece of while-based code. These curly braces are there for a subtle, but important reason. The scope of any variables declared in the “initialization statement” of the for loop have a scope which is limited to the for loop. Recall that a variable typically has a scope which is limited to the curly braces which enclose its declaration. For a variable declared in the start of the for loop, the scope appears to be an exception to this rule, however, it is not if we think of it in terms of the de-sugaring shown above with the curly braces surrounding the declaration.
+The scope of any variables declared in the “initialization statement” of the for loop have a scope which is limited to the for loop. Recall that a variable typically has a scope which is limited to the curly braces which enclose its declaration. For a variable declared in the start of the for loop, the scope appears to be an exception to this rule, however, it is not if we think of it in terms of the while loop shown above with the curly braces surrounding the declaration.
 
 __Nesting__
 
@@ -303,11 +302,11 @@ Sometimes a programmer wants to leave the loop body early, rather than finishing
 
 __Break:__
 
-One behavior would be to exit the loop completely, making the execution arrow jump to immediately after the close curly brace which ends the loop (the same place that it goes when the loop’s condition evaluates to false). This behavior is obtained by using the break; statement—which we have already seen in the context of switch/case. Whenever the execution arrow encounters a break statement, it executes the statement by jumping out of the innermost enclosing loop (whether it is a while, do-while, or for loop), or switch statement. If the break statement is inside multiple of these which are nested together (e.g. a loop inside a case of a switch statement), then it exits only the most immediately enclosing one. If a break statement occurs and is not inside one of these loops or a switch statement, it is an error in the program.
+One behavior would be to exit the loop completely, making the execution arrow jump to immediately after the close curly brace which ends the loop (the same place that it goes when the loop’s condition evaluates to false). This behavior is obtained by using the `break;` statement—which we have already seen in the context of switch/case. Whenever the execution arrow encounters a break statement, it executes the statement by jumping out of the innermost enclosing loop (whether it is a while, do-while, or for loop), or switch statement. If the break statement is inside multiple of these which are nested together (e.g. a loop inside a case of a switch statement), then it exits only the most immediately enclosing one. If a break statement occurs and is not inside one of these loops or a switch statement, it is an error in the program.
 
 __Continue:__
 
-The other possible behavior that the programmer might want to have is for the execution arrow to jump back to the top of the loop. This behavior is accomplished with the continue; statement. Executing the continue statement jumps to the top of the innermost enclosing loop (if it is not in a loop, it is an error). In the case of a for loop, the “increment statement” in the for loop is executed immediately before the jump. This fact complicates the de-sugaring of a for loop into a while loop slightly relative to the explanation given above. If the for loop contains any continue statements, then the “increment statement” is written not only before the close curly brace of the loop, but also before any continue statements.
+The other possible behavior that the programmer might want to have is for the execution arrow to jump back to the top of the loop. This behavior is accomplished with the `continue;` statement. Executing the continue statement jumps to the top of the innermost enclosing loop (if it is not in a loop, it is an error). In the case of a for loop, the “increment statement” in the for loop is executed immediately before the jump. If the for loop contains any continue statements, then the “increment statement” is written not only before the close curly brace of the loop, but also before any continue statements.
 
 
 
@@ -317,13 +316,14 @@ The other possible behavior that the programmer might want to have is for the ex
 
 <h2>Everything Is a Number</h2>
 
+
 <h3>Hardware Representations</h3>
 
-First and foremost, as far as the computer is concerned, there is no way to move “past numbers” because to the computer, everything is a number. A computer stores everything as a series of 0’s and 1’s. Each 0 or 1 is called a bit, and there are many ways to interpret these bits. This is where types come in. A type is a programming language construct that specifies both a size and an interpretation of a series of bits stored in a computer. For example, the type for working with integers is an int, whose size is typically 32 bits and whose interpretation is an integer number directly represented in binary.
+To the computer everything is a number. A computer stores everything as a series of 0’s and 1’s. Each 0 or 1 is called a bit, and there are many ways to interpret these bits. This is where types come in. A _type_ is a programming language construct that specifies both a size and an interpretation of a series of bits stored in a computer. For example, the type for working with integers is an int, whose size is typically 32 bits and whose interpretation is an integer number directly represented in binary.
 
 __Binary Numbers:__
 
-Before we delve into how to represent numbers in binary, let us briefly discuss the decimal system, which should be familiar to all of us. A decimal number is a number represented in base 10, in which there are 10 possible values for each digit (0–9). When these digits are concatenated to make strings of numbers, they are interpreted column by column. Beginning at the far right and moving to the left, we have the 1’s column, the 10’s column, the 100’s column, and so forth. The number 348, for example, has 8 ones, 4 tens, and 3 hundreds. The value of each column is formed by taking the number 10 and raising it to increasing exponents. The ones column is actually 10^{0}=1, the tens column is 10^{1}=10, the hundreds column is 10^{2}=100, and so forth. When we see a number in base 10, we automatically interpret it using the process shown in the figure below, without giving it much thought.
+Similarity between binary numbers and decimal numbers is shown below:
 
 <img src="../1. Programming Fundamentals/images/Binary_Numbers.png">
 
@@ -333,9 +333,7 @@ Binary numbers are interpreted such that each bit (the name for a binary digit) 
 
 <h3>Looking under the Hood</h3>
 
-When you are driving a car in traffic, it is probably not a good idea to think too much about what the engine is doing—in fact, you really do not need to know how it works in order to drive. This example illustrates an important concept in programming: _abstraction_—the separation of interface (what something does or how you use it) from implementation (how something works).
-
-Abstraction often comes in multiple levels. Driving a car, the level of abstraction you care about is that the steering wheel turns the car, the gas pedal makes it go faster, and the brake makes it slow down. Your mechanic’s level of abstraction is how the pieces of the engine fit together, what level is appropriate for the brake fluid, and if your oil filter is screwed on tightly enough. The engineers who designed the car thought about the physics to make it all work efficiently. At each deeper level, you can think about details that were not important at higher levels, but are still crucial to making the system work. We could continue to lower and lower levels of abstraction until we start thinking about quantum interactions of atoms—fortunately you don’t need to worry about that to merge onto the interstate!
+_Abstraction_—the separation of interface (what something does or how you use it) from implementation (how something works) is an important concept in programming. Abstraction often comes in multiple levels. Driving a car, the level of abstraction you care about is that the steering wheel turns the car and the brake makes it slow down. Your mechanic’s level of abstraction is how the pieces of the engine fit together and if your oil filter is screwed on tightly enough. The engineers who designed the car thought about the physics to make it all work efficiently. At each deeper level, you can think about details that were not important at higher levels, but are still crucial to making the system work.
 
 There are times, however, when it is a good idea to take a look “under the hood”—to go deeper than the abstraction levels that you typically care about. At the very least, you might want to know whether the car has a diesel engine before filling up the tank, or to be aware that your car has oil, and you should get it changed sometimes.
 
@@ -343,7 +341,7 @@ Similarly, you need not constantly consider the inner workings of your CPU in or
 
 <img src="../1. Programming Fundamentals/images/hardware.png">
 
-As mentioned earlier, a type indicates both a size and an interpretation. The figure above shows you the now-familiar figure with code and its conceptual representation. For this module, we will add a third column, showing you the underlying representation at the hardware level. When you declare a variable x of type int, you should think about this conceptually as a box called x with a value 42 inside. But at a hardware level, the type int means that you have allocated 32 bits dedicated to this variable, and you have chosen for these bits to be interpreted as an integer number in order to yield the value 42.
+As mentioned earlier, a _type_ indicates both a size and an interpretation. In the figure above, when you declare a variable x of type _int_, you should think about this conceptually as a box called x with a value 42 inside. But at a hardware level, the type int means that you have allocated 32 bits dedicated to this variable, and you have chosen for these bits to be interpreted as an integer number in order to yield the value 42.
 
 __Hexadecimal:__
 
@@ -354,13 +352,15 @@ Numbers represented in binary can easily be converted to hex by simply grouping 
 
 <h2>Basic Data Types</h2>
 
-C supports a very small number of data types, each with a unique combination of size and interpretation. Basic data types are shown in the figure below. Note that while the sizes shown are typical and what we will use in general discussion in this book, they are not guaranteed. In particular, sizes depend on the hardware and the compiler—the program that turns your code into instructions the computer can actually execute (more on this later).
+
+C supports a very small number of data types, each with a unique combination of size and interpretation. Basic data types are shown in the figure below. Note that while the sizes shown are typical they are not guaranteed. In particular, sizes depend on the hardware and the compiler—the program that turns your code into instructions the computer can actually execute.
 
 <img src="../1. Programming Fundamentals/images/data_types.png">
 
+
 <h3>char</h3>
 
-A char (pronounced either “car” or “char”) is the smallest data type—a mere 8 bits long—and is used to encode characters. With only 8 bits, there are only 2^{8}=256 possible values for a char (from 00000000 to 11111111). On most machines you will use, these 8 bits are interpreted via the American Standard Code for Information Interchange (or ASCII) character-encoding scheme, which maps 128 number sequences to letters, basic punctuation, and upper- and lower-case letters. A subset of this mapping is shown in the figure below - please don’t try to memorize it. Another, much more expressive character-encoding scheme you may encounter (particularly when needing to encode non-English characters) is Unicode (which requires more than 1 byte).
+A char (pronounced either “car” or “char”) is the smallest data type—a mere 8 bits long—and is used to encode characters. With only 8 bits, there are only 2^{8}=256 possible values for a char (from 00000000 to 11111111). On most machines you will use, these 8 bits are interpreted via the American Standard Code for Information Interchange (or ASCII) character-encoding scheme, which maps 128 number sequences to letters, basic punctuation, and upper and lower case letters. A subset of this mapping is shown in the figure below - please don’t try to memorize it. Another, much more expressive character-encoding scheme you may encounter (particularly when needing to encode non-English characters) is Unicode (which requires more than 1 byte).
 
 <img src="../1. Programming Fundamentals/images/char.png">
 
@@ -368,13 +368,13 @@ Now if you look at the first line of code in this next figure:
 
 <img src="../1. Programming Fundamentals/images/char_two.png">
 
-you can see the char c declared and initialized to the value 'A'. Writing down this literal gives us the numerical value for A without us having to know that it is 65. If we did need to know, we could consult an ASCII table like the one in the figure above. Being able to write 'A' instead of 65 is another example of abstraction—we do not need to know the ASCII encoding, we can just write down the character we want.
+You can see the char c declared and initialized to the value 'A'. Writing down this literal gives us the numerical value for A without us having to know that it is 65. If we did need to know, we could consult an ASCII table like the one in the figure above.
 
-Figure caption: Examples of chars and ints. At first glance, c and x appear identical since they both have the binary value 65. However, they differ in both size (c has only 8 bits whereas x has 32) and interpretation (c’s value is interpreted using ASCII encoding whereas x’s value is interpreted as an integer). Similarly, y and z are identical in hardware but have differing interpretations because y is unsigned and z is not.
+Another thing to note is at first glance, c and x appear identical since they both have the binary value 65. However, they differ in both size (c has only 8 bits whereas x has 32) and interpretation (c’s value is interpreted using ASCII encoding whereas x’s value is interpreted as an integer). Similarly, y and z are identical in hardware but have differing interpretations because y is unsigned and z is not.
 
 <h3>int</h3>
 
-We have said that an int is a 32-bit value interpreted as an integer directly from its binary representation. As it turns out, this is only half of the story—the positive half of the story. If we dedicate all 32 bits to expressing positive numbers, we can express 2^{32} values, from 0 up to 4,294,967,295. We request this interpretation by using the qualifier unsigned in the declaration, as shown in the second line of the figure below.
+We have said that an int is a 32-bit value interpreted as an integer directly from its binary representation. As it turns out, this is only half of the story—the positive half of the story. If we dedicate all 32 bits to expressing positive numbers, we can express 2^{32} values, from 0 up to 4,294,967,295. We request this interpretation by using the qualifier _unsigned_ in the declaration, as shown in the figure above.
 
 What about negative numbers? ints are actually represented using an encoding called two’s complement, in which half of the 2^{32} possible bit patterns are used to express negative numbers and the other half to express positive ones. Specifically, all numbers with the most significant bit equal to 1 are negative numbers. A 32-bit int is inherently signed (i.e., can have both positive and negative values) and can express values from -2,147,483,648 to 2,147,483,647. Note that both unsigned and signed ints have 2^{32} possible values. For the unsigned int they are all positive; for the signed int, half are positive and half are negative.
 
@@ -382,11 +382,9 @@ In two's complement, the process for negating a number may seem a bit weird, but
 
 Another pair of qualifiers you may run into are short and long which decrease or increase the total number of bits dedicated a particular variable, respectively. For example, a short int (also referred to and declared in C simply as a short) is often only 16 bits long. Technically, the only requirement that the C language standard imposes is that a short int has fewer than or equal to as many bits as an int, and that a long int has greater than or equal to as many bits as an int.
 
-<img src="../1. Programming Fundamentals/images/int.png">
-
 <h3>float and double</h3>
 
-The final two basic data types in C allow the programmer to express real numbers. Since there are an infinite number of real numbers, the computer cannot express them all (that would require an infinite number of bits!). Instead, for values that cannot be represented exactly, an approximation of the value is stored.
+The final two basic data types in C allow the programmer to express real numbers. Since there are an infinite number of real numbers, the computer cannot express them all. Instead, for values that cannot be represented exactly, an approximation of the value is stored.
 
 If you think about the fact that computers can only store values as 0s and 1s, you may wonder how it is possible to store a real number, which has a fractional part. In much the same way that decimal representations of a number can have a fractional portion with places to the right of a decimal point (the tenth’s, hundredth’s, thousandth’s, etc. places), binary representations of numbers can have fractional portions after the binary point. The places to the right of the binary point are the half’s, quarter’s, eighth’s, etc. places.
 
@@ -410,7 +408,7 @@ It is also important to understand the cost. A double takes up twice as much spa
 
 <h3>Printing redux</h3>
 
-As we learned in the lesson on printing, C supports printing formatted information via the function printf. Now that we have multiple types, we can explore the various format specifiers, which allow us to print variables of a variety of types. The figure below shows the most common specifiers.
+C supports printing formatted information via the function printf. Now that we have multiple types, we can explore the various format specifiers, which allow us to print variables of a variety of types. The figure below shows the most common specifiers.
 
 <img src="../1. Programming Fundamentals/images/printing_specifiers.png">
 
@@ -421,15 +419,12 @@ The figure below shows some examples of these format specifiers being used. Here
 
 <h2>Expressions Have Types</h2>
 
+
 <h3>Expressions Have Types</h3>
 
-In the Expressions lesson, we learned that expressions are evaluated to values—if you have `a+b*2`, the current value of b is read out of its box, multiplied by 2, then the value of a is read out of its box, and added to the product of b*2. The expression evaluates to the resulting sum.
+Expressions also have types, which are determined by the types of the sub-expressions that make them up. The simplest expressions are constants, which have type int if they are integer constants (e.g., 2 or 46), or type double if they are real constants (e.g., 3.14, or -8.19). The types of constants can be modified by applying a letter suffix if needed (__U__ for unsigned, __L__ for long, and __f__ for float): 3.14f is a constant with type float, and 999999999999L is a constant with type long int. The next simplest type of expression is a variable, which has whatever type it was declared to have.
 
-Expressions also have types, which are determined by the types of the sub-expressions that make them up. The simplest expressions are constants, which have type int if they are integer constants (e.g., 2 or 46), or type double if they are real constants (e.g., 3.14, or -8.19). The types of constants can be modified by applying a letter suffix if needed (U for unsigned, L for long, and f for float): 3.14f is a constant with type float, and 999999999999L is a constant with type long int. The next simplest type of expression is a variable, which has whatever type it was declared to have.
-
-Most (but not all) expressions with binary operators—e1 op e2 (e.g., a + b or c * 4)—have the same type as their operands. If a and b are doubles, then a + b is a double as well. Likewise, if c is an int, then c * 4 is also an int (note that 4 is an int).
-
-The type of a function is its declared return type. That is, if you have
+Most (but not all) expressions with binary operators have the same type as their operands. If a and b are doubles, then a + b is a double as well. Likewise, if c is an int, then c * 4 is also an int (note that 4 is an int). The type of a function is its declared return type. That is, if you have
 
 ```c
 int f (int x, int y) {...};
@@ -519,11 +514,13 @@ Note that overflow (and underflow) are actions that occur during a specific oper
 
 <h2>"Non-numbers"</h2>
 
+
 It is worth restating: *__everything is a number__*. This rule is fundamental to understanding how computers work and is one of the most important concepts in programming. For every variable you create in any programming language, the value of that variable—the data that you place “in the box” of every conceptual diagram you draw—is stored in your computer as a series of zeros and ones. This fact is easy to accept for a positive integer, whose base 10 representation is simply converted to base 2 and then stored in a series of bits. Understanding how negative numbers and floating point numbers are also represented as a series of zeros and ones may be a little less straightforward, but is still appeals to our general intuition about numbers.
 
 Extending this rule to things that do not seem like numbers—words, colors, pictures, songs, movies—may seem like a much harder conceptual leap. However, with our newfound understanding that computers can only operate on numbers, we must realize that all of these things must be numbers too—after all, our computers operate on them regularly.
 
 Finding a way to encode these “non-number” data types is simply a matter of coming up with a new convention for encoding the information as bits, and interpreting the bits to mean the original information. These new conventions are not included as basic data types of the C programming language (though some of them are basic data types in languages other than C). Instead, new types are formed by combining the basic types to achieve the programmer’s goals. These more complex types may be widely accepted programming conventions (like the representation of strings), or may be something done by one single programmer specific to their programming task.
+
 
 <h3>Strings</h3>
 
@@ -551,6 +548,7 @@ A video is a sequence of images (called “frames”) and the corresponding soun
 
 
 <h2>Complex, Custom Data Types</h2>
+
 
 <h3>Structs</h3>
 
