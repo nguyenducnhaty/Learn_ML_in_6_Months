@@ -186,6 +186,8 @@ _Maclaurin series_ says that if you know everything about a function at the poin
 
 <h2>Lagrange multipliers</h2>
 
+<img src="../2. Multivariate Calculus/images/Lagrange_multipliers.png">
+
 
 <h3>Constrained optimization</h3>
 
@@ -198,6 +200,9 @@ _Maclaurin series_ says that if you know everything about a function at the poin
 
 
 <h2>Introduction to linear regression</h2>
+
+
+<img src="../2. Multivariate Calculus/images/least_squares.png">
 
 
 <h3>Simple linear regression</h3>
