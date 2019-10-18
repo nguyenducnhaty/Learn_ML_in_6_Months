@@ -629,7 +629,7 @@ public interface IPrivateConversation {
 public class Person implements IPublicSpeaking, IPrivateConversation {
     public void speak() {
         System.out.println("This is fine");
-    }
+}
 }
 ```
 
