@@ -20,7 +20,7 @@ Next, I personally took all these courses so I know for a fact how affective the
 
 Also, a word of warning, this is a pretty intense compilation of courses, the math is advanced, you will learn four programming languages, Python, C, C++ and Java and to be good, you have to practice, I recommend hacker rank and I have also created a repository with all my [HackerRank solutions](https://github.com/mukeshmithrakumar/HackerRankSolutions). My goal is to be Number 1 in the leaderboard for all these 4 Languages by the end of the 6 Months. And the Math side, again, practice, finishing it in 6 months should not be your goal, even though it is an important one, understanding all the topics should be, so practice as much as you can. Even though I have provided all the quiz solutions, don't look into it till you finish or get stuck or are really confused. Your goal I assume is to get a job and remember, no one will give you a job for finishing these courses, you will have to know to apply, so make sure you do.
 
-Finally, this is a full time course plan, if you are in college, plan to go through this during your breaks, summer or winter but if you are working, it will take you more than 6 months to finish so spread it out. I work full time, and I also mentor, but I found time to squeeze these courses, so if you are committed, you should be able to as well. Good Luck 🙂
+Finally, this is a full time course plan, if you are in college, plan to go through this during your breaks, summer or winter but if you are working, it will take you more than 6 months to finish so spread it out. I work full time, and I also mentor, but I found time to squeeze these courses, so if you are committed, you should be able to as well. Good Luck 🙂.
 
 
 
@@ -28,18 +28,7 @@ Finally, this is a full time course plan, if you are in college, plan to go thro
 
 
 
-In this repository you will find the solution to all the quizzes, code and also my short notes for all the courses.
-
-You should roughly plan to spend around:
-- 2hrs everyday from Monday to Friday for Data Science
-- 2hrs everyday from Monday to Friday for C and C++
-- 2hrs everyday from Monday to Saturday for Machine Learning
-- 1hr everyday from Monday to Saturday for Software Engineering
-- 1hr everyday from Monday to Saturday for Big Data
-- On Saturdays you can spend up-to 4 hours studying for the IBM AI Professional Certificate
-
 Following is the list of courses we will be taking. The first 3 months you will focus on the courses under Phase 1 and the next 3 months, you should focus on the courses in Phase 2. In between to reinforce some concepts and refresh some fundamentals, we will also go through other video lectures online and I will provide links to it on my course notes README. Also, after finishing every month, we should take a week to review everything we studied.
-
 
 <h2>Phase 1:</h2>
 
@@ -63,14 +52,39 @@ Following is the list of courses we will be taking. The first 3 months you will 
 14. [IBM AI Engineering Professional Certificate](https://www.coursera.org/professional-certificates/ai-engineer?)
 
 
-<h2>Review</h2>
+In this repository you will find the solution to all the quizzes, code and also my short notes for all the courses.
+
+<h2>Time Table</h2>
+
+You should roughly plan to spend around:
+- 2hrs everyday from Monday to Friday for Data Science
+- 2hrs everyday from Monday to Friday for C and C++
+- 2hrs everyday from Monday to Saturday for Machine Learning
+- 1hr everyday from Monday to Saturday for Software Engineering
+- 1hr everyday from Monday to Saturday for Big Data
+- On Saturdays you can spend up-to 4 hours studying for the IBM AI Professional Certificate
+
+
+<h2>What would you have learned</h2>
+
+By the End of the courses you would have learned:
+
+- Programming Languages: Python, Java, C, C++
+- Big Data Management: Hadoop
+- Machine Learning Frameworks:
+- Cloud Services: IBM Cloud
+
+
+
+<h1>Review</h1>
 
 Below you can see my progress each month, reviewing everything we went through for a month in a week is not possible because I also use this time to do a lot of extra reading and coding, so below you will see under completed, the courses that I finished and was able to review and under not completed the courses I finished but was not able to complete and I will come back to review these courses in the following months' review day.
 
 
-<h3>1st Month Review:</h3>
+<h2>1st Month Review:</h2>
 
-__Completed:__
+
+<h3>Completed</h3>
 
 - IBM Data Science:
     - What is Data Science?
@@ -88,7 +102,11 @@ __Completed:__
 - Software Development Life-cycle
     - Software Development Processes and Methodologies
 
-__Not Completed:__
+- Big Data
+    - Introduction to Big Data
+
+
+<h3>Not Completed</h3>
 
 - Introduction to Programming in C
     - Writing, Running, and Fixing Code in C
@@ -96,3 +114,6 @@ __Not Completed:__
 - Mathematics for Machine Learning
     - Linear Algebra (50%)
     - Multivariate Calculus (50%)
+
+- Big Data
+    - Big Data Modeling and Management Systems
