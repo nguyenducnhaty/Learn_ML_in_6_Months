@@ -4,6 +4,7 @@
 
 <h2>Introduction to Software Design and Architecture</h2>
 
+
 So, what is software design and architecture? How does it improve your software products? Consider this scenario. You join a project that's been in development for a while. You look at the code and become instantly overwhelmed. You can't tell what the purpose of the pieces are, things are unorganized, and design documentation is non-existent. You don't even know where to begin. These are all signs that the project was not well-designed from the outset. Or let's say that you are now working on a personal development project. When you began, you weren't quite sure what the functionalities would be, but you just started coding. It didn't matter that the code was unorganized because you were the only one working on it and you know how it works. You come up with a great new feature for your product, but in implementing it, you broke the program elsewhere. You should have designed it right. I'm guessing that you have experienced scenarios like these. They are quite common in the software industry, which shows you why software design and architecture is so beneficial.
 
 <h3>Software Architect and Design</h3>
@@ -12,6 +13,7 @@ Typically, the software designer role would be responsible for outlining a softw
 
 
 <h2>Object-Oriented Thinking</h2>
+
 
 <h3>Object-Oriented Modeling</h3>
 
@@ -23,6 +25,7 @@ With object-oriented thinking, you often think of everything as objects even liv
 
 
 <h2>Design in the Software Process</h2>
+
 
 <h3>Software Requirements, Conceptual and Technical Designs</h3>
 
@@ -93,6 +96,7 @@ At this point it may be difficult to see how these object types can help you. Th
 
 <h2>Design for Quality Attributes</h2>
 
+
 <h3>Competing Qualities and Trade-offs</h3>
 
 As you design software to satisfy requirements, you have to make many important decisions. Certain design decisions involve trade-offs in different quality attributes such as performance, convenience and security.
@@ -119,6 +123,7 @@ There is a common trade-off between performance and maintainability. High perfor
 
 
 <h2>Class Responsibility Collaborator (CRC)</h2>
+
 
 <h3>Record, Organize, and Refine Components</h3>
 

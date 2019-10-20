@@ -81,10 +81,36 @@ By the End of the courses you would have learned:
 Below you can see my progress each month, reviewing everything we went through for a month in a week is not possible because I also use this time to do a lot of extra reading and coding, so below you will see under completed, the courses that I finished and was able to review and under not completed the courses I finished but was not able to complete and I will come back to review these courses in the following months' review day.
 
 
-<h2>1st Month Review:</h2>
+<h2>1st Month Review</h2>
 
 
-<h3>Completed</h3>
+<h3>Completed Courses</h3>
+
+- IBM Data Science:
+    - What is Data Science?
+    - Open Source tools for Data Science
+    - Data Science Methodology
+    - Python for Data Science and AI
+
+- Introduction to Programming in C
+    - Programming Fundamentals
+    - Writing, Running, and Fixing Code in C
+
+- Mathematics for Machine Learning
+    - Linear Algebra
+    - Multivariate Calculus
+
+- Software Development Life-cycle
+    - Software Development Processes and Methodologies
+
+- Big Data
+    - Introduction to Big Data
+    - Big Data Modeling and Management Systems
+
+- IBM Applied AI Professional
+    - Introduction to Artificial Intelligence
+
+<h3>Completed Review</h3>
 
 - IBM Data Science:
     - What is Data Science?
@@ -105,8 +131,10 @@ Below you can see my progress each month, reviewing everything we went through f
 - Big Data
     - Introduction to Big Data
 
+- IBM Applied AI Professional
+    - Introduction to Artificial Intelligence
 
-<h3>Not Completed</h3>
+<h3>Not Completed Review</h3>
 
 - Introduction to Programming in C
     - Writing, Running, and Fixing Code in C
@@ -117,3 +145,19 @@ Below you can see my progress each month, reviewing everything we went through f
 
 - Big Data
     - Big Data Modeling and Management Systems
+
+
+<h2>2nd Month Review:</h2>
+
+
+<h3>Completed Courses</h3>
+
+- Software Design and Architecture
+    - Object-Oriented Design
+
+
+<h3>Completed Review</h3>
+
+
+
+<h3>Not Completed Review</h3>
