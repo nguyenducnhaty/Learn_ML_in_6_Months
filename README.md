@@ -69,10 +69,28 @@ You should roughly plan to spend around:
 
 By the End of the courses you would have learned:
 
-- Programming Languages: Python, Java, C, C++
-- Big Data Management: Hadoop
+- Programming Languages:
+    - Python,
+    - Java,
+    - C,
+    - C++,
+    - SQL
+
+- Database Management System:
+    - IBM Db2 Warehouse
+
+- Big Data Management System:
+    - Hadoop
+
 - Machine Learning Frameworks:
-- Cloud Services: IBM Cloud
+
+- Cloud Services:
+    - IBM Cloud,
+    - IBM Watson
+
+- Software Skills:
+    - Lean Development
+    - Agile Development
 
 
 
