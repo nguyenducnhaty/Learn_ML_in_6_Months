@@ -170,6 +170,33 @@ The error is on line 2, in which we assign _&y_ (which has type __const int *__)
 <h2>Aliasing and Arithmetic</h2>
 
 
+<h3>Aliasing</h3>
+
+In the figure below, we have four names for a’s box: a, _*p_, _**q_, and _***r_. Whenever we have more than one name for a box, we say that the names alias each other—that is, we might say _*p_ aliases _**q_.
+
+<img src="../3. Pointers, Arrays, and Recursion/images/ptr2ptr.png">
+
+<h3>Pointer Arithmetic</h3>
+
+Like all types in C, pointers are variables with numerical values and it can be manipulated the way one can manipulate the value of integers and floating point numbers, for example:
+
+```c
+int x = 4;
+float y = 4.0;
+int *ptr = &x;
+
+x = x + 1;
+y = y + 1;
+ptr = ptr + 1;
+```
+
+Lines 1–3 initialize the values of 3 variables of various types (integer, floating point number, and pointer-to-an-integer). Lines 5–7 add 1 to each of these variables. For each type, adding 1 has a different meaning. For _x_, adding 1 performs integer addition, resulting in the value 5. For _y_, adding 1 requires converting the 1 into a floating point number (1.0) and then performing floating point addition, resulting in 5.0. For both integers and floating point numbers, adding 1 has the basic semantics of “one larger”. For the integer pointer _ptr_ (which initially points to x), adding 1 has the semantics of “one integer later in memory”. Incrementing the pointer should have it point to the “next” integer in memory.
+
+In order to do this, the compiler emits instructions which actually add the number of bytes that an integer occupies in memory (e.g., +1 means to change the numerical value of the pointer by +4). Likewise, when adding N to a pointer to any type T, the compiler generates instructions which add (N * the number of bytes for values of type T) to the numeric value of the pointer—causing it to point N Ts further in memory.
+
+The code we have written here is legal as far as the compiler is concerned, however, our use of pointer arithmetic is rather nonsensical in this context. In particular, we have no idea what box ptr actually points at when this snippet of code finishes. If we had another line of code that did `*ptr = 3;`, the code would still compile, but would have undefined behavior — we could not execute it by hand and say with certainty what happens. Specifically, when `ptr = &x`, it is pointing at one box (for an integer) which is all by itself—it is not part of some sequence of multiple integer boxes. Incrementing the pointer will point it at some location in memory, we just do not know what. It could be the box for y, the return address of the function, or even the box for ptr itself.
+
+We will consider all code with undefined behavior, such as this, to be erroneous. Note that simply performing arithmetic on pointers such that they do not point to a valid box is not, by itself, an error—only dereferencing the pointer while we do not know what it points at is the problem. 
 
 
 
