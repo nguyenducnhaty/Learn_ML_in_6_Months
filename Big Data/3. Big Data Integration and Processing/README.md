@@ -53,18 +53,72 @@ __Requirements for Big Data Systems:__
 
 <h3>What is Data Retrieval? Part 1</h3>
 
+Data retrieval refers to the way in which data desired by a user is specified and retrieved from a data store.
 
+A query language is a language in which a retrieval request is specified. A query language is often called declarative, which means it lets you specify what you want to retrieve without having to tell the system how to retrieve. For example, SQL, structured query language, it is the most used query language for relational data. Now, in contrast to a query language, a database programming language like Oracle's PL/SQL or Postgres's PgSQL are high-level procedural programming languages that embed query operations.
+
+The most basic structure of a sql query is given below:
+
+<img src="../3. Big Data Integration and Processing/images/basic_sql.png">
+
+This form of query can also be represented as a selection operation on the relation Beers with a condition on the manf attribute, followed by a projection operation that outputs the name attribute from the result of the selection operation. This is given inside the black box in the image above.
+
+Below are some more advanced sql queries:
+
+<img src="../3. Big Data Integration and Processing/images/more_sql_examples.png">
+
+The DISTINCT ensures that the result has no duplicates.
 
 <h3>What is Data Retrieval? Part 2</h3>
 
+If the table was large and had millions of entries, the table would possibly need to be split over many machines. Another way of saying that is that the table will be partitioned across a number of machines. Since a query simply performs a selection and projection here, it can be evaluated in parallel.
 
+One standard way of partitioning the data is called a range partitioning by the primary key. This simply means that the rows of the table are put in groups depending on the alphabetical order of the name value. Below you can see how to query partition tables:
+
+<img src="../3. Big Data Integration and Processing/images/queries_in_large.png">
+
+When we use like, we're telling the query engine that we only have partial information about the string we want to match. This partly specified string is called a _string pattern_. There is this part of the string we know and a part that we do not know and for the part we don't know, we use the `%`. If we wanted to find, say, Am somewhere in the middle of the string, we would write the pattern as `%Am%`.
 
 <h3>Querying Two Relations</h3>
 
-
+<img src="../3. Big Data Integration and Processing/images/query_two_relations.png">
 
 <h3>Subqueries</h3>
 
+Let's look into a more complex query, "Find the bars that serve Miller for the same or less price than what TGAB charges for Bud". We can break it into two queries:
+1. Find the price TGAB charges for Bud
+2. Find the bars that serve Miller at that price
+
+Now this is a classic situation where the result from the first part of the query should be fed as a parameter to the second query. Now this situation is called a subquery.
+
+```sql
+select bar
+from sells
+where beer = 'Miller' and
+    price <= (select price
+              from sells
+              where bar = 'TGAB'
+              and beer = 'bud'
+              );
+```
+
+The part after price is called the _inner query_ or the _subquery_. Notice that the inner query is independent of the outer query. In other words, even if we did not have the outer query, we can still evaluate the inner query. We say in this case that the subquery is uncorrelated.
+
+Let's look at another example:
+
+<img src="../3. Big Data Integration and Processing/images/subquery_example.png">
+
+Example of a correlated subquery:
+
+<img src="../3. Big Data Integration and Processing/images/correlated_subquery.png">
+
+__Aggregate queries:__
+
+<img src="../3. Big Data Integration and Processing/images/aggregate_queries.png">
+
+__Groupby queries:__
+
+<img src="../3. Big Data Integration and Processing/images/groupby_queries.png">
 
 
 
