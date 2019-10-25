@@ -196,7 +196,7 @@ In order to do this, the compiler emits instructions which actually add the numb
 
 The code we have written here is legal as far as the compiler is concerned, however, our use of pointer arithmetic is rather nonsensical in this context. In particular, we have no idea what box ptr actually points at when this snippet of code finishes. If we had another line of code that did `*ptr = 3;`, the code would still compile, but would have undefined behavior — we could not execute it by hand and say with certainty what happens. Specifically, when `ptr = &x`, it is pointing at one box (for an integer) which is all by itself—it is not part of some sequence of multiple integer boxes. Incrementing the pointer will point it at some location in memory, we just do not know what. It could be the box for y, the return address of the function, or even the box for ptr itself.
 
-We will consider all code with undefined behavior, such as this, to be erroneous. Note that simply performing arithmetic on pointers such that they do not point to a valid box is not, by itself, an error—only dereferencing the pointer while we do not know what it points at is the problem. 
+We will consider all code with undefined behavior, such as this, to be erroneous. Note that simply performing arithmetic on pointers such that they do not point to a valid box is not, by itself, an error—only dereferencing the pointer while we do not know what it points at is the problem.
 
 
 
@@ -204,7 +204,42 @@ We will consider all code with undefined behavior, such as this, to be erroneous
 
 
 
+<h2>Cryptography Motivation</h2>
 
+
+
+<h2>Array Basics</h2>
+
+
+<h3>Array Declaration and Initialization</h3>
+
+
+
+<h3>Accessing an Array</h3>
+
+
+
+<h2>Arrays in Action</h2>
+
+
+<h3>Passing Arrays as Parameters</h3>
+
+
+
+<h3>Writing Code with Arrays</h3>
+
+
+
+
+
+<h2>Array Caveats</h2>
+
+
+<h3>Dangling Pointers</h3>
+
+
+
+<h3>Array Size</h3>
 
 
 

@@ -59,7 +59,12 @@ Variances of higher-dimensional data sets is defined below:
 
 <h2>Dot product</h2>
 
+
+The dot product is one specific example of an inner product. Not all inner products are the dot product, however.
+
 <img src="../3. Principal Component Analysis/images/dot_product.png">
+
+<img src="../3. Principal Component Analysis/images/dot_product_angle.png">
 
 
 <h2>Inner products</h2>
@@ -69,14 +74,29 @@ Variances of higher-dimensional data sets is defined below:
 
 <img src="../3. Principal Component Analysis/images/inner_product.png">
 
+<img src="../3. Principal Component Analysis/images/inner_product_example.png">
+
 <h3>Inner product: length and distances of vectors</h3>
 
 <img src="../3. Principal Component Analysis/images/inner_product_lengths.png">
 
+I watched [Example of a Matrix of an Inner Product](https://www.youtube.com/watch?v=Om3BEqhOK88) to understand how to calculate the lengths and to calculate the distance:
+
+$$d(X,Y)^2 = \langle X - Y, X - Y \rangle = \langle X, X \rangle + \langle Y, Y \rangle - 2 \langle X, Y \rangle$$
+
 <h3>Basis vectors</h3>
 
+<img src="../3. Principal Component Analysis/images/basis.png">
 
+This sounded awfully like a eigenvector, and for the question, "what is the relationship between eigenvector and basis vector?" in Quora, the following answer provided the best explanation:
 
+"_Think of a vector space with some number of dimensions. You can choose any set that may be linearly independent vectors as your basis. The basis is arbitrary, as long as you have enough vectors in it and they’re linearly independent._
+
+_Eigenvectors, on the other hand, are properties of a linear transformation on that vector space. If a linear transformation affects some non-zero vector only by scalar multiplication, that vector is an eigenvector of that transformation. Different linear transformations can have different eigenvectors._
+
+_Since you can choose any arbitrary basis for a space, but the eigenvectors are properties of a linear transformation, it follows that the eigenvectors are independent of the basis, and the basis is independent of the eigenvectors of any transformation._
+
+_Do eigenvectors always form a basis? asks a related but more specific question. The answer is, no, the linearly independent eigenvectors of a linear transformation on a vector space may be, but are not necessarily, a basis for the space._"
 
 <h3>Inner product: angles and orthogonality</h3>
 
@@ -84,7 +104,18 @@ Variances of higher-dimensional data sets is defined below:
 
 <h3>Inner products of functions and random variables</h3>
 
+Inner products and norms on function spaces play an absolutely essential role in modern analysis and its applications, particularly Fourier analysis, boundary value problems,
+ordinary and partial differential equations, and numerical analysis.
 
+Let $[a, b] ⊂ \mathbb{R}$ be a bounded closed interval. Consider the vector space $C^0 [a, b]$ consisting of all continuous scalar functions $f(x)$ defined for $a ≤ x ≤ b$. The integral of the product of two continuous functions:
+
+<img src="../3. Principal Component Analysis/images/inner_product_function.png">
+
+defines an inner product on the vector space $C^0 [a, b]$.  The associated norm is:
+
+<img src="../3. Principal Component Analysis/images/function_norm.png">
+
+and is known as the $L^2$ _norm_ of the function $f$ over the interval $[a, b]$. The $L^2$ inner product and norm of functions can be viewed as the infinite-dimensional function space versions of the dot product and Euclidean norm of vectors in $\mathbb{R^n}$.
 
 
 
