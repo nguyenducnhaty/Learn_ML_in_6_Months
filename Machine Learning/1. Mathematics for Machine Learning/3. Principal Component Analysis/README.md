@@ -57,8 +57,32 @@ Variances of higher-dimensional data sets is defined below:
 
 
 
+<h2>Dot product</h2>
+
+<img src="../3. Principal Component Analysis/images/dot_product.png">
 
 
+<h2>Inner products</h2>
+
+
+<h3>Inner product: definition</h3>
+
+<img src="../3. Principal Component Analysis/images/inner_product.png">
+
+<h3>Inner product: length and distances of vectors</h3>
+
+<img src="../3. Principal Component Analysis/images/inner_product_lengths.png">
+
+<h3>Basis vectors</h3>
+
+
+
+
+<h3>Inner product: angles and orthogonality</h3>
+
+<img src="../3. Principal Component Analysis/images/inner_product_angles.png">
+
+<h3>Inner products of functions and random variables</h3>
 
 
 
